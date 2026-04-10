@@ -120,9 +120,74 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .task{font-size:13px;color:#1a1a18;line-height:1.5;margin-bottom:10px}
 .hook-box{background:#f5f5f2;border-radius:8px;padding:8px 10px}
 .hook{font-size:12px;color:#5a5a56;line-height:1.5;font-style:italic}
+
+/* ── GLOBAL TOP NAV ── */
+.global-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1rem;height:44px;
+  background:#fff;border-bottom:0.5px solid #e2e2dc;
+  position:sticky;top:0;z-index:20;
+}
+.gnav-left{display:flex;align-items:center;gap:8px;}
+.back-btn{
+  display:flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:500;color:#6b6b66;
+  text-decoration:none;padding:5px 10px;border-radius:8px;
+  border:0.5px solid #e2e2dc;background:#f5f5f2;
+  transition:background .15s,color .15s,border-color .15s;
+  white-space:nowrap;
+}
+.back-btn:hover{background:#ebebeb;color:#1a1a18;border-color:#bbb;}
+.back-btn svg{width:13px;height:13px;flex-shrink:0;}
+.gnav-divider{width:0.5px;height:18px;background:#e2e2dc;margin:0 2px;}
+.prog-badge{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:600;
+  color:#085041;background:#E1F5EE;
+  padding:4px 10px;border-radius:20px;
+}
+.prog-badge-dot{width:6px;height:6px;border-radius:50%;background:#1D9E75;flex-shrink:0;}
+
+/* switcher */
+.prog-switcher{display:flex;align-items:center;gap:6px;}
+.switcher-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#9b9b96;margin-right:2px;}
+.sw-btn{
+  font-size:11px;font-weight:500;padding:4px 10px;border-radius:8px;
+  border:0.5px solid #e2e2dc;background:transparent;color:#6b6b66;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:background .15s,color .15s,border-color .15s;white-space:nowrap;
+}
+.sw-btn:hover{background:#ebebeb;color:#1a1a18;border-color:#bbb;}
+.sw-btn.sw-academy:hover{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC;}
+.sw-btn.sw-dsml:hover{background:#FAEEDA;color:#633806;border-color:#d4a96a;}
+
+/* push page-nav down since global-nav is also sticky */
+.page-nav{top:44px;}
 </style>
 </head>
 <body>
+
+<!-- ══ GLOBAL NAV ══ -->
+<nav class="global-nav">
+  <div class="gnav-left">
+    <a class="back-btn" href="../index.html">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      All programs
+    </a>
+    <div class="gnav-divider"></div>
+    <div class="prog-badge">
+      <span class="prog-badge-dot"></span>
+      AI &amp; ML Engineering
+    </div>
+  </div>
+  <div class="prog-switcher">
+    <span class="switcher-label">Switch to</span>
+    <a class="sw-btn sw-academy" href="../academy/index.html">💻 Academy</a>
+    <a class="sw-btn sw-dsml" href="../dsml/index.html">📊 DSML</a>
+  </div>
+</nav>
 
 <div class="page-nav">
   <button class="nav-btn active" onclick="show('upgrade',this)">Already in AI/ML? Why upgrade</button>
