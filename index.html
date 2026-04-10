@@ -193,9 +193,9 @@ header {
 }
 
 /* Card variants */
-.card-aiml { --card-accent: #1D9E75; --card-bg: #E1F5EE; --card-text: #085041; }
+.card-aiml    { --card-accent: #1D9E75; --card-bg: #E1F5EE; --card-text: #085041; }
 .card-academy { --card-accent: #3C3489; --card-bg: #EEEDFE; --card-text: #3C3489; }
-.card-dsml { --card-accent: #c06000; --card-bg: #FAEEDA; --card-text: #633806; }
+.card-dsml    { --card-accent: #c06000; --card-bg: #FAEEDA; --card-text: #633806; }
 
 .card-icon {
   width: 44px;
@@ -303,10 +303,7 @@ header {
   stroke: white;
 }
 
-.cta-arrow svg {
-  width: 14px;
-  height: 14px;
-}
+.cta-arrow svg { width: 14px; height: 14px; }
 
 .cta-arrow svg path {
   stroke: var(--card-text);
@@ -346,9 +343,7 @@ footer {
 }
 
 /* ── ANIMATIONS ── */
-.card {
-  animation: fadeUp 0.4s ease both;
-}
+.card { animation: fadeUp 0.4s ease both; }
 .card:nth-child(1) { animation-delay: 0.05s; }
 .card:nth-child(2) { animation-delay: 0.12s; }
 .card:nth-child(3) { animation-delay: 0.19s; }
@@ -419,7 +414,7 @@ footer {
   </a>
 
   <!-- Academy -->
-  <a class="card card-academy" href="academy/index.html" style="pointer-events:auto;opacity:1;">
+  <a class="card card-academy" href="academy/index.html">
     <div class="card-icon">💻</div>
     <span class="card-label">Software Engineering</span>
     <h2>Scaler Academy</h2>
@@ -439,7 +434,7 @@ footer {
       </div>
     </div>
     <div class="card-cta">
-      <span class="cta-text">Explore program → [Team is working on it]</span>
+      <span class="cta-text">Explore program →</span>
       <span class="cta-arrow">
         <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </span>
@@ -447,7 +442,7 @@ footer {
   </a>
 
   <!-- DSML -->
-  <a class="card card-dsml" href="dsml/index.html" style="pointer-events:auto;opacity:1;">
+  <a class="card card-dsml" href="dsml/index.html">
     <div class="card-icon">📊</div>
     <span class="card-label">Data Science & ML</span>
     <h2>Scaler DSML Program</h2>
@@ -467,7 +462,7 @@ footer {
       </div>
     </div>
     <div class="card-cta">
-      <span class="cta-text">Explore program → [Team is working on it]</span>
+      <span class="cta-text">Explore program →</span>
       <span class="cta-arrow">
         <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </span>
