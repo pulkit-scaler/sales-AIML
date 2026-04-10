@@ -5,139 +5,354 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learner Netflix Job Map — Scaler AI Engineering</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9f9f7; color: #1a1a18; padding: 2rem 1.5rem 4rem; }
-  h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; color: #1a1a18; }
-  .subtitle { font-size: 13px; color: #6b6b66; margin-bottom: 1.5rem; }
-  .meta { font-size: 12px; color: #6b6b66; margin-bottom: 1.25rem; padding: 8px 12px; background: #f1f1ee; border-left: 3px solid #1D9E75; }
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
-  .fb { font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 0.5px solid #c8c8c0; background: transparent; color: #6b6b66; cursor: pointer; font-weight: 500; transition: background .15s, color .15s; }
-  .fb.active, .fb:hover { color: #1a1a18; border-color: #888; background: #efefec; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-  .card { background: #ffffff; border: 0.5px solid #e2e2dc; border-radius: 12px; padding: 1rem 1.1rem; transition: border-color .15s; }
-  .card:hover { border-color: #b8b8b0; }
-  .card.hidden { display: none; }
-  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
-  .badge { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 12px; white-space: nowrap; flex-shrink: 0; }
-  .badge-teal { background: #E1F5EE; color: #085041; }
-  .badge-purple { background: #EEEDFE; color: #3C3489; }
-  .badge-amber { background: #FAEEDA; color: #633806; }
-  .badge-coral { background: #FAECE7; color: #712B13; }
-  .badge-gray { background: #F1EFE8; color: #444441; }
-  .mod-num { font-size: 10px; font-weight: 500; color: #9b9b96; margin-bottom: 2px; }
-  .mod-name { font-size: 14px; font-weight: 600; color: #1a1a18; line-height: 1.3; }
-  .tools { font-size: 11px; color: #9b9b96; margin: 6px 0 8px; line-height: 1.4; }
-  .divider { border: none; border-top: 0.5px solid #e8e8e2; margin: 8px 0; }
-  .section-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #9b9b96; margin-bottom: 4px; }
-  .task { font-size: 13px; color: #1a1a18; line-height: 1.5; margin-bottom: 10px; }
-  .hook-box { background: #f5f5f2; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
-  .hook { font-size: 12px; color: #5a5a56; line-height: 1.5; font-style: italic; }
-  .level-row { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
-  .level-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .level-text { font-size: 11px; color: #6b6b66; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f2;color:#1a1a18;padding:0 0 4rem}
+.page-nav{display:flex;gap:0;border-bottom:0.5px solid #ddd;background:#fff;position:sticky;top:0;z-index:10}
+.nav-btn{flex:1;font-size:12px;font-weight:500;padding:12px 8px;border:none;background:transparent;color:#6b6b66;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.nav-btn.active{color:#1a1a18;border-bottom-color:#1a1a18}
+.section{display:none;padding:2rem 1.5rem}
+.section.active{display:block}
+.section-title{font-size:18px;font-weight:600;margin-bottom:4px;color:#1a1a18}
+.section-sub{font-size:13px;color:#6b6b66;margin-bottom:1.5rem;line-height:1.6}
+.divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
+.label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#9b9b96;margin-bottom:4px}
+.badge{font-size:11px;font-weight:500;padding:3px 9px;border-radius:12px;white-space:nowrap;flex-shrink:0}
+.badge-teal{background:#E1F5EE;color:#085041}
+.badge-purple{background:#EEEDFE;color:#3C3489}
+.badge-amber{background:#FAEEDA;color:#633806}
+.badge-coral{background:#FAECE7;color:#712B13}
+.badge-gray{background:#F1EFE8;color:#444441}
+
+/* SECTION 1 — UPGRADE */
+.upgrade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.upgrade-card{background:#fff;border:0.5px solid #e2e2dc;border-radius:12px;padding:1.1rem}
+.role-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.role-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.role-title{font-size:14px;font-weight:600;color:#1a1a18;line-height:1.2}
+.role-years{font-size:11px;color:#9b9b96;margin-top:1px}
+.gap-box{background:#fef6f3;border-radius:8px;padding:9px 11px;margin-bottom:8px;border-left:3px solid #f0997b}
+.gap-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#993C1D;margin-bottom:4px}
+.gap-text{font-size:12px;color:#5a5a56;line-height:1.6}
+.gain-box{background:#f0faf6;border-radius:8px;padding:9px 11px;margin-bottom:10px;border-left:3px solid #5DCAA5}
+.gain-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#085041;margin-bottom:4px}
+.gain-text{font-size:12px;color:#1a1a18;line-height:1.6}
+.key-mods-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#9b9b96;margin-bottom:5px}
+.mod-pills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.mod-pill{font-size:11px;padding:3px 9px;border-radius:10px;background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC}
+.jump-row{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:0.5px solid #ebebeb}
+.jump-from{font-size:12px;color:#6b6b66;background:#f5f5f2;padding:3px 9px;border-radius:6px}
+.jump-arrow{font-size:14px;color:#1D9E75;font-weight:700}
+.jump-to{font-size:12px;font-weight:600;color:#085041;background:#E1F5EE;padding:3px 9px;border-radius:6px}
+
+/* SECTION 2 — TRACKER */
+.tracker-wrap{max-width:820px}
+.slider-row{display:flex;align-items:center;gap:14px;margin-bottom:1rem}
+.slider-row label{font-size:13px;color:#6b6b66;white-space:nowrap}
+.slider-row input[type=range]{flex:1;accent-color:#1D9E75;height:4px}
+.mod-counter{font-size:13px;font-weight:600;color:#1a1a18;min-width:90px;text-align:right}
+.prog-wrap{height:5px;background:#e4e4e0;border-radius:3px;margin-bottom:1.5rem;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#1D9E75,#5DCAA5);border-radius:3px;transition:width .3s}
+.tracker-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:560px){.tracker-cards{grid-template-columns:1fr}}
+.tc{background:#fff;border:0.5px solid #e2e2dc;border-radius:12px;padding:1rem 1.1rem}
+.tc-title{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:10px;line-height:1.3}
+.skill-list{list-style:none;display:flex;flex-wrap:wrap;gap:5px}
+.skill-pill{font-size:11px;padding:3px 9px;border-radius:10px;background:#f5f5f2;border:0.5px solid #ddd;color:#3a3a38}
+.skill-pill.new{background:#E1F5EE;border-color:#5DCAA5;color:#085041;font-weight:500}
+.job-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.job-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#1a1a18;line-height:1.4}
+.job-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.milestone{background:#fff;border:0.5px solid #e2e2dc;border-radius:12px;padding:1rem 1.2rem}
+.milestone-text{font-size:13px;color:#1a1a18;line-height:1.7;font-style:italic}
+.milestone-note{font-size:11px;color:#9b9b96;margin-top:6px}
+
+/* SECTION 3 — MODULES */
+.meta-bar{font-size:12px;color:#6b6b66;margin-bottom:1.25rem;padding:8px 12px;background:#fff;border-left:3px solid #1D9E75}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem}
+.fb{font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid #c8c8c0;background:transparent;color:#6b6b66;cursor:pointer;font-weight:500;transition:background .15s}
+.fb.active,.fb:hover{color:#1a1a18;border-color:#888;background:#efefec}
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.mod-card{background:#fff;border:0.5px solid #e2e2dc;border-radius:12px;padding:1rem 1.1rem;transition:border-color .15s}
+.mod-card:hover{border-color:#b8b8b0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.mod-num{font-size:10px;font-weight:500;color:#9b9b96;margin-bottom:2px}
+.mod-name{font-size:14px;font-weight:600;color:#1a1a18;line-height:1.3}
+.tools{font-size:11px;color:#9b9b96;margin:6px 0 8px;line-height:1.4}
+.level-row{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.level-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.level-text{font-size:11px;color:#6b6b66}
+.task{font-size:13px;color:#1a1a18;line-height:1.5;margin-bottom:10px}
+.hook-box{background:#f5f5f2;border-radius:8px;padding:8px 10px}
+.hook{font-size:12px;color:#5a5a56;line-height:1.5;font-style:italic}
 </style>
 </head>
 <body>
-<h1>Learner Netflix job map</h1>
-<p class="subtitle">Scaler Applied AI Engineering — what each module unlocks at a Netflix-scale company</p>
-<div class="meta">Modules shown in curriculum sequence — module 1 to 14. Big Data Engineering appears at module 12, as per the Scaler curriculum.</div>
-<div class="filters">
-  <button class="fb active" onclick="filter('all',this)">All modules</button>
-  <button class="fb" onclick="filter('teal',this)">Supervised &amp; unsupervised</button>
-  <button class="fb" onclick="filter('purple',this)">Deep learning &amp; NLP</button>
-  <button class="fb" onclick="filter('amber',this)">Ops, scale &amp; RL</button>
-  <button class="fb" onclick="filter('coral',this)">GenAI era</button>
-  <button class="fb" onclick="filter('gray',this)">Engineering craft</button>
+
+<div class="page-nav">
+  <button class="nav-btn active" onclick="show('upgrade',this)">Already in AI/ML? Why upgrade</button>
+  <button class="nav-btn" onclick="show('tracker',this)">Skills and jobs by module</button>
+  <button class="nav-btn" onclick="show('modules',this)">All 14 module cards</button>
 </div>
-<div class="grid" id="grid"></div>
+
+<!-- SECTION 1 -->
+<div class="section active" id="section-upgrade">
+  <div class="section-title">Already working in AI or ML?</div>
+  <p class="section-sub">Here is exactly what changes about your career depending on where you are today — and which modules do the most work for you.</p>
+  <div class="upgrade-grid" id="upgrade-grid"></div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section" id="section-tracker">
+  <div class="section-title">What do I have after each module?</div>
+  <p class="section-sub">Drag the slider to any checkpoint and see which skills you've accumulated and which job roles you can crack at that point — explained the way a hiring manager talks, not an engineer. Green pills are the skills you just gained.</p>
+  <div class="tracker-wrap">
+    <div class="slider-row">
+      <label>Completed up to</label>
+      <input type="range" id="mod-slider" min="1" max="14" value="1" oninput="updateTracker(this.value)">
+      <span class="mod-counter" id="mod-label">Module 1 of 14</span>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:7%"></div></div>
+    <div class="tracker-cards">
+      <div class="tc">
+        <div class="tc-title" id="tc-name">Data foundations and supervised learning</div>
+        <div class="label" style="margin-bottom:8px">Skills you now have</div>
+        <ul class="skill-list" id="skill-list"></ul>
+      </div>
+      <div class="tc">
+        <div class="tc-title">Job roles you can now crack</div>
+        <div class="label" style="margin-bottom:8px">Based on all modules completed so far</div>
+        <ul class="job-list" id="job-list"></ul>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="label" style="margin-bottom:7px">What a hiring manager says about you at this point</div>
+      <div class="milestone-text" id="milestone-text"></div>
+      <div class="milestone-note" id="milestone-note"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section" id="section-modules">
+  <div class="section-title">All 14 module cards</div>
+  <p class="section-sub">What each module teaches and what a learner builds at a Netflix-scale company on day one.</p>
+  <div class="meta-bar">Modules shown in curriculum sequence — 1 to 14. Big Data Engineering is module 12, as per the Scaler curriculum.</div>
+  <div class="filters">
+    <button class="fb active" onclick="filterMods('all',this)">All modules</button>
+    <button class="fb" onclick="filterMods('teal',this)">Supervised &amp; unsupervised</button>
+    <button class="fb" onclick="filterMods('purple',this)">Deep learning &amp; NLP</button>
+    <button class="fb" onclick="filterMods('amber',this)">Ops, scale &amp; RL</button>
+    <button class="fb" onclick="filterMods('coral',this)">GenAI era</button>
+    <button class="fb" onclick="filterMods('gray',this)">Engineering craft</button>
+  </div>
+  <div class="mod-grid" id="mod-grid"></div>
+</div>
 
 <script>
-const modules=[
-{num:1,phase:'teal',name:'Data foundations and supervised learning',tools:'scikit-learn, XGBoost, LightGBM, Pandas, Optuna, Streamlit',level:'ML engineer (junior)',levelColor:'#0F6E56',
-task:'Build a churn prediction model using XGBoost that scores every Netflix subscriber daily — flagging who is likely to cancel so the retention team can act 30 days ahead.',
-hook:'This is the first model that earns money. Churn prediction is the entry point for almost every AI conversation with a new customer.'},
-{num:2,phase:'teal',name:'Unsupervised learning',tools:'KMeans, DBSCAN, PCA, ARIMA, Isolation Forest, mlxtend',level:'ML engineer',levelColor:'#0F6E56',
-task:'Cluster 238M users into taste profiles with no labels — surfacing hidden tribes like "binge-thriller weekenders" that the marketing team never knew existed.',
-hook:'Customers always ask what they don\'t know about their users. This module answers that question with code, not surveys.'},
-{num:3,phase:'purple',name:'Neural networks and deep learning',tools:'TensorFlow, Keras, PyTorch, TensorBoard',level:'ML engineer',levelColor:'#534AB7',
-task:'Build the two-tower deep learning model that creates a mathematical fingerprint for every user and every title — the engine behind 80% of everything watched on Netflix.',
-hook:'When a customer asks how a recommendation engine actually works, this is the module you point to.'},
-{num:4,phase:'purple',name:'Computer vision',tools:'CNNs, ResNet, YOLO, OpenCV, Albumentations, torchvision',level:'ML engineer (CV)',levelColor:'#534AB7',
-task:'Build the thumbnail personalisation system that evaluates millions of images per title and serves the frame most likely to make each specific user click play.',
-hook:'This one gets gasps in demos. Every image ever seen on Netflix was chosen by a system exactly like this.'},
-{num:5,phase:'purple',name:'Natural language processing',tools:'BERT, Hugging Face Transformers, spaCy, NLTK, Gensim',level:'NLP engineer',levelColor:'#534AB7',
-task:'Fine-tune BERT so Netflix search understands "feel-good film for a rainy evening" — moving beyond keyword matching to genuine user intent.',
-hook:'Search is the most visible AI a customer interacts with every day. This learner makes it actually intelligent.'},
-{num:6,phase:'amber',name:'MLOps',tools:'MLflow, Docker, Kubernetes, AWS SageMaker, GitHub Actions',level:'MLOps engineer',levelColor:'#854F0B',
-task:'Build CI/CD pipelines that automatically retrain, test, and redeploy Netflix\'s recommendation models — so the engine never serves stale predictions.',
-hook:'The question "what happens after the model is built?" is the one most prospects haven\'t thought about yet. This is the answer.'},
-{num:7,phase:'amber',name:'ML system design',tools:'Kafka, Redis, TF Serving, FastAPI, gRPC, Kubernetes',level:'Staff ML engineer',levelColor:'#854F0B',
-task:'Design the real-time inference system that serves a personalised homepage to 238M users within 250ms — globally, at every timezone, without a single timeout.',
-hook:'Speed is the silent killer of AI products. This learner designs for latency and scale from day one.'},
-{num:8,phase:'coral',name:'RAG systems and agentic AI',tools:'LangGraph, CrewAI, ChromaDB, Pinecone, LangChain, MCP',level:'AI engineer',levelColor:'#993C1D',
-task:'Build an internal agent where a Netflix producer types "find all courtroom dramas set before 1980" and gets sourced, accurate results from the entire content library in seconds.',
-hook:'This is the module that makes every internal knowledge base conversation real. Enterprise clients lean in hard here.'},
-{num:9,phase:'coral',name:'LLM fine-tuning and LLMOps',tools:'LoRA, QLoRA, vLLM, LangSmith, Ragas, AWS Bedrock',level:'LLM engineer',levelColor:'#993C1D',
-task:'Fine-tune Llama-3 on Netflix\'s internal content taxonomy so it understands genres, tone codes, and production language — a model that speaks Netflix, not just English.',
-hook:'Off-the-shelf LLMs don\'t know your customer\'s business. Fine-tuning is how you make AI genuinely theirs.'},
-{num:10,phase:'coral',name:'Multimodal AI',tools:'GPT-4V, Whisper, VAPI, WebRTC, LLaVA, PyMuPDF',level:'AI engineer (multimodal)',levelColor:'#993C1D',
-task:'Build a system that watches a clip, transcribes the dialogue, reads the subtitles, and auto-tags every scene — content metadata at machine speed, zero human review.',
-hook:'When AI can see, hear, and read simultaneously, the volume of work it replaces becomes staggering. This is the demo that closes deals.'},
-{num:11,phase:'purple',name:'Advanced machine learning',tools:'SHAP, LIME, GNNs, ViT, PyTorch Geometric, SciPy',level:'Senior / research ML engineer',levelColor:'#534AB7',
-task:'Use SHAP to audit why Netflix\'s recommendation model surfaces different content to different demographic groups — making AI decisions transparent and defensible.',
-hook:'Enterprise buyers ask about AI fairness and explainability in every serious procurement. This is the technical answer, not a policy document.'},
-{num:12,phase:'teal',name:'Big data engineering',tools:'Apache Spark, PySpark, Kafka, Databricks, Airflow, dbt',level:'Data / ML infrastructure engineer',levelColor:'#0F6E56',
-task:'Build distributed PySpark pipelines that process petabytes of Netflix viewing history — turning raw event logs into the clean, partitioned datasets every downstream model depends on.',
-hook:'A company\'s AI is only as good as its data infrastructure. This learner builds the foundation that makes everything else possible at scale.'},
-{num:13,phase:'amber',name:'Reinforcement learning',tools:'PPO, DQN, Stable-Baselines3, RLlib, OpenAI Gym',level:'Research / RL engineer',levelColor:'#854F0B',
-task:'Train an RL agent that experiments with Netflix homepage row order in real time — learning which layout drives the most engagement per unique user session.',
-hook:'This is AI that never stops improving. Every user interaction becomes training data for the next decision.'},
-{num:14,phase:'gray',name:'DSA and problem solving',tools:'Algorithms, graphs, dynamic programming, Big-O analysis',level:'Software engineer (all roles)',levelColor:'#5F5E5A',
-task:'Write the efficient graph traversal that powers Netflix\'s content similarity network — the unseen backbone of every "more like this" row on the homepage.',
-hook:'Every module in this programme runs on code that has to be fast. DSA is what separates engineers who ship from those who struggle.'}
-];
-
-function phaseLabel(p){
-  return{teal:'Supervised / data',purple:'Deep learning',amber:'Ops & scale',coral:'GenAI',gray:'Craft'}[p];
+function show(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  btn.classList.add('active');
 }
 
-function renderCards(phase){
-  const g=document.getElementById('grid');
-  g.innerHTML='';
-  const list=phase==='all'?modules:modules.filter(m=>m.phase===phase);
-  list.forEach(m=>{
+/* ── MODULE DATA ── */
+const modules=[
+{num:1,phase:'teal',name:'Data foundations and supervised learning',tools:'scikit-learn, XGBoost, LightGBM, Pandas, Optuna, Streamlit',level:'ML engineer (junior)',levelColor:'#0F6E56',task:'Build a churn prediction model using XGBoost that scores every Netflix subscriber daily — flagging who is likely to cancel so the retention team can act 30 days ahead.',hook:'This is the first model that earns money. Churn prediction is the entry point for almost every AI conversation with a new customer.'},
+{num:2,phase:'teal',name:'Unsupervised learning',tools:'KMeans, DBSCAN, PCA, ARIMA, Isolation Forest, mlxtend',level:'ML engineer',levelColor:'#0F6E56',task:'Cluster 238M users into taste profiles with no labels — surfacing hidden tribes like "binge-thriller weekenders" that the marketing team never knew existed.',hook:'Customers always ask what they don\'t know about their users. This module answers that question with code, not surveys.'},
+{num:3,phase:'purple',name:'Neural networks and deep learning',tools:'TensorFlow, Keras, PyTorch, TensorBoard',level:'ML engineer',levelColor:'#534AB7',task:'Build the two-tower deep learning model that creates a mathematical fingerprint for every user and every title — the engine behind 80% of everything watched on Netflix.',hook:'When a customer asks how a recommendation engine actually works, this is the module you point to.'},
+{num:4,phase:'purple',name:'Computer vision',tools:'CNNs, ResNet, YOLO, OpenCV, Albumentations, torchvision',level:'ML engineer (CV)',levelColor:'#534AB7',task:'Build the thumbnail personalisation system that evaluates millions of images per title and serves the frame most likely to make each specific user click play.',hook:'This one gets gasps in demos. Every image ever seen on Netflix was chosen by a system exactly like this.'},
+{num:5,phase:'purple',name:'Natural language processing',tools:'BERT, Hugging Face Transformers, spaCy, NLTK, Gensim',level:'NLP engineer',levelColor:'#534AB7',task:'Fine-tune BERT so Netflix search understands "feel-good film for a rainy evening" — moving beyond keyword matching to genuine user intent.',hook:'Search is the most visible AI a customer interacts with every day. This learner makes it actually intelligent.'},
+{num:6,phase:'amber',name:'MLOps',tools:'MLflow, Docker, Kubernetes, AWS SageMaker, GitHub Actions',level:'MLOps engineer',levelColor:'#854F0B',task:'Build CI/CD pipelines that automatically retrain, test, and redeploy Netflix\'s recommendation models — so the engine never serves stale predictions.',hook:'The question "what happens after the model is built?" is the one most prospects haven\'t thought about yet. This is the answer.'},
+{num:7,phase:'amber',name:'ML system design',tools:'Kafka, Redis, TF Serving, FastAPI, gRPC, Kubernetes',level:'Staff ML engineer',levelColor:'#854F0B',task:'Design the real-time inference system that serves a personalised homepage to 238M users within 250ms — globally, at every timezone, without a single timeout.',hook:'Speed is the silent killer of AI products. This learner designs for latency and scale from day one.'},
+{num:8,phase:'coral',name:'RAG systems and agentic AI',tools:'LangGraph, CrewAI, ChromaDB, Pinecone, LangChain, MCP',level:'AI engineer',levelColor:'#993C1D',task:'Build an internal agent where a Netflix producer types "find all courtroom dramas set before 1980" and gets sourced, accurate results from the entire content library in seconds.',hook:'This is the module that makes every internal knowledge base conversation real. Enterprise clients lean in hard here.'},
+{num:9,phase:'coral',name:'LLM fine-tuning and LLMOps',tools:'LoRA, QLoRA, vLLM, LangSmith, Ragas, AWS Bedrock',level:'LLM engineer',levelColor:'#993C1D',task:'Fine-tune Llama-3 on Netflix\'s internal content taxonomy so it understands genres, tone codes, and production language — a model that speaks Netflix, not just English.',hook:'Off-the-shelf LLMs don\'t know your customer\'s business. Fine-tuning is how you make AI genuinely theirs.'},
+{num:10,phase:'coral',name:'Multimodal AI',tools:'GPT-4V, Whisper, VAPI, WebRTC, LLaVA, PyMuPDF',level:'AI engineer (multimodal)',levelColor:'#993C1D',task:'Build a system that watches a clip, transcribes the dialogue, reads the subtitles, and auto-tags every scene — content metadata at machine speed, zero human review.',hook:'When AI can see, hear, and read simultaneously, the volume of work it replaces becomes staggering. This is the demo that closes deals.'},
+{num:11,phase:'purple',name:'Advanced machine learning',tools:'SHAP, LIME, GNNs, ViT, PyTorch Geometric, SciPy',level:'Senior / research ML engineer',levelColor:'#534AB7',task:'Use SHAP to audit why Netflix\'s recommendation model surfaces different content to different demographic groups — making AI decisions transparent and defensible.',hook:'Enterprise buyers ask about AI fairness and explainability in every serious procurement. This is the technical answer, not a policy document.'},
+{num:12,phase:'teal',name:'Big data engineering',tools:'Apache Spark, PySpark, Kafka, Databricks, Airflow, dbt',level:'Data / ML infrastructure engineer',levelColor:'#0F6E56',task:'Build distributed PySpark pipelines that process petabytes of Netflix viewing history — turning raw event logs into the clean, partitioned datasets every downstream model depends on.',hook:'A company\'s AI is only as good as its data infrastructure. This learner builds the foundation that makes everything else possible at scale.'},
+{num:13,phase:'amber',name:'Reinforcement learning',tools:'PPO, DQN, Stable-Baselines3, RLlib, OpenAI Gym',level:'Research / RL engineer',levelColor:'#854F0B',task:'Train an RL agent that experiments with Netflix homepage row order in real time — learning which layout drives the most engagement per unique user session.',hook:'This is AI that never stops improving. Every user interaction becomes training data for the next decision.'},
+{num:14,phase:'gray',name:'DSA and problem solving',tools:'Algorithms, graphs, dynamic programming, Big-O analysis',level:'Software engineer (all roles)',levelColor:'#5F5E5A',task:'Write the efficient graph traversal that powers Netflix\'s content similarity network — the unseen backbone of every "more like this" row on the homepage.',hook:'Every module in this programme runs on code that has to be fast. DSA is what separates engineers who ship from those who struggle.'}
+];
+
+/* ── CHECKPOINT DATA ── */
+const cp=[
+{name:'Data foundations and supervised learning',
+ skills:['Feature engineering','Regression (Linear, Ridge, Lasso)','Classification (XGBoost, LightGBM)','Model evaluation (ROC-AUC, F1, RMSE)','sklearn pipelines','Hyperparameter tuning (Optuna)'],
+ newSkills:['Feature engineering','Regression (Linear, Ridge, Lasso)','Classification (XGBoost, LightGBM)','Model evaluation (ROC-AUC, F1, RMSE)','sklearn pipelines','Hyperparameter tuning (Optuna)'],
+ jobs:[{t:'Junior Data Scientist',c:'#0F6E56'},{t:'ML Analyst',c:'#0F6E56'},{t:'Analytics Engineer (ML track)',c:'#888'}],
+ milestone:'"This person can take a raw dataset, build a working prediction model, and tell us whether it\'s actually any good. That is genuinely useful from week one."',note:'Roles open: entry-level DS and ML analyst positions at product companies and startups.'},
+{name:'Unsupervised learning',
+ skills:['All M1 skills','Clustering (KMeans, DBSCAN, GMM)','Anomaly and fraud detection (Isolation Forest)','Time series forecasting (ARIMA, SARIMA)','Dimensionality reduction (PCA, t-SNE)','Collaborative filtering'],
+ newSkills:['Clustering (KMeans, DBSCAN, GMM)','Anomaly and fraud detection (Isolation Forest)','Time series forecasting (ARIMA, SARIMA)','Dimensionality reduction (PCA, t-SNE)','Collaborative filtering'],
+ jobs:[{t:'Data Scientist',c:'#0F6E56'},{t:'ML Engineer',c:'#0F6E56'},{t:'Fraud / Anomaly Detection Engineer',c:'#0F6E56'},{t:'Demand Forecasting Analyst',c:'#888'}],
+ milestone:'"They can find structure in data we didn\'t know was there. Customer segmentation, fraud signals, forecasting — this person is already dangerous with a dataset."',note:'The combination of M1 + M2 is what most "Data Scientist" job descriptions actually require at mid-level.'},
+{name:'Neural networks and deep learning',
+ skills:['All M1–M2 skills','Neural network architecture (MLP, backpropagation)','Deep learning frameworks (TensorFlow, PyTorch)','Regularisation (Dropout, BatchNorm)','Autoencoders','Embedding layers'],
+ newSkills:['Neural network architecture (MLP, backpropagation)','Deep learning (TensorFlow, PyTorch)','Regularisation (Dropout, BatchNorm)','Autoencoders','Embedding layers'],
+ jobs:[{t:'Deep Learning Engineer',c:'#534AB7'},{t:'ML Engineer',c:'#0F6E56'},{t:'AI Research Associate',c:'#534AB7'},{t:'Junior AI Scientist',c:'#888'}],
+ milestone:'"This candidate actually understands deep learning — not just how to call a library. They can debug a training run, explain why it is failing, and fix it."',note:'M3 is the gateway module. Most senior ML roles now assume deep learning fluency as a baseline.'},
+{name:'Computer vision',
+ skills:['All M1–M3 skills','CNN architecture and filters','Object detection (YOLO, Faster R-CNN)','Transfer learning (ResNet, InceptionV3)','Image segmentation (U-Net, Mask R-CNN)','GAN-based image generation'],
+ newSkills:['CNN architecture and filters','Object detection (YOLO, Faster R-CNN)','Transfer learning (ResNet, InceptionV3)','Image segmentation (U-Net, Mask R-CNN)','GAN-based generation'],
+ jobs:[{t:'Computer Vision Engineer',c:'#534AB7'},{t:'Perception Engineer',c:'#534AB7'},{t:'ML Engineer (CV track)',c:'#534AB7'},{t:'Vision AI Developer',c:'#888'}],
+ milestone:'"They can build systems that look at images and make intelligent decisions. Retail, manufacturing, media, autonomous vehicles — the applications are enormous."',note:'CV is one of the highest-paying ML specialisations. M4 opens a dedicated hiring market.'},
+{name:'Natural language processing',
+ skills:['All M1–M4 skills','BERT and transformer fine-tuning','Named entity recognition (NER)','Semantic search and embeddings','Text classification and sentiment analysis','Seq2Seq summarisation and translation'],
+ newSkills:['BERT and transformer fine-tuning','Named entity recognition (NER)','Semantic search and embeddings','Text classification','Seq2Seq summarisation'],
+ jobs:[{t:'NLP Engineer',c:'#534AB7'},{t:'Search Engineer',c:'#534AB7'},{t:'Conversational AI Developer',c:'#534AB7'},{t:'Language AI Specialist',c:'#888'}],
+ milestone:'"They can make machines understand language, not just match keywords. That is the difference between a search bar and an intelligent assistant."',note:'M1–M5 together represent a full traditional ML + NLP stack. Strong profile for most ML engineering roles at scale-ups.'},
+{name:'MLOps',
+ skills:['All M1–M5 skills','Docker and Kubernetes','CI/CD for ML (GitHub Actions)','Experiment tracking (MLflow)','Model registry and versioning','AWS SageMaker end-to-end deployment'],
+ newSkills:['Docker and Kubernetes','CI/CD for ML (GitHub Actions)','Experiment tracking (MLflow)','Model registry and versioning','AWS SageMaker deployment'],
+ jobs:[{t:'MLOps Engineer',c:'#854F0B'},{t:'ML Platform Engineer',c:'#854F0B'},{t:'AI Infrastructure Engineer',c:'#854F0B'},{t:'Applied ML Engineer',c:'#888'}],
+ milestone:'"Finally, someone who can get a model into production — not just a Jupyter notebook, but a real versioned, monitored, auto-retraining pipeline."',note:'MLOps engineers are among the most in-demand AI hires. Many companies have models but no one who can operate them.'},
+{name:'ML system design',
+ skills:['All M1–M6 skills','Real-time inference architecture','Kafka streaming pipelines','Redis caching strategies','Distributed model serving (TF Serving, TensorRT)','Latency and throughput optimisation'],
+ newSkills:['Real-time inference architecture','Kafka streaming pipelines','Redis caching','Distributed model serving (TF Serving)','Latency and throughput optimisation'],
+ jobs:[{t:'Senior ML Engineer',c:'#854F0B'},{t:'ML Architect',c:'#854F0B'},{t:'Staff AI Engineer',c:'#854F0B'},{t:'ML Infrastructure Lead',c:'#888'}],
+ milestone:'"They think in systems, not models. They can design how to serve predictions to a million users simultaneously without breaking the product or the budget."',note:'M7 is the inflection point from engineer to architect. It unlocks Staff and Principal-level conversations.'},
+{name:'RAG systems and agentic AI',
+ skills:['All M1–M7 skills','LLM orchestration (LangChain, LangGraph)','Vector databases (ChromaDB, Pinecone)','ReAct and Plan-and-Solve agents','Multi-agent systems (CrewAI)','RAG pipeline design (hybrid search, reranking)'],
+ newSkills:['LLM orchestration (LangChain, LangGraph)','Vector databases (ChromaDB, Pinecone)','ReAct agent architecture','Multi-agent systems (CrewAI)','RAG pipeline design'],
+ jobs:[{t:'AI Engineer',c:'#993C1D'},{t:'GenAI Engineer',c:'#993C1D'},{t:'LLM Application Developer',c:'#993C1D'},{t:'Conversational AI Lead',c:'#888'}],
+ milestone:'"They can build agents that actually do things — search internal knowledge, call APIs, chain decisions together. This is the most-hired AI profile right now."',note:'The AI Engineer title emerged in 2023 and is now one of the fastest-growing job categories globally. M8 is where you enter that market.'},
+{name:'LLM fine-tuning and LLMOps',
+ skills:['All M1–M8 skills','LoRA and QLoRA fine-tuning','Model distillation (Teacher-Student)','LLMOps (LangSmith, LangFuse, Arize)','Production LLM serving (vLLM, TGI)','Evaluation pipelines (Ragas, LLM-as-a-Judge)'],
+ newSkills:['LoRA and QLoRA fine-tuning','Model distillation','LLMOps (LangSmith, LangFuse)','Production LLM serving (vLLM)','Evaluation pipelines (Ragas)'],
+ jobs:[{t:'LLM Engineer',c:'#993C1D'},{t:'Applied AI Scientist',c:'#993C1D'},{t:'Foundation Model Engineer',c:'#993C1D'},{t:'AI Product Engineer',c:'#888'}],
+ milestone:'"This is the person who can take a general-purpose model and make it yours — fine-tuned, evaluated properly, and served at scale without burning the GPU budget."',note:'Fine-tuning is the skill that separates companies using AI from companies that own AI. M9 is where that conversation starts.'},
+{name:'Multimodal AI',
+ skills:['All M1–M9 skills','Vision-language models (GPT-4V, LLaVA)','Speech-to-text (Whisper)','Voice AI (VAPI, WebRTC)','Document and PDF parsing','Multimodal RAG pipelines'],
+ newSkills:['Vision-language models (GPT-4V, LLaVA)','Speech-to-text (Whisper)','Voice AI (VAPI, WebRTC)','Document and PDF parsing','Multimodal RAG pipelines'],
+ jobs:[{t:'Multimodal AI Engineer',c:'#993C1D'},{t:'Senior AI Engineer',c:'#993C1D'},{t:'Voice AI Engineer',c:'#993C1D'},{t:'Document AI Specialist',c:'#888'}],
+ milestone:'"They can build AI that sees, hears, and reads simultaneously. Products that used to need three different specialists — this person builds it alone."',note:'Multimodal is the frontier of the consumer AI market in 2025. M10 puts learners at the cutting edge.'},
+{name:'Advanced machine learning',
+ skills:['All M1–M10 skills','SHAP and LIME model interpretability','Graph neural networks (GNNs)','Vision Transformers (ViT)','Statistical learning theory (VC dimension, PAC)','Advanced SVM and kernel methods'],
+ newSkills:['SHAP and LIME interpretability','Graph neural networks (GNNs)','Vision Transformers (ViT)','Statistical learning theory','Advanced SVM and kernel methods'],
+ jobs:[{t:'Senior ML Scientist',c:'#534AB7'},{t:'Research Engineer',c:'#534AB7'},{t:'Principal ML Engineer',c:'#534AB7'},{t:'AI Ethics / Fairness Lead',c:'#888'}],
+ milestone:'"They can tell you not just what the model predicts, but why — and whether it\'s being fair. That\'s what enterprise procurement asks for now and most engineers cannot answer."',note:'M11 opens research-track and principal-level roles. It also differentiates learners in senior interviews where theory is tested.'},
+{name:'Big data engineering',
+ skills:['All M1–M11 skills','Apache Spark and PySpark at scale','Distributed ETL pipelines','Databricks and Delta Lake','Workflow orchestration (Airflow, dbt)','Kafka streaming at petabyte scale'],
+ newSkills:['Apache Spark and PySpark','Distributed ETL pipelines','Databricks and Delta Lake','Workflow orchestration (Airflow, dbt)','Kafka at petabyte scale'],
+ jobs:[{t:'ML Platform Lead',c:'#0F6E56'},{t:'Data Engineering Lead',c:'#0F6E56'},{t:'ML Infrastructure Architect',c:'#0F6E56'},{t:'Senior Data Engineer',c:'#888'}],
+ milestone:'"They can build the pipelines that every AI system depends on. Without this, your data sits in silos and your models never see the full picture."',note:'Big data skills are essential for ML at scale. M12 makes learners complete across the full data-to-model stack.'},
+{name:'Reinforcement learning',
+ skills:['All M1–M12 skills','Policy gradient methods (PPO, REINFORCE)','Deep Q-Networks (DQN, DQN variants)','Reward modelling for RLHF','Multi-agent environments (PettingZoo)','Imitation learning (GAIL, Behavior Cloning)'],
+ newSkills:['Policy gradient methods (PPO, REINFORCE)','Deep Q-Networks (DQN)','Reward modelling for RLHF','Multi-agent environments','Imitation learning (GAIL)'],
+ jobs:[{t:'RL Engineer',c:'#854F0B'},{t:'Research Scientist (AI)',c:'#854F0B'},{t:'RLHF / Alignment Engineer',c:'#854F0B'},{t:'AI Research Engineer',c:'#888'}],
+ milestone:'"They can build AI that learns from experience, not just from historical data. Every interaction becomes a training signal. That is a fundamentally different class of system."',note:'RLHF is at the core of how frontier LLMs like GPT and Claude are trained. M13 puts learners in that conversation.'},
+{name:'DSA and problem solving',
+ skills:['All M1–M13 skills','Algorithmic problem solving','Graph traversal (BFS, DFS, Dijkstra, A*)','Dynamic programming (memoisation, tabulation)','Big-O complexity analysis','Interview-grade coding fluency'],
+ newSkills:['Algorithmic problem solving','Graph traversal (BFS, DFS, Dijkstra)','Dynamic programming','Big-O complexity analysis','Interview-grade coding fluency'],
+ jobs:[{t:'FAANG-ready across all AI / ML roles',c:'#1a1a18'},{t:'Tech Lead — AI / ML',c:'#1a1a18'},{t:'Principal Engineer',c:'#1a1a18'},{t:'Senior ML Engineer at any tier',c:'#888'}],
+ milestone:'"Full programme complete. This person can walk into a technical interview at Google, Netflix, or any serious AI-first company and hold their own on every dimension."',note:'Programme complete. The learner now has a full-stack AI engineering profile: foundations, intelligence, scale, GenAI, and interview readiness.'}
+];
+
+function updateTracker(v){
+  const c=cp[v-1];
+  document.getElementById('mod-label').textContent='Module '+v+' of 14';
+  document.getElementById('prog-fill').style.width=Math.round((v/14)*100)+'%';
+  document.getElementById('tc-name').textContent=c.name;
+  const sl=document.getElementById('skill-list');
+  sl.innerHTML='';
+  c.skills.forEach(s=>{
+    const li=document.createElement('li');
+    li.className='skill-pill'+(c.newSkills.includes(s)?' new':'');
+    li.textContent=s;
+    sl.appendChild(li);
+  });
+  const jl=document.getElementById('job-list');
+  jl.innerHTML='';
+  c.jobs.forEach(j=>{
+    const li=document.createElement('li');
+    li.className='job-item';
+    li.innerHTML='<span class="job-dot" style="background:'+j.c+'"></span><span>'+j.t+'</span>';
+    jl.appendChild(li);
+  });
+  document.getElementById('milestone-text').textContent=c.milestone;
+  document.getElementById('milestone-note').textContent=c.note;
+}
+updateTracker(1);
+
+/* ── UPGRADE ROLES ── */
+const roles=[
+{icon:'⚙',bg:'#EEEDFE',title:'ML Engineer',years:'2–5 years experience',
+gap:'You know sklearn and basic deep learning but you have likely never fine-tuned an LLM, built a real agent, or designed a system that serves predictions at real-time scale. The GenAI wave has moved faster than most ML engineering job descriptions.',
+gain:'Modules 8–10 give you the complete GenAI and agent stack. Modules 6–7 formalise your MLOps and system design thinking. Module 9 gives you fine-tuning depth that most self-described "ML engineers" simply do not have.',
+from:'ML Engineer',to:'Senior AI Engineer / GenAI Lead',
+mods:['M7 — System design','M8 — RAG & agents','M9 — LLM fine-tuning','M10 — Multimodal']},
+{icon:'📊',bg:'#FAEEDA',title:'Data Scientist',years:'2–6 years experience',
+gap:'You are strong at analysis, statistics, and data storytelling. But you have probably never deployed a model, fine-tuned a transformer, or built anything that runs in production without a data engineer handling the hard parts.',
+gain:'Modules 3, 6, and 7 close the deployment gap entirely. Modules 8–9 give you the GenAI skills that data science job descriptions now assume. You move from insight-generator to product-builder.',
+from:'Data Scientist',to:'Applied AI Engineer / ML Engineer',
+mods:['M3 — Neural networks','M6 — MLOps','M7 — System design','M8 — RAG & agents']},
+{icon:'🤖',bg:'#FAECE7',title:'AI Engineer',years:'1–3 years experience',
+gap:'You build things with OpenAI APIs, LangChain, and prompt engineering. But when a system breaks in production, you are exposed. You may not know how to fine-tune, evaluate rigorously, or design the infrastructure underneath your stack.',
+gain:'Module 9 gives you fine-tuning depth. Module 7 gives you the system design rigour to architect at scale. Modules 1–2 give you classical ML foundations that make you credible in any technical conversation.',
+from:'AI Engineer',to:'Senior AI Engineer / ML Platform Lead',
+mods:['M1 — ML foundations','M7 — System design','M9 — LLM fine-tuning','M11 — Advanced ML']},
+{icon:'💻',bg:'#E1F5EE',title:'Software / Backend Engineer',years:'Wants to move into AI',
+gap:'You are a strong engineer who can ship software, design APIs, and think in systems. But you have no formal ML training and every AI job description reads like a foreign language. The gap feels too large.',
+gain:'This programme is built for exactly this situation. Your engineering instincts are a superpower — you just need the ML layer. By module 6 you are already more deployable than most data scientists. By module 10 you are a full-stack AI engineer.',
+from:'Software Engineer',to:'ML Engineer → AI Engineer in 12–18 months',
+mods:['M1 — Start here','M3 — Deep learning','M6 — MLOps','M8 — GenAI stack']},
+{icon:'🔤',bg:'#EEEDFE',title:'NLP or CV Specialist',years:'Deep in one modality',
+gap:'You are highly skilled in one area — language or vision. But the industry is moving to multimodal systems, agentic pipelines, and cross-modal reasoning. A single-modality specialist is increasingly a single point of failure.',
+gain:'Module 10 makes you multimodal. Module 8 connects your domain expertise to agent orchestration so you can build systems that reason across text, images, and audio. You move from specialist to full-stack AI engineer.',
+from:'NLP / CV Specialist',to:'Multimodal AI Engineer / Full-Stack AI Lead',
+mods:['M8 — RAG & agents','M9 — Fine-tuning','M10 — Multimodal','M7 — System design']}
+];
+
+function renderUpgrade(){
+  const g=document.getElementById('upgrade-grid');
+  roles.forEach(r=>{
     const d=document.createElement('div');
-    d.className='card';
-    d.innerHTML=`
-      <div class="mod-num">Module ${m.num} of 14</div>
-      <div class="card-top">
-        <div class="mod-name">${m.name}</div>
-        <span class="badge badge-${m.phase}">${phaseLabel(m.phase)}</span>
-      </div>
-      <div class="tools">${m.tools}</div>
-      <div class="level-row">
-        <div class="level-dot" style="background:${m.levelColor}"></div>
-        <div class="level-text">Unlocks: ${m.level}</div>
-      </div>
-      <hr class="divider">
-      <div class="section-label">On day one, this learner will...</div>
-      <div class="task">${m.task}</div>
-      <div class="hook-box">
-        <div class="section-label" style="margin-bottom:3px">Sales hook</div>
-        <div class="hook">${m.hook}</div>
-      </div>
-    `;
+    d.className='upgrade-card';
+    d.innerHTML=
+      '<div class="role-header">'+
+        '<div class="role-icon" style="background:'+r.bg+'">'+r.icon+'</div>'+
+        '<div><div class="role-title">'+r.title+'</div><div class="role-years">'+r.years+'</div></div>'+
+      '</div>'+
+      '<div class="gap-box"><div class="gap-label">What you\'re missing today</div><div class="gap-text">'+r.gap+'</div></div>'+
+      '<div class="gain-box"><div class="gain-label">What this programme adds</div><div class="gain-text">'+r.gain+'</div></div>'+
+      '<div class="key-mods-label">Key modules for you</div>'+
+      '<div class="mod-pills">'+r.mods.map(m=>'<span class="mod-pill">'+m+'</span>').join('')+'</div>'+
+      '<div class="jump-row">'+
+        '<span class="jump-from">'+r.from+'</span>'+
+        '<span class="jump-arrow">→</span>'+
+        '<span class="jump-to">'+r.to+'</span>'+
+      '</div>';
     g.appendChild(d);
   });
 }
+renderUpgrade();
 
-function filter(phase, btn){
+/* ── MODULE CARDS ── */
+function phaseLabel(p){return{teal:'Supervised / data',purple:'Deep learning',amber:'Ops & scale',coral:'GenAI',gray:'Craft'}[p]}
+function renderMods(phase){
+  const g=document.getElementById('mod-grid');
+  g.innerHTML='';
+  (phase==='all'?modules:modules.filter(m=>m.phase===phase)).forEach(m=>{
+    const d=document.createElement('div');
+    d.className='mod-card';
+    d.innerHTML=
+      '<div class="mod-num">Module '+m.num+' of 14</div>'+
+      '<div class="card-top"><div class="mod-name">'+m.name+'</div><span class="badge badge-'+m.phase+'">'+phaseLabel(m.phase)+'</span></div>'+
+      '<div class="tools">'+m.tools+'</div>'+
+      '<div class="level-row"><div class="level-dot" style="background:'+m.levelColor+'"></div><div class="level-text">Unlocks: '+m.level+'</div></div>'+
+      '<hr class="divider">'+
+      '<div class="label">On day one, this learner will...</div>'+
+      '<div class="task">'+m.task+'</div>'+
+      '<div class="hook-box"><div class="label" style="margin-bottom:3px">Sales hook</div><div class="hook">'+m.hook+'</div></div>';
+    g.appendChild(d);
+  });
+}
+renderMods('all');
+function filterMods(phase,btn){
   document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  renderCards(phase);
+  renderMods(phase);
 }
-
-renderCards('all');
 </script>
 </body>
 </html>
