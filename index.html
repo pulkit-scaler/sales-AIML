@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learner Netflix Job Map — Scaler AI Engineering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9f9f7; color: #1a1a18; padding: 2rem 1.5rem 4rem; }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; color: #1a1a18; }
+  .subtitle { font-size: 13px; color: #6b6b66; margin-bottom: 1.5rem; }
+  .meta { font-size: 12px; color: #6b6b66; margin-bottom: 1.25rem; padding: 8px 12px; background: #f1f1ee; border-left: 3px solid #1D9E75; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+  .fb { font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 0.5px solid #c8c8c0; background: transparent; color: #6b6b66; cursor: pointer; font-weight: 500; transition: background .15s, color .15s; }
+  .fb.active, .fb:hover { color: #1a1a18; border-color: #888; background: #efefec; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  .card { background: #ffffff; border: 0.5px solid #e2e2dc; border-radius: 12px; padding: 1rem 1.1rem; transition: border-color .15s; }
+  .card:hover { border-color: #b8b8b0; }
+  .card.hidden { display: none; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+  .badge { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 12px; white-space: nowrap; flex-shrink: 0; }
+  .badge-teal { background: #E1F5EE; color: #085041; }
+  .badge-purple { background: #EEEDFE; color: #3C3489; }
+  .badge-amber { background: #FAEEDA; color: #633806; }
+  .badge-coral { background: #FAECE7; color: #712B13; }
+  .badge-gray { background: #F1EFE8; color: #444441; }
+  .mod-num { font-size: 10px; font-weight: 500; color: #9b9b96; margin-bottom: 2px; }
+  .mod-name { font-size: 14px; font-weight: 600; color: #1a1a18; line-height: 1.3; }
+  .tools { font-size: 11px; color: #9b9b96; margin: 6px 0 8px; line-height: 1.4; }
+  .divider { border: none; border-top: 0.5px solid #e8e8e2; margin: 8px 0; }
+  .section-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #9b9b96; margin-bottom: 4px; }
+  .task { font-size: 13px; color: #1a1a18; line-height: 1.5; margin-bottom: 10px; }
+  .hook-box { background: #f5f5f2; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
+  .hook { font-size: 12px; color: #5a5a56; line-height: 1.5; font-style: italic; }
+  .level-row { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+  .level-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .level-text { font-size: 11px; color: #6b6b66; }
+</style>
+</head>
+<body>
+<h1>Learner Netflix job map</h1>
+<p class="subtitle">Scaler Applied AI Engineering — what each module unlocks at a Netflix-scale company</p>
+<div class="meta">Modules shown in curriculum sequence — module 1 to 14. Big Data Engineering appears at module 12, as per the Scaler curriculum.</div>
+<div class="filters">
+  <button class="fb active" onclick="filter('all',this)">All modules</button>
+  <button class="fb" onclick="filter('teal',this)">Supervised &amp; unsupervised</button>
+  <button class="fb" onclick="filter('purple',this)">Deep learning &amp; NLP</button>
+  <button class="fb" onclick="filter('amber',this)">Ops, scale &amp; RL</button>
+  <button class="fb" onclick="filter('coral',this)">GenAI era</button>
+  <button class="fb" onclick="filter('gray',this)">Engineering craft</button>
+</div>
+<div class="grid" id="grid"></div>
+
+<script>
+const modules=[
+{num:1,phase:'teal',name:'Data foundations and supervised learning',tools:'scikit-learn, XGBoost, LightGBM, Pandas, Optuna, Streamlit',level:'ML engineer (junior)',levelColor:'#0F6E56',
+task:'Build a churn prediction model using XGBoost that scores every Netflix subscriber daily — flagging who is likely to cancel so the retention team can act 30 days ahead.',
+hook:'This is the first model that earns money. Churn prediction is the entry point for almost every AI conversation with a new customer.'},
+{num:2,phase:'teal',name:'Unsupervised learning',tools:'KMeans, DBSCAN, PCA, ARIMA, Isolation Forest, mlxtend',level:'ML engineer',levelColor:'#0F6E56',
+task:'Cluster 238M users into taste profiles with no labels — surfacing hidden tribes like "binge-thriller weekenders" that the marketing team never knew existed.',
+hook:'Customers always ask what they don\'t know about their users. This module answers that question with code, not surveys.'},
+{num:3,phase:'purple',name:'Neural networks and deep learning',tools:'TensorFlow, Keras, PyTorch, TensorBoard',level:'ML engineer',levelColor:'#534AB7',
+task:'Build the two-tower deep learning model that creates a mathematical fingerprint for every user and every title — the engine behind 80% of everything watched on Netflix.',
+hook:'When a customer asks how a recommendation engine actually works, this is the module you point to.'},
+{num:4,phase:'purple',name:'Computer vision',tools:'CNNs, ResNet, YOLO, OpenCV, Albumentations, torchvision',level:'ML engineer (CV)',levelColor:'#534AB7',
+task:'Build the thumbnail personalisation system that evaluates millions of images per title and serves the frame most likely to make each specific user click play.',
+hook:'This one gets gasps in demos. Every image ever seen on Netflix was chosen by a system exactly like this.'},
+{num:5,phase:'purple',name:'Natural language processing',tools:'BERT, Hugging Face Transformers, spaCy, NLTK, Gensim',level:'NLP engineer',levelColor:'#534AB7',
+task:'Fine-tune BERT so Netflix search understands "feel-good film for a rainy evening" — moving beyond keyword matching to genuine user intent.',
+hook:'Search is the most visible AI a customer interacts with every day. This learner makes it actually intelligent.'},
+{num:6,phase:'amber',name:'MLOps',tools:'MLflow, Docker, Kubernetes, AWS SageMaker, GitHub Actions',level:'MLOps engineer',levelColor:'#854F0B',
+task:'Build CI/CD pipelines that automatically retrain, test, and redeploy Netflix\'s recommendation models — so the engine never serves stale predictions.',
+hook:'The question "what happens after the model is built?" is the one most prospects haven\'t thought about yet. This is the answer.'},
+{num:7,phase:'amber',name:'ML system design',tools:'Kafka, Redis, TF Serving, FastAPI, gRPC, Kubernetes',level:'Staff ML engineer',levelColor:'#854F0B',
+task:'Design the real-time inference system that serves a personalised homepage to 238M users within 250ms — globally, at every timezone, without a single timeout.',
+hook:'Speed is the silent killer of AI products. This learner designs for latency and scale from day one.'},
+{num:8,phase:'coral',name:'RAG systems and agentic AI',tools:'LangGraph, CrewAI, ChromaDB, Pinecone, LangChain, MCP',level:'AI engineer',levelColor:'#993C1D',
+task:'Build an internal agent where a Netflix producer types "find all courtroom dramas set before 1980" and gets sourced, accurate results from the entire content library in seconds.',
+hook:'This is the module that makes every internal knowledge base conversation real. Enterprise clients lean in hard here.'},
+{num:9,phase:'coral',name:'LLM fine-tuning and LLMOps',tools:'LoRA, QLoRA, vLLM, LangSmith, Ragas, AWS Bedrock',level:'LLM engineer',levelColor:'#993C1D',
+task:'Fine-tune Llama-3 on Netflix\'s internal content taxonomy so it understands genres, tone codes, and production language — a model that speaks Netflix, not just English.',
+hook:'Off-the-shelf LLMs don\'t know your customer\'s business. Fine-tuning is how you make AI genuinely theirs.'},
+{num:10,phase:'coral',name:'Multimodal AI',tools:'GPT-4V, Whisper, VAPI, WebRTC, LLaVA, PyMuPDF',level:'AI engineer (multimodal)',levelColor:'#993C1D',
+task:'Build a system that watches a clip, transcribes the dialogue, reads the subtitles, and auto-tags every scene — content metadata at machine speed, zero human review.',
+hook:'When AI can see, hear, and read simultaneously, the volume of work it replaces becomes staggering. This is the demo that closes deals.'},
+{num:11,phase:'purple',name:'Advanced machine learning',tools:'SHAP, LIME, GNNs, ViT, PyTorch Geometric, SciPy',level:'Senior / research ML engineer',levelColor:'#534AB7',
+task:'Use SHAP to audit why Netflix\'s recommendation model surfaces different content to different demographic groups — making AI decisions transparent and defensible.',
+hook:'Enterprise buyers ask about AI fairness and explainability in every serious procurement. This is the technical answer, not a policy document.'},
+{num:12,phase:'teal',name:'Big data engineering',tools:'Apache Spark, PySpark, Kafka, Databricks, Airflow, dbt',level:'Data / ML infrastructure engineer',levelColor:'#0F6E56',
+task:'Build distributed PySpark pipelines that process petabytes of Netflix viewing history — turning raw event logs into the clean, partitioned datasets every downstream model depends on.',
+hook:'A company\'s AI is only as good as its data infrastructure. This learner builds the foundation that makes everything else possible at scale.'},
+{num:13,phase:'amber',name:'Reinforcement learning',tools:'PPO, DQN, Stable-Baselines3, RLlib, OpenAI Gym',level:'Research / RL engineer',levelColor:'#854F0B',
+task:'Train an RL agent that experiments with Netflix homepage row order in real time — learning which layout drives the most engagement per unique user session.',
+hook:'This is AI that never stops improving. Every user interaction becomes training data for the next decision.'},
+{num:14,phase:'gray',name:'DSA and problem solving',tools:'Algorithms, graphs, dynamic programming, Big-O analysis',level:'Software engineer (all roles)',levelColor:'#5F5E5A',
+task:'Write the efficient graph traversal that powers Netflix\'s content similarity network — the unseen backbone of every "more like this" row on the homepage.',
+hook:'Every module in this programme runs on code that has to be fast. DSA is what separates engineers who ship from those who struggle.'}
+];
+
+function phaseLabel(p){
+  return{teal:'Supervised / data',purple:'Deep learning',amber:'Ops & scale',coral:'GenAI',gray:'Craft'}[p];
+}
+
+function renderCards(phase){
+  const g=document.getElementById('grid');
+  g.innerHTML='';
+  const list=phase==='all'?modules:modules.filter(m=>m.phase===phase);
+  list.forEach(m=>{
+    const d=document.createElement('div');
+    d.className='card';
+    d.innerHTML=`
+      <div class="mod-num">Module ${m.num} of 14</div>
+      <div class="card-top">
+        <div class="mod-name">${m.name}</div>
+        <span class="badge badge-${m.phase}">${phaseLabel(m.phase)}</span>
+      </div>
+      <div class="tools">${m.tools}</div>
+      <div class="level-row">
+        <div class="level-dot" style="background:${m.levelColor}"></div>
+        <div class="level-text">Unlocks: ${m.level}</div>
+      </div>
+      <hr class="divider">
+      <div class="section-label">On day one, this learner will...</div>
+      <div class="task">${m.task}</div>
+      <div class="hook-box">
+        <div class="section-label" style="margin-bottom:3px">Sales hook</div>
+        <div class="hook">${m.hook}</div>
+      </div>
+    `;
+    g.appendChild(d);
+  });
+}
+
+function filter(phase, btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards(phase);
+}
+
+renderCards('all');
+</script>
+</body>
+</html>
