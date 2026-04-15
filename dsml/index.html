@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scaler DSML 3.0 — Programme Map</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fafaf9;color:#1c1917;padding:0 0 4rem}
+
+/* NAV */
+.page-nav{display:flex;background:#fff;border-bottom:1px solid #e7e5e4;position:sticky;top:0;z-index:10;overflow-x:auto}
+.nav-btn{flex:1;min-width:180px;font-size:12px;font-weight:500;padding:13px 10px;border:none;background:transparent;color:#78716c;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.nav-btn.active{color:#c2410c;border-bottom-color:#ea580c}
+
+/* SECTIONS */
+.section{display:none;padding:2rem 1.5rem}
+.section.active{display:block}
+.sec-title{font-size:18px;font-weight:600;color:#1c1917;margin-bottom:4px}
+.sec-sub{font-size:13px;color:#78716c;margin-bottom:1.5rem;line-height:1.6;max-width:720px}
+.lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#a8a29e;margin-bottom:4px}
+.divider{border:none;border-top:1px solid #f5f5f4;margin:10px 0}
+
+/* BADGES */
+.badge{font-size:11px;font-weight:500;padding:3px 9px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.b-orange{background:#ffedd5;color:#7c2d12}
+.b-sky{background:#e0f2fe;color:#0c4a6e}
+.b-indigo{background:#e0e7ff;color:#1e1b4b}
+.b-violet{background:#f5f3ff;color:#3b0764}
+.b-rose{background:#ffe4e6;color:#881337}
+.b-purple{background:#fae8ff;color:#3b0764}
+.b-teal{background:#ccfbf1;color:#134e4a}
+.b-amber{background:#fef3c7;color:#451a03}
+.b-slate{background:#f1f5f9;color:#334155}
+.b-new{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;font-size:10px;padding:2px 7px}
+
+/* ══ TAB 1 — PROFILES ══ */
+.profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.pc{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:1.1rem}
+.pc-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.pc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.pc-name{font-size:14px;font-weight:600;color:#1c1917;line-height:1.2}
+.pc-sub{font-size:11px;color:#a8a29e;margin-top:2px}
+.gap-box{background:#fff7ed;border:1px solid #fed7aa;border-left:3px solid #f97316;border-radius:8px;padding:9px 11px;margin-bottom:8px}
+.gap-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#9a3412;margin-bottom:3px}
+.gap-txt{font-size:12px;color:#431407;line-height:1.6}
+.gain-box{background:#f0fdf4;border:1px solid #bbf7d0;border-left:3px solid #22c55e;border-radius:8px;padding:9px 11px;margin-bottom:10px}
+.gain-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#14532d;margin-bottom:3px}
+.gain-txt{font-size:12px;color:#14532d;line-height:1.6}
+.mp-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#a8a29e;margin-bottom:5px}
+.mp-pills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.mpill{font-size:11px;padding:3px 9px;border-radius:10px;background:#ffedd5;color:#7c2d12;border:1px solid #fed7aa}
+.jump-row{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid #f5f5f4;flex-wrap:wrap}
+.jump-from{font-size:12px;color:#78716c;background:#fafaf9;padding:3px 9px;border-radius:6px;border:1px solid #e7e5e4}
+.jump-arrow{font-size:15px;color:#ea580c;font-weight:700}
+.jump-to{font-size:12px;font-weight:600;color:#14532d;background:#dcfce7;padding:3px 9px;border-radius:6px}
+
+/* ══ TAB 2 — TRACKER ══ */
+.tracker-wrap{max-width:820px}
+.track-sel{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+.tb{font-size:12px;padding:6px 16px;border-radius:20px;border:1px solid #d6d3d1;background:#fff;color:#78716c;cursor:pointer;font-weight:500;transition:all .15s}
+.tb.active{background:#ea580c;border-color:#ea580c;color:#fff}
+.slider-row{display:flex;align-items:center;gap:14px;margin-bottom:1rem}
+.slider-row label{font-size:13px;color:#78716c;white-space:nowrap}
+.slider-row input[type=range]{flex:1;accent-color:#ea580c}
+.stage-counter{font-size:13px;font-weight:600;color:#1c1917;min-width:100px;text-align:right}
+.prog-wrap{height:5px;background:#e7e5e4;border-radius:3px;margin-bottom:1.5rem;overflow:hidden}
+.prog-fill{height:100%;background:#ea580c;border-radius:3px;transition:width .3s}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:580px){.tgrid{grid-template-columns:1fr}}
+.tc{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:1rem 1.1rem}
+.tc-name{font-size:13px;font-weight:600;color:#1c1917;margin-bottom:10px;line-height:1.3}
+.skill-list{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.sp{font-size:11px;padding:4px 10px;border-radius:10px;background:#fafaf9;border:1px solid #e7e5e4;color:#44403c;cursor:pointer;transition:all .15s;user-select:none}
+.sp:hover{border-color:#a8a29e;background:#f5f5f4}
+.sp.new{background:#ffedd5;border-color:#fdba74;color:#7c2d12;font-weight:500}
+.sp.new:hover{background:#fed7aa;border-color:#fb923c}
+.sp.ap{border-color:#ea580c!important;background:#ffedd5!important;color:#7c2d12!important;font-weight:500}
+.sp::after{content:'';display:inline-block;width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-left:5px;vertical-align:middle;opacity:.5;transition:transform .2s}
+.sp.ap::after{transform:rotate(-135deg);opacity:.8}
+.ex-box{margin-top:10px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 13px;display:none;animation:fi .18s ease}
+.ex-box.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.ex-name{font-size:12px;font-weight:600;color:#1c1917;margin-bottom:4px}
+.ex-text{font-size:13px;color:#44403c;line-height:1.65}
+.ex-close{font-size:11px;color:#a8a29e;cursor:pointer;margin-top:6px;display:inline-block}
+.ex-close:hover{color:#78716c}
+.job-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.job-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#1c1917;line-height:1.4}
+.jdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.milestone{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:1rem 1.2rem}
+.m-text{font-size:13px;color:#1c1917;line-height:1.7;font-style:italic}
+.m-note{font-size:11px;color:#a8a29e;margin-top:6px}
+
+/* ══ TAB 3 — MODULES ══ */
+.phase-note{font-size:12px;background:#fff7ed;border-left:3px solid #f97316;padding:8px 12px;margin-bottom:1.25rem;color:#7c2d12;border-radius:0 4px 4px 0}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem}
+.fb{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid #d6d3d1;background:#fff;color:#78716c;cursor:pointer;font-weight:500;transition:all .15s}
+.fb.active,.fb:hover{color:#1c1917;border-color:#78716c;background:#f5f5f4}
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:2.5rem}
+.mc{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:1rem 1.1rem;transition:border-color .15s}
+.mc:hover{border-color:#a8a29e}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.mc-phase{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#a8a29e;margin-bottom:2px}
+.mc-name{font-size:14px;font-weight:600;color:#1c1917;line-height:1.3}
+.mc-tools{font-size:11px;color:#a8a29e;margin:6px 0;line-height:1.4}
+.track-pill{font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px;display:inline-block;margin-bottom:8px}
+.tp-all{background:#dcfce7;color:#14532d}
+.tp-analytics{background:#ffedd5;color:#7c2d12}
+.tp-ds{background:#e0e7ff;color:#3730a3}
+.tp-elective{background:#f5f3ff;color:#4c1d95}
+.mc-task{font-size:13px;color:#1c1917;line-height:1.5;margin-bottom:10px}
+.hook-box{background:#fafaf9;border-radius:8px;border:1px solid #e7e5e4;padding:8px 10px}
+.hook-txt{font-size:12px;color:#57534e;line-height:1.5;font-style:italic}
+.cap-section-hdr{font-size:16px;font-weight:600;color:#1c1917;margin-bottom:4px}
+.cap-section-sub{font-size:13px;color:#78716c;margin-bottom:1rem;line-height:1.5;max-width:680px}
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.cc{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:1rem 1.1rem}
+.cc-track{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.cc-name{font-size:14px;font-weight:600;color:#1c1917;margin-bottom:6px;line-height:1.3}
+.cc-desc{font-size:12px;color:#57534e;line-height:1.55;margin-bottom:8px}
+.cc-pitch{font-size:12px;color:#1c1917;font-style:italic;line-height:1.5;background:#fafaf9;border-radius:6px;padding:7px 9px;border-left:3px solid #d6d3d1}
+</style>
+</head>
+<body>
+
+<div class="page-nav">
+  <button class="nav-btn active" onclick="show('profiles',this)">Who is this for?</button>
+  <button class="nav-btn" onclick="show('tracker',this)">Skills and jobs by stage</button>
+  <button class="nav-btn" onclick="show('modules',this)">All modules and projects</button>
+</div>
+
+<!-- ══ TAB 1 — PROFILES ══ -->
+<div class="section active" id="section-profiles">
+  <div class="sec-title">Who is Scaler DSML 3.0 for?</div>
+  <p class="sec-sub">Five real buyer profiles — what each person is missing today, what this programme adds, and the exact career jump they are making. Use this to identify which pitch to run on any call.</p>
+  <div class="profile-grid" id="profile-grid"></div>
+</div>
+
+<!-- ══ TAB 2 — TRACKER ══ -->
+<div class="section" id="section-tracker">
+  <div class="sec-title">What do I have after each stage?</div>
+  <p class="sec-sub">Select your track, drag the slider to any stage, and see the skills you have built up and which roles you can target at that point. <strong>Tap any skill pill to get a plain-English explanation</strong> — orange pills are skills just gained in that stage.</p>
+  <div class="tracker-wrap">
+    <div class="track-sel">
+      <button class="tb active" onclick="setTrack('analytics',this)">Data Analytics track</button>
+      <button class="tb" onclick="setTrack('ds',this)">Data Science track</button>
+    </div>
+    <div class="slider-row">
+      <label>Stage</label>
+      <input type="range" id="stage-slider" min="1" max="7" value="1" step="1" oninput="updateTracker(this.value)">
+      <span class="stage-counter" id="stage-label">Stage 1 of 7</span>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:14%"></div></div>
+    <div class="tgrid">
+      <div class="tc">
+        <div class="tc-name" id="tc-name">SQL and AI for data professionals</div>
+        <div class="lbl" style="margin-bottom:8px">Skills you now have <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px;color:#bbb">— tap any to explain</span></div>
+        <ul class="skill-list" id="skill-list"></ul>
+        <div class="ex-box" id="ex-box">
+          <div class="ex-name" id="ex-name"></div>
+          <div class="ex-text" id="ex-text"></div>
+          <span class="ex-close" onclick="closeEx()">close ✕</span>
+        </div>
+      </div>
+      <div class="tc">
+        <div class="tc-name">Roles you can now target</div>
+        <div class="lbl" style="margin-bottom:8px">Based on all stages completed so far</div>
+        <ul class="job-list" id="job-list"></ul>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="lbl" style="margin-bottom:7px">What a hiring manager says about you at this point</div>
+      <div class="m-text" id="m-text"></div>
+      <div class="m-note" id="m-note"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB 3 — MODULES ══ -->
+<div class="section" id="section-modules">
+  <div class="sec-title">All modules and capstone projects</div>
+  <p class="sec-sub">Every module across DSML 3.0 — with the Amazon-anchored task a learner can do on day one, and the sales hook for each.</p>
+  <div class="phase-note">AI is embedded across every module — not a standalone topic, a mindset built throughout the entire programme.</div>
+  <div class="filters">
+    <button class="fb active" onclick="filterMods('all',this)">All modules</button>
+    <button class="fb" onclick="filterMods('p1',this)">Phase 1 — Foundations</button>
+    <button class="fb" onclick="filterMods('p2',this)">Phase 2 — Intermediate</button>
+    <button class="fb" onclick="filterMods('p3',this)">Phase 3 — Advanced</button>
+    <button class="fb" onclick="filterMods('genai',this)">GenAI modules</button>
+    <button class="fb" onclick="filterMods('elective',this)">Electives</button>
+  </div>
+  <div class="mod-grid" id="mod-grid"></div>
+  <div class="cap-section-hdr">Capstone projects</div>
+  <p class="cap-section-sub">Portfolio-worthy, end-to-end systems — not assignments. Built from scratch, demonstrable in interviews, and anchored to real business problems.</p>
+  <div class="cap-grid" id="cap-grid"></div>
+</div>
+
+<script>
+/* ══ NAV ══ */
+function show(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ══ SKILL DESCRIPTIONS ══ */
+const SD={
+'SQL querying for business decisions':'Instead of just writing a query that returns data, this skill is about writing a query that answers a specific business question. At Amazon, "show me conversion rate by device type for Prime Day across the last three years" is a business question — SQL is just how you ask it. The shift from "I know SQL syntax" to "I can answer business questions with SQL" is what this module creates.',
+'AI-assisted SQL generation':'Using AI tools like ChatGPT or GitHub Copilot to write the first draft of a SQL query, then reviewing and validating it before using it. Speeds up analysis by 5–10x. The skill is knowing when the AI got it wrong — which happens more than you would expect — and how to catch it before it misleads a decision.',
+'Query validation and debugging':'Checking that the output of a SQL query actually answers what you asked — not just that it ran without errors. At Amazon, a query that silently double-counts Prime subscribers because of a join logic error is worse than a query that throws an error. Validation is the safety layer between data and decisions.',
+'Joins and aggregations':'The two most powerful tools in SQL. Joins combine data from multiple tables — like linking transaction data to customer profiles to find which segment bought most during a sale. Aggregations summarise — SUM, COUNT, AVG, GROUP BY — turning millions of rows into actionable numbers a business can act on.',
+'Subqueries and window functions':'Advanced SQL that lets you compute values that require context — like "rank each product by sales within its category" or "show rolling 7-day revenue per seller." Window functions are tested in almost every data role interview at Amazon, Google, and every product company, precisely because most candidates cannot use them fluently.',
+'Excel for data analysis':'Using Excel beyond basic spreadsheets — pivot tables, VLOOKUP, conditional formatting, and quick statistical summaries. For most business stakeholders, Excel is still the tool decisions get made in. Knowing how to present data in it cleanly is a professional skill that gets used every single week.',
+'Tableau and Power BI basics':'The two most widely used tools for building visual dashboards. A Tableau dashboard connected to Amazon\'s sales database can let a category manager answer "which sellers are at risk of losing the Buy Box today" in seconds, without waiting for the data team. These tools turn data into decisions without needing to write code.',
+'AI-generated insight narratives':'Using AI to draft the plain-English story behind a chart or dataset — "what does this data mean for the business, and what should we do about it?" At Amazon, an analyst who can produce a dashboard AND write a clear insight summary saves a manager two hours of interpretation time. The AI drafts it; you validate and refine it.',
+'Dashboard design principles':'Knowing which chart type answers which question, how to reduce clutter, and how to sequence information so a busy executive can extract the key message in 30 seconds. The most common mistake in analytics — beautiful dashboards that nobody reads because the insight is buried.',
+'Data storytelling':'The ability to walk a stakeholder through data and arrive at a clear recommendation — not just a summary. "Conversion dropped 12% on mobile in the last two weeks, concentrated in users aged 18–24, with the steepest drop at the payment step — and here is what I think we should test first." That is a data story. This is the skill that gets analysts promoted.',
+'Python basics and syntax':'The entry point to Python — variables, loops, functions, and basic data structures. Not taught in isolation but anchored to real data tasks from day one, with AI tools handling boilerplate so learning time is focused on logic and problem-solving rather than memorising method names.',
+'Pandas for data manipulation':'The Python library that turns messy, real-world datasets into clean, analysis-ready tables. At Amazon, a raw export of seller performance data arrives with missing values, inconsistent formats, and duplicate rows. Pandas is how you clean it in minutes rather than hours, and reshape it into exactly the structure the analysis needs.',
+'NumPy for numerical operations':'Python\'s toolkit for fast mathematical operations on large arrays of numbers. The foundation underneath Pandas, machine learning libraries, and statistical analysis. Used whenever you need to compute something at scale — like calculating the revenue impact of a 2% pricing change across 300 million product listings.',
+'Data cleaning and wrangling':'The unglamorous 80% of real data work — handling nulls, fixing inconsistent formats, removing duplicates, parsing dates, and reshaping messy exports into usable tables. Every Amazon data hire is expected to handle this independently. Most self-taught analysts underestimate how much of the job this is.',
+'AI-assisted Python coding':'Using AI tools to write Python code, debug errors, and suggest approaches — with the understanding to review and validate before using the output. Like having a senior developer on call. The skill is directing the AI precisely and catching its mistakes, which matters because an AI-generated data cleaning script that drops the wrong rows silently is worse than no script at all.',
+'Product funnel analysis':'Mapping each step a user takes from discovery to conversion, and measuring where they drop off. At Amazon, the checkout funnel — search → product page → add to cart → payment → confirmation — is monitored obsessively. A 2% drop at the payment step across Prime Day traffic represents hundreds of millions of rupees in lost revenue. Funnel analysis is how you find it.',
+'Cohort and retention analysis':'Grouping users by when they first interacted with a product and tracking how many return over time. At Amazon, "which cohort of Prime subscribers acquired during last year\'s festive sale retained best through the following 12 months?" is a cohort question. The answer shapes the acquisition strategy for next year.',
+'User journey mapping':'Tracing the full path a specific type of user takes across a product — what they click, where they pause, where they abandon. Not aggregate statistics, but the actual sequence. At Amazon, understanding the journey of a first-time seller from registration to first live listing reveals exactly where the onboarding experience breaks.',
+'Prompt engineering for data':'Writing structured, precise prompts that make AI tools useful for data work — asking for SQL queries, data summaries, Python code, and insight explanations in ways that return reliable, validated output rather than plausible-sounding hallucinations. The foundational skill of AI-native data work.',
+'Gen AI workflows for analytics':'Connecting AI tools into repeatable workflows for data tasks — automatically summarising weekly reports, generating SQL from plain English questions, flagging anomalies in dashboards, and producing executive briefings from raw data. The difference between using AI occasionally and building it into every part of your daily workflow.',
+'AI for SQL and Python automation':'Using AI to generate, review, and optimise SQL queries and Python scripts as part of a normal working pattern — not just for one-off tasks. At Amazon, an analyst who can automate a weekly report generation pipeline with AI reduces their manual work from four hours to forty minutes. Every week.',
+'Advanced Pandas and data workflows':'Complex data operations that go beyond basic cleaning — multi-index grouping, rolling window calculations, merge strategies, reshaping with melt and pivot — all applied to real business datasets. The difference between an analyst who can clean data and one who can build a complete analysis pipeline independently.',
+'A/B testing and experimentation':'Designing and running controlled experiments to test whether a change to a product actually caused an improvement, or whether the difference was random noise. At Amazon, every change to the search ranking algorithm, the buy box logic, or the homepage layout is A/B tested before full rollout. Getting the test design wrong wastes weeks of engineering time and produces misleading results.',
+'Hypothesis testing and p-values':'The mathematical backbone of A/B testing. A p-value tells you how likely it is that your observed result happened by chance. At Amazon, saying "checkout conversion improved by 1.2%" only matters if the result is statistically significant — not a fluke of the sample. This is what separates analysts whose recommendations get acted on from those whose recommendations get questioned.',
+'Statistical significance':'The formal threshold at which you declare a test result real rather than random. Misunderstanding this is the most expensive mistake in analytics — calling a test winner too early, or missing a real improvement because the sample was too small. Every major product decision at Amazon is backed by a statistically rigorous test.',
+'Experiment design':'The art of setting up an A/B test correctly before running it — choosing the right metric, calculating the sample size needed, defining the holdout group, and setting the duration. A badly designed experiment wastes weeks. At Amazon, experiment design is a core competency expected of every senior analyst and product manager.',
+'Confidence intervals':'A range that tells you not just what the measured value is, but how much it could plausibly vary given the data you have. "Checkout conversion is 4.2%, plus or minus 0.3 percentage points" is far more useful to a decision-maker than just "4.2%." Standard in every analytical communication at product companies.',
+'Advanced product metrics (North Star)':'Understanding which single metric best captures whether a product is delivering value — and how to define it correctly so it does not create gaming behaviour. At Amazon, defining the North Star metric for a new seller onboarding flow determines what the product team optimises for over the next year. Defining it wrong means everyone is working toward the wrong thing.',
+'AWS S3 and data pipelines':'Amazon\'s cloud storage service and the pipelines that move data through it. At Amazon, raw event data lands in S3 every minute. Building a pipeline that cleans, transforms, and loads it into a query-ready warehouse is the infrastructure that every downstream analysis depends on. The skill that takes an analyst from working with CSV files to working like a real data team.',
+'Redshift and cloud warehousing':'Amazon Redshift is a cloud data warehouse designed for analytical queries across billions of rows. Where Pandas handles millions of rows on a laptop, Redshift handles billions of rows in the cloud and returns results in seconds. Every major data-driven company runs its analytical layer on a cloud warehouse like this.',
+'Live dashboards on cloud data':'Connecting Tableau or Power BI directly to a live cloud data source so dashboards update automatically as new data arrives — rather than requiring someone to manually refresh a spreadsheet. The standard for any production-grade analytics system at Amazon or any modern data-driven company.',
+'DevOps basics for data':'The practices that make data work reliable in production — version control with Git, scheduling pipelines to run automatically, monitoring for failures, and documenting the pipeline so the next person can understand it. The difference between a one-time analysis and a system that keeps working six months after you built it.',
+'Real-time data monitoring':'Setting up alerts and monitoring dashboards that flag anomalies in live data — like a sudden drop in payment success rates or a spike in seller support tickets — as they happen, rather than the next morning. At Amazon, catching a checkout bug in the first 10 minutes of Prime Day is worth millions of rupees.',
+'Linear algebra for ML':'The mathematics of vectors and matrices — how to represent data as numbers that computers can operate on, how to measure similarity between things, and how neural networks process information. You do not need to do this by hand, but you need to understand it well enough to know when a model is behaving incorrectly.',
+'Calculus and gradients':'The mathematical mechanism behind how machine learning models learn — by computing gradients (the direction of steepest improvement) and adjusting parameters in that direction repeatedly until the model stops getting better. Understanding this lets you diagnose why a model is failing to learn and what to change.',
+'Probability and Bayesian reasoning':'The mathematics of uncertainty — how likely is an event, how should you update your belief when you see new evidence, and how do you reason under incomplete information. The foundation of every ML model that makes probabilistic predictions. At Amazon, "what is the probability this seller will churn in the next 30 days?" is a Bayesian question.',
+'Machine learning concepts and workflows':'The big picture of how ML works — framing a problem as a prediction task, preparing the data, choosing a model type, training it, evaluating it, and deploying it. AI tools now assist at every step, but you still decide what problem to solve and whether the model is actually working.',
+'Feature engineering':'Transforming raw data into the variables a model can learn from. At Amazon, "days since last purchase" is more useful to a churn model than "date of last purchase." "Price deviation from category average" tells a fraud model more than "price" alone. Feature engineering is where domain knowledge becomes model performance.',
+'AI-powered ML workflows':'Using AI tools to accelerate the ML development cycle — generating boilerplate code, suggesting features, identifying data quality issues, explaining model behaviour. Not replacing the data scientist\'s judgement, but removing the friction around executing it.',
+'Linear and Logistic Regression':'The foundational predictive models. Linear regression predicts a number — like "how many units will this product sell next week?" Logistic regression predicts a probability — "is this transaction fraudulent, yes or no?" Both are still used extensively in production at Amazon because they are fast, interpretable, and explainable to stakeholders.',
+'Decision Trees and Random Forest':'A Decision Tree makes predictions by asking a sequence of yes/no questions about the data. A Random Forest runs hundreds of Decision Trees and takes the majority vote. Significantly more accurate than a single tree and more robust to noisy data. Used at Amazon for seller risk scoring, product categorisation, and demand forecasting.',
+'XGBoost and LightGBM':'The algorithms that win most real-world ML competitions and power most production prediction systems at product companies. XGBoost builds trees sequentially, each one correcting the mistakes of the last. Used at Amazon for everything from delivery time prediction to ad click-through rate estimation.',
+'Model evaluation (precision, recall, AUC)':'The scorecards that tell you whether a model is actually useful for the business purpose it was built for. At Amazon, a fraud model with 99% accuracy but 10% recall is useless — it misses 90% of actual fraud. Precision and recall capture the trade-offs that matter when mistakes have real-world costs.',
+'Cross-validation and hyperparameter tuning':'Techniques for getting the most out of a model without overfitting it to the training data. Cross-validation tests the model on multiple held-out slices of the data to ensure performance generalises. Hyperparameter tuning searches for the settings that produce the best result. AI tools automate both — but you have to understand the objective they are optimising.',
+'End-to-end supervised ML pipelines':'Building the full workflow from raw data to a deployed prediction — data prep, feature engineering, model training, evaluation, and production export — as a reproducible, automated system. The difference between a model in a notebook and a model that runs every night and updates a business dashboard.',
+'K-Means and DBSCAN clustering':'Algorithms that find natural groupings in data without being told what the groups are. K-Means assigns every record to the nearest cluster centre. DBSCAN finds dense regions and treats outliers as anomalies. At Amazon, clustering customer purchase behaviour finds the tribal patterns — "weekend grocery buyers," "deal hunters," "brand loyalists" — that no manual segmentation would have identified.',
+'PCA and dimensionality reduction':'When your data has hundreds of variables and you need to make sense of it, PCA finds the combinations of variables that capture the most variation and compresses the data into a smaller, more manageable space. Used for visualising high-dimensional data, removing noise, and speeding up subsequent models.',
+'Anomaly detection':'Automatically flagging data points that do not fit the normal pattern — fraudulent transactions, defective products, unusual seller behaviour, sudden traffic drops. At Amazon, an anomaly detection system running on seller metrics catches fraudulent stores weeks before human reviewers would notice.',
+'Customer segmentation with ML':'Combining multiple clustering and dimensionality reduction techniques to produce business-ready customer segments with stable, interpretable profiles — then attaching business logic like predicted lifetime value, churn risk, and product affinity scores to each segment. The deliverable that marketing and product teams actually use.',
+'Unsupervised pattern discovery':'The broader skill of using unsupervised techniques to find structure, patterns, and anomalies in data without predefined labels. The mindset that turns a data scientist from "I can predict labelled outcomes" to "I can discover things about the data nobody thought to look for."',
+'ARIMA and SARIMA forecasting':'Classical time series models that predict future values based on past patterns and seasonal cycles. ARIMA handles trends. SARIMA adds seasonality — which is essential at Amazon where demand for most categories follows weekly, monthly, and annual patterns that any forecasting model must account for to be useful.',
+'Demand forecasting systems':'End-to-end systems that predict how much of each product will be sold over the next days, weeks, or months — powering inventory decisions, logistics planning, and pricing strategies. Amazon\'s warehouse replenishment system is fundamentally a demand forecasting problem run across hundreds of millions of SKUs.',
+'Collaborative filtering':'The recommendation technique that says "users who liked what you liked also liked these" — finding patterns in user behaviour without needing to understand anything about the content itself. The core algorithm behind Amazon\'s "customers who bought this also bought" feature, which drives a significant portion of total revenue.',
+'Matrix factorisation':'A mathematical technique that decomposes the user-item interaction matrix into two smaller matrices representing latent user preferences and item characteristics. More scalable than basic collaborative filtering and able to handle the sparsity problem — most users have only interacted with a tiny fraction of available items.',
+'Docker for ML':'Packaging a machine learning model and all its dependencies into a container that runs identically everywhere — laptop, staging server, production cloud. The difference between a model that "works on my machine" and one that is actually deployable.',
+'Model versioning and MLflow':'Tracking every experiment, every model version, and every parameter choice so you can reproduce results, compare approaches, and roll back to a previous version if a new deployment underperforms. Standard practice at every serious ML team. Without it, teams regularly lose their best-performing models.',
+'CI/CD for ML pipelines':'Automated pipelines that test, validate, and redeploy an ML model every time the training data is updated or the model code changes — so the deployed model never goes stale. How Amazon\'s recommendation and pricing models retrain continuously as new data arrives.',
+'Model monitoring in production':'Tracking whether a deployed model is still performing as expected — detecting data drift (the real-world distribution is changing), prediction drift (the model\'s output is shifting), and performance degradation. At Amazon, a demand forecasting model that silently degrades after the festive season could leave warehouses overstocked for months.',
+'Neural network architecture and backpropagation':'The building blocks of deep learning. A neural network is layers of simple mathematical operations stacked together — each layer transforming the data slightly — until the final layer produces a prediction. Backpropagation is how the network learns from its mistakes, adjusting every layer based on the error it made.',
+'Convolutional Neural Networks (CNNs)':'Neural networks designed to understand images. Instead of treating an image as a flat list of pixels, CNNs scan it in overlapping patches, learning to detect edges, textures, shapes, and eventually objects. Used at Amazon for product image classification, visual search, and defect detection in fulfilment centres.',
+'RNNs and LSTMs for sequences':'Neural networks designed for data that comes in sequences — time series, text, audio. An LSTM (Long Short-Term Memory) can remember important patterns from hundreds of steps back, making it useful for tasks like predicting the next word in a sentence or the next value in a sales curve.',
+'Transfer learning and fine-tuning':'Taking a neural network already trained on millions of examples and repurposing it for a new task with much less data and compute. At Amazon, fine-tuning a pre-trained image model to classify marketplace product categories takes days instead of months — because most of the visual understanding is already built in.',
+'TensorFlow and PyTorch':'The two industry-standard frameworks for building and training neural networks. TensorFlow is Google\'s framework, widely used in production. PyTorch is Meta\'s framework, preferred for research and rapid experimentation. Every serious ML engineering team uses one or both.',
+'Deep learning for real-world problems':'Applying deep learning to production problems where classical ML underperforms — understanding images, processing language, working with audio, and building recommendation systems at massive scale. The skill that separates data scientists who build prototypes from those who ship products.',
+'Computer vision (YOLOv8, EfficientNet)':'AI models that can detect, locate, and classify objects in images and video. YOLOv8 is fast enough for real-time detection. EfficientNet is optimised for accuracy with limited compute. At Amazon\'s fulfilment centres, computer vision systems inspect packages on conveyor belts at 3,000 items per hour, flagging defects that human inspectors would miss.',
+'NLP with transformer models':'Using transformer-based AI (like BERT or GPT) to understand and process text — classifying emails, extracting entities, answering questions, summarising documents. At Amazon, NLP models read every customer support ticket, classify it by issue type, extract the order ID and product name, and route it to the right team — automatically, at millions of tickets per day.',
+'BERT fine-tuning for text classification':'Taking a pre-trained language model and adapting it to classify text into categories specific to your business. At Amazon, a BERT model fine-tuned on seller support tickets can classify them by urgency, product category, and issue type with 95%+ accuracy — routing critical cases before SLA breach.',
+'AI Engineering and system design':'Building AI systems that work reliably in production — not just models that perform in notebooks. Handling model latency, fallback strategies, prompt management, evaluation pipelines, and the infrastructure that keeps AI systems accurate and auditable over time.',
+'Agentic AI and autonomous workflows':'AI systems that chain together multiple steps to complete a goal — searching databases, calling APIs, making decisions, generating outputs — without a human clicking at each step. At Amazon, an agentic system could ingest a new seller application, verify documents, check for fraud signals, assess category risk, and produce an onboarding decision — entirely automatically.',
+'RAG and knowledge retrieval':'Retrieval-Augmented Generation — giving an AI access to a specific knowledge base before it answers, so responses come from your actual data rather than general training knowledge. At Amazon, an internal AI assistant built on RAG can answer "what is the current policy on seller return abuse" with the actual current policy — not a generic approximation.',
+'Embeddings and vector search':'Representing text, images, or other data as lists of numbers in a way that captures meaning — so that "fast delivery" and "quick shipping" are numerically similar, even though the words are different. The engine behind semantic search, recommendation systems, and RAG. Used everywhere at Amazon from product search to internal knowledge tools.',
+'Multi-modal AI systems':'AI that processes and reasons across multiple types of data simultaneously — text, images, audio, and video together. At Amazon, a multi-modal system could watch a product return video, read the customer\'s written complaint, and cross-reference the order history to automatically determine whether to approve the refund — all at once.',
+'Interview-grade problem framing':'The ability to break down an ambiguous business question into a structured analytical approach on the spot — exactly what happens in a case interview at Amazon, Google, or Flipkart. "Conversion dropped this week — figure out what is going on" is not a data question. It is a problem-framing question. This skill is what gets analysts to final rounds.',
+'Portfolio of 3 end-to-end analytics projects':'Three working systems built from scratch — food delivery analytics, streaming platform analytics, and a live cloud pipeline — each demonstrable in interviews. Not case studies, not exercises. Real systems with real code, on GitHub, with a clear business story behind each one.',
+'Portfolio of 4 end-to-end DS projects':'Four production-grade systems — customer segmentation, industrial quality inspection (CV), customer support intelligence (NLP), and a multi-modal search engine — each demonstrable in interviews. The depth and breadth of portfolio that senior data science roles at Amazon and Flipkart expect to see before making an offer.',
+};
+function getDesc(s){
+  if(SD[s]) return SD[s];
+  for(const k of Object.keys(SD)){if(k.toLowerCase().includes(s.toLowerCase().slice(0,12))||s.toLowerCase().includes(k.toLowerCase().slice(0,12))) return SD[k];}
+  return 'A key skill built in this stage — part of the end-to-end workflow that companies like Amazon expect data professionals to own from day one.';
+}
+
+/* ══ PILL INTERACTION ══ */
+let aP=null;
+function handlePill(pill,skill){
+  if(aP===pill){closeEx();return;}
+  if(aP) aP.classList.remove('ap');
+  aP=pill;pill.classList.add('ap');
+  document.getElementById('ex-name').textContent=skill;
+  document.getElementById('ex-text').textContent=getDesc(skill);
+  document.getElementById('ex-box').classList.add('on');
+}
+function closeEx(){
+  if(aP){aP.classList.remove('ap');aP=null;}
+  document.getElementById('ex-box').classList.remove('on');
+}
+
+/* ══ TRACK DATA ══ */
+const tracks={
+  analytics:{
+    max:7,
+    stages:[
+      {name:'SQL and AI for data professionals',
+       skills:['SQL querying for business decisions','AI-assisted SQL generation','Query validation and debugging','Joins and aggregations','Subqueries and window functions'],
+       newSkills:['SQL querying for business decisions','AI-assisted SQL generation','Query validation and debugging','Joins and aggregations','Subqueries and window functions'],
+       jobs:[{t:'Building foundational data skills — not yet interview-ready',c:'#a8a29e'}],
+       m:'"Can already write SQL to answer business questions — not just queries that run. The combination of SQL fluency and AI-assisted validation is exactly what junior analyst job descriptions ask for now."',
+       n:'SQL is the first filter in every data analyst interview process. Clearing this stage makes the first technical screen passable.'},
+      {name:'Excel, dashboarding and AI storytelling',
+       skills:['SQL querying for business decisions','AI-assisted SQL generation','Joins and aggregations','Subqueries and window functions','Excel for data analysis','Tableau and Power BI basics','AI-generated insight narratives','Dashboard design principles','Data storytelling'],
+       newSkills:['Excel for data analysis','Tableau and Power BI basics','AI-generated insight narratives','Dashboard design principles','Data storytelling'],
+       jobs:[{t:'Data Analyst (entry-level)',c:'#ea580c'},{t:'Reporting Analyst',c:'#ea580c'},{t:'Business Analyst',c:'#a8a29e'}],
+       m:'"Can build a dashboard and explain what it means for the business — not just present charts. The AI insight narrative is the differentiator. Most candidates can make the chart; very few can write the story."',
+       n:'SQL + dashboarding covers the baseline requirement for most junior Data Analyst roles at Indian product companies.'},
+      {name:'Python foundations and AI coding assistants',
+       skills:['SQL querying for business decisions','AI-assisted SQL generation','Joins and aggregations','Dashboard design principles','Data storytelling','Python basics and syntax','Pandas for data manipulation','NumPy for numerical operations','Data cleaning and wrangling','AI-assisted Python coding'],
+       newSkills:['Python basics and syntax','Pandas for data manipulation','NumPy for numerical operations','Data cleaning and wrangling','AI-assisted Python coding'],
+       jobs:[{t:'Data Analyst',c:'#ea580c'},{t:'Junior Data Scientist (analytics-focused)',c:'#ea580c'},{t:'Analytics Engineer',c:'#a8a29e'}],
+       m:'"Can handle messy, real-world datasets in Python with AI assistance — the exact thing that trips up most self-taught analysts in technical rounds. SQL + Pandas + dashboards is a genuinely competitive analyst profile."',
+       n:'Most mid-level Data Analyst job descriptions list SQL, Python, and a BI tool. This stage makes all three checkboxes. Phase 1 core skills complete.'},
+      {name:'Product analytics and Gen AI for analytics',
+       skills:['All SQL and Python skills','All dashboarding and storytelling skills','Product funnel analysis','Cohort and retention analysis','User journey mapping','Prompt engineering for data','Gen AI workflows for analytics','AI for SQL and Python automation'],
+       newSkills:['Product funnel analysis','Cohort and retention analysis','User journey mapping','Prompt engineering for data','Gen AI workflows for analytics','AI for SQL and Python automation'],
+       jobs:[{t:'Product Analyst',c:'#0284c7'},{t:'Data Analyst (mid-level)',c:'#0284c7'},{t:'Customer Analytics Manager',c:'#a8a29e'}],
+       m:'"Can answer the Amazon interview question — conversion dropped, figure out why — end to end. Funnels, cohorts, retention, root cause, recommendation. That is the real expectation at every data-driven company now."',
+       n:'Phase 1 complete. This is the profile that Product Analyst roles at Swiggy, Flipkart, and Razorpay are looking for. The Gen AI integration is a direct differentiator in every interview.'},
+      {name:'Advanced analytics, statistics and experimentation',
+       skills:['All prior skills','Advanced Pandas and data workflows','A/B testing and experimentation','Hypothesis testing and p-values','Statistical significance','Experiment design','Confidence intervals'],
+       newSkills:['Advanced Pandas and data workflows','A/B testing and experimentation','Hypothesis testing and p-values','Statistical significance','Experiment design','Confidence intervals'],
+       jobs:[{t:'Senior Data Analyst',c:'#0284c7'},{t:'Experimentation Analyst',c:'#0284c7'},{t:'Product Data Analyst',c:'#0284c7'},{t:'Analytics Lead',c:'#a8a29e'}],
+       m:'"Can design an A/B test, run it correctly, and explain whether the results are actually significant or just noise. That is the question every senior analytics interview at Amazon, Flipkart, and Google asks. This stage makes it answerable."',
+       n:'Statistics and A/B testing knowledge moves the learner from junior to mid-senior analyst territory. Phase 2 core material.'},
+      {name:'Advanced product analytics and cloud / AWS',
+       skills:['All prior skills','Advanced product metrics (North Star)','AWS S3 and data pipelines','Redshift and cloud warehousing','Live dashboards on cloud data','DevOps basics for data','Real-time data monitoring'],
+       newSkills:['Advanced product metrics (North Star)','AWS S3 and data pipelines','Redshift and cloud warehousing','Live dashboards on cloud data','DevOps basics for data','Real-time data monitoring'],
+       jobs:[{t:'Senior Data Analyst',c:'#0284c7'},{t:'Analytics Engineer',c:'#0284c7'},{t:'Business Intelligence Engineer',c:'#0284c7'},{t:'Data Platform Analyst',c:'#a8a29e'}],
+       m:'"Can build the full pipeline — raw event data landing in S3, cleaned and loaded into Redshift, surfaced in a live Tableau dashboard with anomaly alerts. That is exactly how Amazon\'s BI teams operate. Phase 2 complete."',
+       n:'Cloud skills are now a significant differentiator for analytics roles. Most analyst candidates cannot demonstrate this. The end-to-end cloud pipeline capstone goes directly onto the portfolio.'},
+      {name:'Interview readiness and programme complete',
+       skills:['All prior skills','Interview-grade problem framing','Portfolio of 3 end-to-end analytics projects'],
+       newSkills:['Interview-grade problem framing','Portfolio of 3 end-to-end analytics projects'],
+       jobs:[{t:'Data Analyst at top product companies',c:'#16a34a'},{t:'Senior Analyst at FAANG and Indian unicorns',c:'#16a34a'},{t:'Business Intelligence Engineer',c:'#16a34a'},{t:'Product Analyst',c:'#a8a29e'}],
+       m:'"Full analytics programme complete. SQL, Python, Dashboarding, Product Analytics, Statistics, Experimentation, Cloud/AWS, Gen AI integration, three portfolio projects, and interview simulation. The profile Amazon, Google, and Flipkart\'s analytics teams are actively hiring for."',
+       n:'Three capstone projects — Food Delivery Analytics, Streaming Platform Analytics, End-to-End Cloud Pipeline — all on GitHub, all demonstrable in interviews.'}
+    ]
+  },
+  ds:{
+    max:9,
+    stages:[
+      {name:'SQL, Python and AI — dual foundations',
+       skills:['SQL querying for business decisions','AI-assisted SQL generation','Joins and aggregations','Python basics and syntax','Pandas for data manipulation','AI-assisted Python coding','Business problem framing'],
+       newSkills:['SQL querying for business decisions','AI-assisted SQL generation','Joins and aggregations','Python basics and syntax','Pandas for data manipulation','AI-assisted Python coding','Business problem framing'],
+       jobs:[{t:'Building foundational skills — not yet interview-ready',c:'#a8a29e'}],
+       m:'"Two foundations acquired simultaneously — SQL for querying, Python for processing. Every data science interview assumes both. Starting here means neither will be a weakness in any technical round."',
+       n:'The DS track combines the SQL and Python modules from the start. Nothing about models is taught without first establishing the data layer that feeds them.'},
+      {name:'Product analytics and Gen AI for analytics',
+       skills:['All SQL and Python skills','Product funnel analysis','Cohort and retention analysis','User journey mapping','Prompt engineering for data','Gen AI workflows for analytics','AI for SQL and Python automation'],
+       newSkills:['Product funnel analysis','Cohort and retention analysis','User journey mapping','Prompt engineering for data','Gen AI workflows for analytics','AI for SQL and Python automation'],
+       jobs:[{t:'Data Analyst',c:'#ea580c'},{t:'Junior Data Scientist (analytics-focused)',c:'#a8a29e'}],
+       m:'"Can move from raw data to a business recommendation — the end-to-end pipeline that Amazon expects from every data hire. Product analytics comes early because model building without business context produces models nobody uses."',
+       n:'The Gen AI workflow integration at this stage differentiates DS learners from those who just "know tools."'},
+      {name:'Advanced analytics, statistics and experimentation',
+       skills:['All prior skills','Advanced Pandas and data workflows','A/B testing and experimentation','Hypothesis testing and p-values','Statistical significance','Experiment design','Confidence intervals'],
+       newSkills:['Advanced Pandas and data workflows','A/B testing and experimentation','Hypothesis testing and p-values','Statistical significance','Experiment design','Confidence intervals'],
+       jobs:[{t:'Data Analyst',c:'#ea580c'},{t:'Junior Data Scientist',c:'#ea580c'},{t:'Experimentation Analyst',c:'#a8a29e'}],
+       m:'"Can design, run, and interpret an experiment correctly — the skill that separates data scientists whose results are trusted from those whose results are questioned. Statistics and A/B testing appear in almost every DS interview at Amazon."',
+       n:'Phase 2 core foundations complete. The learner can now handle the "analytics and experimentation" portion of any DS job description.'},
+      {name:'Mathematical foundations and ML concepts',
+       skills:['All prior skills','Linear algebra for ML','Calculus and gradients','Probability and Bayesian reasoning','Machine learning concepts and workflows','Feature engineering','AI-powered ML workflows'],
+       newSkills:['Linear algebra for ML','Calculus and gradients','Probability and Bayesian reasoning','Machine learning concepts and workflows','Feature engineering','AI-powered ML workflows'],
+       jobs:[{t:'Junior Data Scientist',c:'#4338ca'},{t:'ML Engineer (junior)',c:'#a8a29e'}],
+       m:'"Understands why models work — not just how to call them. Can explain gradient descent to a hiring panel without reading off a textbook definition. This is what most online learners skip, and what interview panels use to separate candidates who truly know ML from those who have just run code."',
+       n:'Most self-taught data science candidates skip the maths. This stage closes that gap permanently.'},
+      {name:'Supervised machine learning',
+       skills:['All prior skills','Linear and Logistic Regression','Decision Trees and Random Forest','XGBoost and LightGBM','Model evaluation (precision, recall, AUC)','Cross-validation and hyperparameter tuning','End-to-end supervised ML pipelines'],
+       newSkills:['Linear and Logistic Regression','Decision Trees and Random Forest','XGBoost and LightGBM','Model evaluation (precision, recall, AUC)','Cross-validation and hyperparameter tuning','End-to-end supervised ML pipelines'],
+       jobs:[{t:'Data Scientist',c:'#4338ca'},{t:'ML Engineer (junior)',c:'#4338ca'},{t:'Applied Scientist (junior)',c:'#a8a29e'}],
+       m:'"Can build a demand forecasting model for Amazon\'s warehouse replenishment — selecting the right algorithm, evaluating it on business impact rather than just accuracy, and explaining the output to a non-technical product manager. The most common interview topic for DS roles. This stage makes those conversations winnable."',
+       n:'Supervised ML is the core of most DS job descriptions. Clearing this stage opens the majority of data science hiring market.'},
+      {name:'Unsupervised machine learning',
+       skills:['All prior skills','K-Means and DBSCAN clustering','PCA and dimensionality reduction','Anomaly detection','Customer segmentation with ML','Unsupervised pattern discovery'],
+       newSkills:['K-Means and DBSCAN clustering','PCA and dimensionality reduction','Anomaly detection','Customer segmentation with ML','Unsupervised pattern discovery'],
+       jobs:[{t:'Data Scientist',c:'#4338ca'},{t:'Customer Analytics Scientist',c:'#4338ca'},{t:'Product Data Scientist',c:'#a8a29e'}],
+       m:'"Can segment Amazon\'s customer base by purchase behaviour — finding tribal patterns that no survey would capture — and recommend different product strategies per segment. The Smart Retail capstone is built at this stage."',
+       n:'Phase 3 core ML complete. The Smart Retail Demand and Customer Intelligence capstone project goes onto the portfolio here.'},
+      {name:'Time series, recommender systems and MLOps',
+       skills:['All prior skills','ARIMA and SARIMA forecasting','Demand forecasting systems','Collaborative filtering','Matrix factorisation','Docker for ML','Model versioning and MLflow','CI/CD for ML pipelines','Model monitoring in production'],
+       newSkills:['ARIMA and SARIMA forecasting','Demand forecasting systems','Collaborative filtering','Matrix factorisation','Docker for ML','Model versioning and MLflow','CI/CD for ML pipelines','Model monitoring in production'],
+       jobs:[{t:'Data Scientist (mid-level)',c:'#4338ca'},{t:'ML Engineer',c:'#4338ca'},{t:'Applied Scientist',c:'#4338ca'},{t:'Recommender Systems Engineer',c:'#a8a29e'}],
+       m:'"Can build the demand forecasting system that powers Amazon\'s warehouse replenishment AND keep it running in production, versioned, monitored, and auto-retraining. The difference between a data scientist who builds models and one who ships products."',
+       n:'MLOps is the gap most DS candidates cannot demonstrate. This stage closes it permanently with working capstone evidence.'},
+      {name:'Deep learning and neural networks',
+       skills:['All prior skills','Neural network architecture and backpropagation','Convolutional Neural Networks (CNNs)','RNNs and LSTMs for sequences','Transfer learning and fine-tuning','TensorFlow and PyTorch','Deep learning for real-world problems'],
+       newSkills:['Neural network architecture and backpropagation','Convolutional Neural Networks (CNNs)','RNNs and LSTMs for sequences','Transfer learning and fine-tuning','TensorFlow and PyTorch','Deep learning for real-world problems'],
+       jobs:[{t:'Senior Data Scientist',c:'#7c3aed'},{t:'ML Engineer (mid-senior)',c:'#7c3aed'},{t:'Research Scientist',c:'#a8a29e'}],
+       m:'"Can build the image recognition model Amazon uses for product quality inspection in its fulfilment centres — fine-tuned YOLOv8 classifying defect severity from conveyor belt images in real time. Every senior DS role now assumes deep learning. This stage makes that assumption correct."',
+       n:'The Industrial Quality Inspection capstone is built at this stage. Computer vision portfolio piece on GitHub.'},
+      {name:'Electives, AI engineering and programme complete',
+       skills:['All prior skills','Computer vision (YOLOv8, EfficientNet)','NLP with transformer models','BERT fine-tuning for text classification','AI Engineering and system design','Agentic AI and autonomous workflows','RAG and knowledge retrieval','Embeddings and vector search','Multi-modal AI systems','Portfolio of 4 end-to-end DS projects'],
+       newSkills:['Computer vision (YOLOv8, EfficientNet)','NLP with transformer models','BERT fine-tuning for text classification','AI Engineering and system design','Agentic AI and autonomous workflows','RAG and knowledge retrieval','Embeddings and vector search','Multi-modal AI systems','Portfolio of 4 end-to-end DS projects'],
+       jobs:[{t:'Senior Data Scientist',c:'#16a34a'},{t:'AI Engineer / Applied Scientist',c:'#16a34a'},{t:'ML Researcher',c:'#16a34a'},{t:'Data Science Lead',c:'#16a34a'}],
+       m:'"Full programme complete. SQL, Python, Product Analytics, Statistics, Mathematical Foundations, Supervised + Unsupervised ML, MLOps, Deep Learning, CV, NLP, Agentic AI. Four portfolio projects. Interview simulation. The profile Amazon\'s Applied Science and AI teams are actively hiring for."',
+       n:'Four capstone projects: Smart Retail Demand, Industrial Quality Inspection, Customer Support Intelligence, Video-Context Search Engine. MLOps, Agentic AI, and full production deployment all demonstrated.'}
+    ]
+  }
+};
+
+let currentTrack='analytics';
+function setTrack(t,btn){
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTrack=t;
+  const max=tracks[t].max;
+  const sl=document.getElementById('stage-slider');
+  sl.max=max;sl.value=1;
+  updateTracker(1);
+}
+function updateTracker(v){
+  closeEx();
+  const tr=tracks[currentTrack];
+  const c=tr.stages[v-1];
+  const max=tr.max;
+  document.getElementById('stage-label').textContent='Stage '+v+' of '+max;
+  document.getElementById('prog-fill').style.width=Math.round((v/max)*100)+'%';
+  document.getElementById('tc-name').textContent=c.name;
+  const sl=document.getElementById('skill-list');sl.innerHTML='';
+  c.skills.forEach(s=>{
+    const isNew=c.newSkills.includes(s);
+    const li=document.createElement('li');
+    li.className='sp'+(isNew?' new':'');li.textContent=s;
+    li.onclick=function(){handlePill(li,s);};
+    sl.appendChild(li);
+  });
+  const jl=document.getElementById('job-list');jl.innerHTML='';
+  c.jobs.forEach(j=>{
+    const li=document.createElement('li');li.className='job-item';
+    li.innerHTML='<span class="jdot" style="background:'+j.c+'"></span><span>'+j.t+'</span>';
+    jl.appendChild(li);
+  });
+  document.getElementById('m-text').textContent=c.m;
+  document.getElementById('m-note').textContent=c.n;
+}
+
+/* ══ MODULES ══ */
+const phLabel={p1:'Phase 1',p2:'Phase 2',p3:'Phase 3',genai:'GenAI',mlops:'MLOps',elective:'Elective'};
+const phBadge={p1:'b-orange',p2:'b-sky',p3:'b-indigo',genai:'b-violet',mlops:'b-rose',elective:'b-slate'};
+const trackPillCls={all:'tp-all',analytics:'tp-analytics',ds:'tp-ds',elective:'tp-elective'};
+const trackPillLabel={all:'All tracks',analytics:'Analytics track',ds:'DS track',elective:'Elective'};
+const modules=[
+{ph:'p1',track:'all',num:'1',name:'Advanced SQL and AI for data professionals',
+ tools:'SQL, AI query tools, ChatGPT, database platforms',
+ task:'Write the queries that power Amazon\'s conversion analysis dashboard — joining transaction, session, and customer tables to answer "where exactly did conversion drop on Prime Day, and in which segment is it worst?"',
+ hook:'"Earlier you learned SQL syntax. Now you learn how to use SQL to answer business questions — with AI by your side. That is the shift every company is hiring for."'},
+{ph:'p1',track:'all',num:'2',name:'Excel and dashboarding with AI storytelling',
+ tools:'Excel, Tableau, Power BI, AI insight generation tools',
+ task:'Build the category performance dashboard Amazon\'s business team reviews every Monday — seller count, sell-through rate, revenue contribution, and an AI-generated insight narrative that explains what changed and why.',
+ hook:'"Earlier you made dashboards. Now you explain decisions using dashboards. The AI insight narrative is the differentiator — most candidates can build the chart; very few can write the story."'},
+{ph:'p1',track:'all',num:'3',name:'Python foundations and AI coding assistants',
+ tools:'Python, Pandas, NumPy, Jupyter, GitHub Copilot, Cursor, ChatGPT',
+ task:'Clean and analyse Amazon\'s raw seller performance export — handle missing values, inconsistent formats, duplicate rows — and produce the ranked seller scorecard the account management team uses each week.',
+ hook:'"Real data is always messy. This module teaches how to handle it — with Python and AI assistance — the way it actually arrives in any company\'s data pipeline, not how it looks in tutorials."'},
+{ph:'p1',track:'all',num:'4',name:'Data to decisions: product analytics with AI',
+ tools:'Python, SQL, analytics frameworks, product metrics tooling',
+ task:'Diagnose why Amazon\'s mobile checkout conversion dropped 12% this week — map the full funnel, identify exactly which step broke, segment by device and user type, and produce a prioritised list of actions for the product team.',
+ hook:'"This is the Amazon interview question. Conversion dropped — figure out what is going on. This module teaches how to answer it end to end — from raw data to a clear recommendation."'},
+{ph:'genai',track:'all',num:'5',name:'Generative AI for data analytics and automation',
+ tools:'ChatGPT, Claude, Gemini, prompt engineering, n8n, AI workflow tools',
+ new:true,
+ task:'Build an automated weekly analytics briefing for Amazon\'s category team — AI generates the SQL, cleans the output, writes the insight narrative, and emails the summary every Monday morning, with no human in the loop.',
+ hook:'"This is the biggest differentiator in the new curriculum. AI is not a module — it is a workflow embedded into every step of the analysis. This is how data professionals who stay relevant actually work."'},
+{ph:'p2',track:'all',num:'6',name:'Advanced analytics with Python, Pandas and AI workflows',
+ tools:'Advanced Pandas, Python, AI workflow automation, data pipeline tools',
+ task:'Build the end-to-end seller health scoring pipeline — ingest raw seller data, clean it with AI-assisted Pandas workflows, compute composite risk scores, and surface the sellers most at risk of churning before next month\'s review cycle.',
+ hook:'"The difference between an analyst who can clean a dataset and one who can build a complete analysis pipeline independently. Every mid-senior analyst role requires this."'},
+{ph:'p2',track:'all',num:'7',name:'Statistics, experimentation and AI for data-driven decisions',
+ tools:'Python (scipy, statsmodels), A/B testing frameworks, experiment design tools',
+ task:'Design and analyse the A/B test for Amazon\'s new one-click checkout feature — compute sample size, run the test correctly, calculate statistical significance, and write the recommendation that the product team will act on.',
+ hook:'"Can you design an A/B test and explain whether the results are actually significant? This is what every senior analytics and product interview asks. This module makes it answerable."'},
+{ph:'p2',track:'analytics',num:'8A',name:'Advanced product analytics',
+ tools:'Product analytics frameworks, North Star metrics, cohort analysis tools',
+ task:'Define the North Star metric for Amazon\'s new seller onboarding flow, build the funnel tracking to measure it, and identify the top three drop-off points costing the most active sellers per quarter.',
+ hook:'"North Star metrics and advanced product frameworks are what separate analysts from analytics leads. This module gives the language and the tools to have that conversation at the senior level."'},
+{ph:'p2',track:'elective',num:'8B',name:'Cloud and data analytics on AWS',
+ tools:'AWS S3, Redshift, Glue, Lambda, Tableau on cloud data',
+ new:true,
+ task:'Build a production data pipeline from raw Amazon event logs landing in S3, through Glue transformation, into Redshift, and surfaced on a live Tableau dashboard with automated anomaly alerts.',
+ hook:'"Earlier, students worked on CSV files. Now they work like real companies do — data pipelines on AWS, live dashboards, real production workflows. Cloud experience is a significant hiring differentiator."'},
+{ph:'p3',track:'elective',num:'9',name:'AI for beginners / everyone',
+ tools:'ChatGPT, Claude, Gemini, Llama, n8n, Zapier, MindStudio',
+ new:true,
+ task:'Build an AI agent that monitors Amazon\'s seller support inbox, classifies each ticket by category and urgency, drafts an initial response, and routes critical cases to the right specialist team — autonomously.',
+ hook:'"For learners new to AI concepts. Covers LLM fundamentals, agent workflows, and real-world AI applications — before diving into the mathematical depth of the DS modules."'},
+{ph:'p3',track:'ds',num:'10',name:'Mathematical foundations for AI',
+ tools:'Python, NumPy, Jupyter notebooks, mathematical visualisation tools',
+ task:'Implement gradient descent from scratch and use it to fit a price elasticity model to Amazon\'s product pricing data — understanding mathematically why the model converges and what happens when the learning rate is set incorrectly.',
+ hook:'"Most online DS learners skip the maths. This module is why Scaler DS graduates can answer the why questions in interviews — and why they do not get caught out when a panel goes deeper than algorithm names."'},
+{ph:'p3',track:'ds',num:'11',name:'Machine learning with AI workflows',
+ tools:'scikit-learn, Python, AI-assisted ML tools, feature engineering libraries',
+ task:'Build the feature engineering pipeline that feeds Amazon\'s seller risk model — generating recency, frequency, and behavioural features from raw transaction logs, with AI assistance at every step of the transformation.',
+ hook:'"AI now assists at every stage of the ML workflow. The skill is knowing what problem to solve and validating that the AI got the feature engineering right — because a wrong feature silently degrades model performance."'},
+{ph:'p3',track:'ds',num:'12',name:'Supervised machine learning with AI',
+ tools:'scikit-learn, XGBoost, LightGBM, Python, MLflow, model evaluation tools',
+ task:'Build and compare three demand forecasting models for Amazon\'s warehouse replenishment system — XGBoost, Random Forest, and Logistic Regression — evaluating each on business impact (inventory cost savings) rather than just RMSE.',
+ hook:'"Supervised ML is the most common DS interview topic. This module is built around the demand forecasting and churn prediction problems that Amazon, Flipkart, and every product company actually cares about."'},
+{ph:'p3',track:'ds',num:'13',name:'Unsupervised machine learning with AI',
+ tools:'scikit-learn, K-Means, DBSCAN, PCA, clustering evaluation tools',
+ task:'Segment Amazon\'s 300M+ customer base by purchase behaviour — running K-Means and DBSCAN, evaluating cluster quality, profiling each segment by lifetime value, category affinity, and churn risk, and producing the segment strategy recommendation.',
+ hook:'"This is the module that turns data scientists from analysts who describe what happened into scientists who discover things nobody thought to look for."'},
+{ph:'p3',track:'ds',num:'14',name:'Time series and recommender systems with AI workflows',
+ tools:'statsmodels, ARIMA, collaborative filtering, surprise library, Python',
+ task:'Build the seasonal demand forecasting model that predicts Amazon\'s category-level sales for the next 90 days — accounting for festive season spikes, promotional effects, and day-of-week patterns — and evaluate it against the live inventory planning system.',
+ hook:'"Demand forecasting and recommendation systems are the two ML use cases that drive the most revenue at product companies. This module builds both from scratch."'},
+{ph:'mlops',track:'ds',num:'15',name:'MLOps and AI deployment',
+ tools:'MLflow, Docker, GitHub Actions, AWS, model monitoring tools',
+ task:'Deploy the demand forecasting model to production — containerised with Docker, versioned with MLflow, auto-retraining via CI/CD when new data arrives, and monitored for performance drift across Amazon\'s product categories.',
+ hook:'"The gap between data scientists who build models and data scientists who ship products. Every serious DS role now expects MLOps fluency. This module closes that gap with working production evidence."'},
+{ph:'p3',track:'ds',num:'16',name:'Deep learning and neural networks',
+ tools:'TensorFlow, PyTorch, Keras, GPU training, transfer learning frameworks',
+ task:'Fine-tune a pre-trained convolutional network to classify product image quality for Amazon\'s marketplace listings — detecting low-resolution images, watermarks, and prohibited content with 95%+ precision before they go live.',
+ hook:'"Every senior DS role now assumes deep learning. This module is built around the exact computer vision and sequence modelling problems Amazon\'s ML teams work on daily."'},
+{ph:'p3',track:'elective',num:'17',name:'AI for computer vision',
+ tools:'YOLOv8, EfficientNet, PyTorch, image processing libraries, cloud GPU',
+ new:false,
+ task:'Build the defect detection system for Amazon\'s fulfilment centre conveyor belt — YOLOv8 identifying damaged packages at 3,000 items per hour, classifying by severity, and routing critical defects for immediate rework before they reach customers.',
+ hook:'"Computer vision is one of the highest-value ML applications in e-commerce, logistics, and manufacturing. This elective is the difference between a DS profile and a specialist AI engineering profile."'},
+{ph:'p3',track:'elective',num:'18',name:'AI for natural language processing',
+ tools:'Hugging Face Transformers, BERT, spaCy, NLP evaluation tools',
+ new:false,
+ task:'Fine-tune a BERT model on Amazon\'s seller support tickets — classifying each ticket by issue type, urgency, and product category, extracting order IDs and product names, and routing critical cases before SLA breach.',
+ hook:'"NLP with transformers is the fastest-growing DS specialisation. Customer support, content moderation, sentiment analysis, document intelligence — every major company has these problems at scale."'},
+{ph:'genai',track:'elective',num:'19',name:'AI engineering and agentic AI',
+ tools:'LangChain, LangGraph, RAG systems, vector databases, embedding models',
+ new:true,
+ task:'Build the multi-modal search engine for Amazon\'s internal knowledge base — ingesting meeting recordings, extracting transcripts and frame embeddings, and enabling semantic search that retrieves the exact video moment relevant to any query.',
+ hook:'"AI Engineering and Agentic AI — the fastest-growing job category in tech right now. Companies like Amazon, Google, and Flipkart are actively hiring for these roles. This module puts learners at the frontier."'},
+];
+
+function renderMods(ph){
+  const g=document.getElementById('mod-grid');g.innerHTML='';
+  const list=ph==='all'?modules:modules.filter(m=>m.ph===ph);
+  list.forEach(m=>{
+    const d=document.createElement('div');d.className='mc';
+    const tLabel=trackPillLabel[m.track]||m.track;
+    const tCls=trackPillCls[m.track]||'tp-all';
+    const newBadge=m.new?'<span class="badge b-new" style="margin-left:6px">New in 3.0</span>':'';
+    d.innerHTML=
+      '<div class="mc-phase">Module '+m.num+'</div>'+
+      '<div class="card-top"><div class="mc-name">'+m.name+newBadge+'</div><span class="badge '+phBadge[m.ph]+'">'+phLabel[m.ph]+'</span></div>'+
+      '<div class="mc-tools">'+m.tools+'</div>'+
+      '<span class="track-pill '+tCls+'">'+tLabel+'</span>'+
+      '<hr class="divider">'+
+      '<div class="lbl">On day one at Amazon, this learner will...</div>'+
+      '<div class="mc-task">'+m.task+'</div>'+
+      '<div class="hook-box"><div class="lbl" style="margin-bottom:3px">Sales hook</div><div class="hook-txt">'+m.hook+'</div></div>';
+    g.appendChild(d);
+  });
+}
+renderMods('all');
+function filterMods(ph,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMods(ph);
+}
+
+/* ══ CAPSTONES ══ */
+const capstones=[
+{track:'Analytics track',c:'#ea580c',name:'Food delivery analytics system',
+ tags:'Product analytics',
+ desc:'Analyse user behaviour across the full customer journey — funnels, retention metrics, and cohort analyses. Build interactive dashboards with AI-generated anomaly detection and insight narratives. Built on a dataset modelled after Swiggy and Amazon Fresh.',
+ pitch:'"A working product analytics system — not a tutorial. The funnel analysis, cohort work, and AI insight generation are all directly demonstrable in a Product Analyst interview at Amazon or any data-driven company."'},
+{track:'Analytics track',c:'#ea580c',name:'Streaming platform analytics',
+ tags:'Content and retention',
+ desc:'Watch-time analysis across content types and user segments. Content performance benchmarking and churn prediction. Retention tracking with AI-based recommendation logic and reporting dashboards — modelled on Amazon Prime Video.',
+ pitch:'"Retention analysis on streaming data is one of the most commonly discussed case studies in data interviews. Candidates who have actually built it, not just studied it, stand out immediately."'},
+{track:'Analytics track',c:'#0284c7',name:'End-to-end cloud pipeline',
+ tags:'Cloud and BI',
+ desc:'Full pipeline: Raw Data → AWS S3 → Glue → Redshift → Tableau live dashboards. AI-powered analysis layer on top of cloud data with real DevOps-style deployment and monitoring. Built on Amazon-scale event data.',
+ pitch:'"This is the project that demonstrates cloud experience — the thing most analyst candidates cannot show. A live Tableau dashboard connected to a Redshift warehouse they built themselves. That goes on the resume."'},
+{track:'Data science track',c:'#4338ca',name:'Smart retail demand and customer intelligence',
+ tags:'Supervised and unsupervised ML',
+ desc:'Customer segmentation with K-Means/DBSCAN. Per-segment demand forecasting with XGBoost and Random Forest. Dynamic pricing recommendations. AI-powered anomaly detection for fraud and stockout warnings. Interactive dashboard with revenue impact analysis.',
+ pitch:'"Two of the three most commonly asked DS interview topics — segmentation and demand forecasting — in a single end-to-end system. Built on retail data at Amazon scale. Directly demonstrable."'},
+{track:'Data science track',c:'#7c3aed',name:'Industrial quality inspection and defect analytics',
+ tags:'Computer vision',
+ desc:'Fine-tuned YOLOv8 and EfficientNet detecting and classifying manufacturing defects. Severity scoring pipeline — critical vs. cosmetic — for triage. AI-assisted root cause analysis linking defect patterns to production variables. Precision-recall trade-off analysis.',
+ pitch:'"Computer vision portfolio evidence is rare. A learner who can explain the trade-off between precision and recall on a defect detection model — and show a working system — is immediately differentiated in any ML interview."'},
+{track:'Data science track',c:'#0d9488',name:'Customer support intelligence and escalation engine',
+ tags:'Natural language processing',
+ desc:'BERT-based classification of support tickets by intent, urgency, and product area. Entity extraction (order IDs, product names, sentiment). Auto-escalation pipeline routing critical tickets before SLA breach. AI-generated response drafts with confidence scoring.',
+ pitch:'"NLP with transformers applied to a real business problem — not sentiment analysis on movie reviews. Customer support intelligence is a live production system at Amazon, Google, and every product company at scale."'},
+{track:'Data science track',c:'#4338ca',name:'Video-context search engine — multi-modal AI',
+ tags:'GenAI and Agentic AI',
+ desc:'Ingest video recordings, extract audio transcripts, generate visual frame and text embeddings on a shared timeline. Searchable multi-modal index — query by text, retrieve synced video moments. Agentic retrieval that decides whether to search transcript, frames, or both.',
+ pitch:'"Multi-modal AI is the frontier. A learner who has built a working video-text search engine with agentic retrieval logic is demonstrating the exact capability that Amazon\'s AI teams are hiring for right now."'},
+];
+function renderCaps(){
+  const g=document.getElementById('cap-grid');
+  capstones.forEach(c=>{
+    const d=document.createElement('div');d.className='cc';
+    d.style.borderTop='3px solid '+c.c;
+    d.innerHTML=
+      '<div class="cc-track" style="color:'+c.c+'">'+c.track+' — '+c.tags+'</div>'+
+      '<div class="cc-name">'+c.name+'</div>'+
+      '<div class="cc-desc">'+c.desc+'</div>'+
+      '<div class="cc-pitch">'+c.pitch+'</div>';
+    g.appendChild(d);
+  });
+}
+renderCaps();
+
+/* ══ PROFILES ══ */
+const profiles=[
+{icon:'🌱',bg:'#fff7ed',name:'Complete beginner',sub:'Zero coding or data background',
+ gap:'Has no SQL, no Python, no statistics, and no idea where to start. Every "learn data science" resource online assumes some prior knowledge, moves too fast, or teaches tools in isolation without connecting them to real business problems. The learning gap feels enormous.',
+ gain:'The programme is built for exactly this starting point. AI assists at every step — generating code, explaining errors, suggesting approaches — which makes the learning curve manageable from day one. By the end of Phase 1, the learner is SQL-fluent, Python-capable, and building real dashboards. The beginner premium is that every concept is explained from first principles.',
+ from:'Zero data background',to:'Data Analyst at a product company (12–18 months)',
+ mods:['SQL and AI','Python foundations','Product analytics','Statistics','Dashboarding']},
+{icon:'📊',bg:'#fff7ed',name:'Non-tech professional',sub:'Finance, marketing, operations — wants data skills',
+ gap:'Can think analytically but cannot execute. Has probably used Excel, maybe Tableau, but writes no code and cannot query a database independently. Relies on the data team for every number. Knows this is a career ceiling and wants to remove it.',
+ gain:'Phases 1 and 2 give this person complete independence — they can pull, analyse, visualise, and explain their own data without asking the data team. The product analytics module is especially powerful here because it connects immediately to the business problems they already understand. The Gen AI integration means they get 10x more done in the same time.',
+ from:'Operations / finance professional',to:'Data Analyst / Product Analyst',
+ mods:['SQL and AI','Dashboarding','Product analytics','Gen AI for analytics','Statistics']},
+{icon:'🔄',bg:'#dcfce7',name:'Career switcher',sub:'Completely different field — targeting data roles',
+ gap:'Has professional experience and soft skills but no technical credentials. Feels permanently locked out of data roles because they do not have the degree or the prior job title. Applying without a portfolio and the right technical background gets CVs screened out automatically.',
+ gain:'The portfolio-first approach is the direct answer. Four end-to-end capstone projects — demonstrable in interviews, on GitHub — replace the missing prior experience as a signal of capability. The programme also covers interview readiness explicitly, including how to reframe unrelated experience as a strength rather than a gap.',
+ from:'Professional in an unrelated field',to:'Data Analyst or Junior Data Scientist',
+ mods:['Full programme','Capstone projects','Interview readiness','Product analytics']},
+{icon:'⬆',bg:'#e0e7ff',name:'Existing data analyst',sub:'Has SQL and Excel — wants AI and DS skills',
+ gap:'Can do the job they are in but cannot see a path to the next level. Does not know statistics rigorously, has not touched ML, and has no AI workflow skills. Every senior role requires at least one of these three and most now require all three. Stagnating in terms of both title and compensation.',
+ gain:'Phases 2 and 3 are the targeted upgrade. Statistics and experimentation close the gap that makes A/B testing questions terrifying. The ML modules add the capability that every DS title now assumes. The Gen AI and Agentic AI electives put the learner at the frontier of what companies are hiring for in 2025 and beyond.',
+ from:'Data Analyst (2–4 years)',to:'Senior Analyst / Junior Data Scientist / AI Analyst',
+ mods:['Statistics and A/B testing','Supervised ML','Advanced product analytics','MLOps','Gen AI and Agentic AI']},
+{icon:'🤖',bg:'#f5f3ff',name:'Developer / engineer moving into data',sub:'Can code — wants to specialise in data science',
+ gap:'Technically strong but missing the data-specific thinking. Can write Python fluently but has never done feature engineering, never designed an A/B test, never deployed a model in production, and does not think in terms of business metrics. The technical skills are there; the data science judgement is not.',
+ gain:'The statistics, ML, and MLOps modules give this person the data science layer on top of their engineering foundation. They move through the Python content quickly and spend their learning time on the material they are missing. The MLOps and Agentic AI modules are where an engineering background becomes a significant advantage over typical DS candidates.',
+ from:'Software / backend engineer',to:'ML Engineer / Data Scientist / AI Engineer',
+ mods:['Statistics and experimentation','ML with AI','MLOps deployment','Deep learning','AI Engineering and Agentic AI']}
+];
+function renderProfiles(){
+  const g=document.getElementById('profile-grid');
+  profiles.forEach(p=>{
+    const d=document.createElement('div');d.className='pc';
+    d.innerHTML=
+      '<div class="pc-hdr">'+
+        '<div class="pc-icon" style="background:'+p.bg+'">'+p.icon+'</div>'+
+        '<div><div class="pc-name">'+p.name+'</div><div class="pc-sub">'+p.sub+'</div></div>'+
+      '</div>'+
+      '<div class="gap-box"><div class="gap-lbl">What they are missing today</div><div class="gap-txt">'+p.gap+'</div></div>'+
+      '<div class="gain-box"><div class="gain-lbl">What this programme adds</div><div class="gain-txt">'+p.gain+'</div></div>'+
+      '<div class="mp-lbl">Modules that do the most work</div>'+
+      '<div class="mp-pills">'+p.mods.map(m=>'<span class="mpill">'+m+'</span>').join('')+'</div>'+
+      '<div class="jump-row"><span class="jump-from">'+p.from+'</span><span class="jump-arrow">→</span><span class="jump-to">'+p.to+'</span></div>';
+    g.appendChild(d);
+  });
+}
+renderProfiles();
+updateTracker(1);
+</script>
+</body>
+</html>
