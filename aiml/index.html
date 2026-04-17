@@ -7,8 +7,8 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f2;color:#1a1a18;padding:0 0 4rem}
-.page-nav{display:flex;gap:0;border-bottom:0.5px solid #ddd;background:#fff;position:sticky;top:0;z-index:10}
-.nav-btn{flex:1;font-size:12px;font-weight:500;padding:12px 8px;border:none;background:transparent;color:#6b6b66;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.page-nav{display:flex;gap:0;border-bottom:0.5px solid #ddd;background:#fff;position:sticky;top:0;z-index:10;overflow-x:auto}
+.nav-btn{flex:1;min-width:150px;font-size:12px;font-weight:500;padding:12px 8px;border:none;background:transparent;color:#6b6b66;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
 .nav-btn.active{color:#1a1a18;border-bottom-color:#1a1a18}
 .section{display:none;padding:2rem 1.5rem}
 .section.active{display:block}
@@ -22,6 +22,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .badge-amber{background:#FAEEDA;color:#633806}
 .badge-coral{background:#FAECE7;color:#712B13}
 .badge-gray{background:#F1EFE8;color:#444441}
+
+/* track ribbon */
+.track-ribbon{display:flex;align-items:center;gap:10px;font-size:12px;color:#6b6b66;margin-bottom:1rem;padding:10px 14px;background:#fff;border-radius:10px;border:0.5px solid #e2e2dc;flex-wrap:wrap}
+.track-ribbon strong{color:#1a1a18}
+.track-pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:10px;background:#E1F5EE;color:#085041}
 
 /* ── SECTION 1 — UPGRADE ── */
 .upgrade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
@@ -44,18 +49,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .jump-arrow{font-size:14px;color:#1D9E75;font-weight:700}
 .jump-to{font-size:12px;font-weight:600;color:#085041;background:#E1F5EE;padding:3px 9px;border-radius:6px}
 
-/* ── SECTION 2 — TRACKER ── */
-.tracker-wrap{max-width:820px}
-.slider-row{display:flex;align-items:center;gap:14px;margin-bottom:1rem}
-.slider-row label{font-size:13px;color:#6b6b66;white-space:nowrap}
-.slider-row input[type=range]{flex:1;accent-color:#1D9E75;height:4px}
-.mod-counter{font-size:13px;font-weight:600;color:#1a1a18;min-width:90px;text-align:right}
-.prog-wrap{height:5px;background:#e4e4e0;border-radius:3px;margin-bottom:1.5rem;overflow:hidden}
-.prog-fill{height:100%;background:#1D9E75;border-radius:3px;transition:width .3s}
-.tracker-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-@media(max-width:580px){.tracker-cards{grid-template-columns:1fr}}
-.tc{background:#fff;border:0.5px solid #e2e2dc;border-radius:12px;padding:1rem 1.1rem}
-.tc-title{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:10px;line-height:1.3}
+/* ── SECTION 2 — MILESTONE CARDS ── */
+.ms-card{background:#fff;border:0.5px solid #e2e2dc;border-radius:14px;padding:0;margin-bottom:16px;overflow:hidden}
+.ms-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 18px 12px;border-bottom:0.5px solid #ebebeb;flex-wrap:wrap}
+.ms-head-left{flex:1;min-width:0}
+.ms-step{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#9b9b96;margin-bottom:5px}
+.ms-title{font-size:16px;font-weight:600;color:#1a1a18;line-height:1.3;margin-bottom:4px}
+.ms-mods{font-size:12px;color:#6b6b66;line-height:1.5}
+.ms-mods strong{color:#1a1a18;font-weight:500}
+.ms-badge{font-size:11px;font-weight:600;padding:5px 11px;border-radius:12px;white-space:nowrap;flex-shrink:0}
+.ms-badge-ml{background:#E1F5EE;color:#085041}
+.ms-badge-dl{background:#EEEDFE;color:#3C3489}
+.ms-badge-prod{background:#FAEEDA;color:#633806}
+.ms-badge-ai{background:#FAECE7;color:#712B13}
+.ms-badge-data{background:#F1EFE8;color:#444441}
+.ms-badge-elite{background:#1a1a18;color:#fff}
+
+.ms-body{padding:14px 18px 16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.ms-body{grid-template-columns:1fr}}
+
+.ms-col-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#9b9b96;margin-bottom:8px}
+.ms-col-sub{font-size:10px;font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;margin-left:4px}
 
 /* skill pill base */
 .skill-list{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0}
@@ -70,11 +84,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .skill-pill.new:hover{background:#c8eee0;border-color:#1D9E75}
 .skill-pill.active-pill{border-color:#1D9E75 !important;background:#E1F5EE !important;color:#085041 !important;font-weight:500}
 .skill-pill.active-pill.not-new{border-color:#888 !important;background:#efefec !important;color:#1a1a18 !important}
-/* subtle tap indicator */
 .skill-pill::after{content:'';display:inline-block;width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-left:5px;vertical-align:middle;opacity:.5;transition:transform .2s}
 .skill-pill.active-pill::after{transform:rotate(-135deg);opacity:.8}
 
-/* expand box — sits between the skill-list and the milestone */
+/* expand box */
 .skill-explain{
   margin-top:10px;
   background:#f0faf6;
@@ -92,15 +105,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .explain-close{font-size:11px;color:#9b9b96;cursor:pointer;margin-top:6px;display:inline-block}
 .explain-close:hover{color:#555}
 
-/* job list */
-.job-list{list-style:none;display:flex;flex-direction:column;gap:7px}
-.job-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#1a1a18;line-height:1.4}
-.job-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+/* role list */
+.role-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.role-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#1a1a18;line-height:1.4}
+.role-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.role-canonical{font-weight:600}
+.role-variant{font-size:11px;color:#888;margin-left:4px}
 
-/* milestone */
-.milestone{background:#fff;border:0.5px solid #e2e2dc;border-radius:12px;padding:1rem 1.2rem}
-.milestone-text{font-size:13px;color:#1a1a18;line-height:1.7;font-style:italic}
-.milestone-note{font-size:11px;color:#9b9b96;margin-top:6px}
+/* hiring manager quote */
+.ms-quote{background:#f5f5f2;border-left:3px solid #1D9E75;padding:11px 14px;margin:0 18px 16px;border-radius:0 8px 8px 0}
+.ms-quote-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#085041;margin-bottom:5px}
+.ms-quote-text{font-size:13px;color:#1a1a18;line-height:1.6;font-style:italic}
+.ms-quote-note{font-size:11px;color:#6b6b66;margin-top:7px;font-style:normal;line-height:1.5}
 
 /* ── SECTION 3 — MODULES ── */
 .meta-bar{font-size:12px;color:#6b6b66;margin-bottom:1.25rem;padding:8px 12px;background:#fff;border-left:3px solid #1D9E75}
@@ -120,6 +136,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .task{font-size:13px;color:#1a1a18;line-height:1.5;margin-bottom:10px}
 .hook-box{background:#f5f5f2;border-radius:8px;padding:8px 10px}
 .hook{font-size:12px;color:#5a5a56;line-height:1.5;font-style:italic}
+.weeks-chip{font-size:10px;font-weight:500;color:#3C3489;background:#EEEDFE;padding:2px 7px;border-radius:8px;margin-left:6px}
+.kind-chip{font-size:10px;font-weight:500;padding:2px 7px;border-radius:8px}
+.kind-core{background:#E1F5EE;color:#085041}
+.kind-elective{background:#FAEEDA;color:#633806}
+.kind-optional{background:#F1EFE8;color:#444441}
+
+/* ── SECTION 4 — NON-CODER TRACK ── */
+.nc-overview{background:#fff;border:0.5px solid #e2e2dc;border-radius:12px;padding:1.1rem;margin-bottom:1.25rem}
+.nc-overview h3{font-size:14px;font-weight:600;color:#1a1a18;margin-bottom:6px}
+.nc-overview p{font-size:13px;color:#3a3a38;line-height:1.6;margin-bottom:10px}
+.nc-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.nc-stat{background:#f5f5f2;padding:6px 12px;border-radius:8px;font-size:12px;color:#1a1a18}
+.nc-stat strong{color:#085041;font-weight:600}
+.nc-roles{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.nc-role-pill{font-size:11px;padding:3px 9px;border-radius:10px;background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC}
+
+.nc-phase{margin-bottom:1.5rem}
+.nc-phase-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid #e2e2dc}
+.nc-phase-num{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#085041;background:#E1F5EE;padding:3px 9px;border-radius:10px}
+.nc-phase-title{font-size:14px;font-weight:600;color:#1a1a18}
+.nc-phase-sub{font-size:12px;color:#6b6b66;margin-left:auto}
+.nc-mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.nc-mod{background:#fff;border:0.5px solid #e2e2dc;border-radius:10px;padding:0.85rem 1rem;transition:border-color .15s}
+.nc-mod:hover{border-color:#b8b8b0}
+.nc-mod-top{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.nc-mod-num{font-size:10px;font-weight:500;color:#9b9b96}
+.nc-mod-name{font-size:13px;font-weight:600;color:#1a1a18;line-height:1.3}
+.nc-mod-desc{font-size:12px;color:#5a5a56;line-height:1.5;margin-bottom:6px}
+.nc-mod-outcome{font-size:11px;color:#085041;background:#f0faf6;padding:5px 8px;border-radius:6px;line-height:1.5;border-left:2px solid #5DCAA5}
+.nc-mod-outcome strong{color:#064f3b}
 
 /* ── GLOBAL TOP NAV ── */
 .global-nav{
@@ -161,7 +207,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sw-btn.sw-academy:hover{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC;}
 .sw-btn.sw-dsml:hover{background:#FAEEDA;color:#633806;border-color:#d4a96a;}
 
-/* push page-nav down since global-nav is also sticky */
 .page-nav{top:44px;}
 </style>
 </head>
@@ -190,67 +235,94 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </nav>
 
 <div class="page-nav">
-  <button class="nav-btn active" onclick="show('upgrade',this)">Already in AI/ML? Why upgrade</button>
-  <button class="nav-btn" onclick="show('tracker',this)">Skills and jobs by module</button>
-  <button class="nav-btn" onclick="show('modules',this)">All 14 module cards</button>
+  <button class="nav-btn active" onclick="show('upgrade',this)">Your role → Your upgrade path</button>
+  <button class="nav-btn" onclick="show('tracker',this)">Skills &amp; AI/ML roles by module</button>
+  <button class="nav-btn" onclick="show('modules',this)">All 17 AI Engineering modules</button>
+  <button class="nav-btn" onclick="show('noncoder',this)">AI for Non-Coders track</button>
 </div>
 
 <!-- ══ SECTION 1 ══ -->
 <div class="section active" id="section-upgrade">
-  <div class="section-title">Already working in AI or ML?</div>
-  <p class="section-sub">Here is exactly what changes about your career depending on where you are today — and which modules do the most work for you.</p>
+  <div class="section-title">Where you are today → where this programme takes you</div>
+  <p class="section-sub">Six common starting points for 2026 AI hires. Pick the one closest to you to see the exact modules that close your gap and the 2026 AI/ML title you become hireable for.</p>
+  <div class="track-ribbon">
+    <span class="track-pill">AI Engineering Track · 17 modules</span>
+    <span>11 Core + 4 Electives + 1 Optional (DSA) + 1 Capstone (IIT Roorkee)</span>
+  </div>
+  <details style="background:#fff;border:0.5px solid #e2e2dc;border-radius:10px;padding:10px 14px;margin-bottom:1rem;font-size:12px;color:#3a3a38">
+    <summary style="cursor:pointer;font-weight:600;color:#1a1a18">▸ All 17 modules at a glance (tap to expand)</summary>
+    <div style="margin-top:8px;line-height:1.8">
+      <strong>Core (11):</strong><br>
+      M1 — Data Foundations (4w) · M2 — ML Coding: Supervised Learning (6w) · M3 — ML Coding: Unsupervised Learning, Time Series &amp; Recommender Systems (4w) · M4 — ML Coding: Neural Networks (3w) · M5 — ML Coding: Computer Vision &amp; NLP (7w) · M6 — MLOps (8w) · M7 — ML System Design (4w) · M8 — Foundations of AI Engineering &amp; RAG Systems (4w) · M9 — Agentic Design Patterns &amp; Multi-Agent Orchestration (4w) · M10 — Advanced Cognitive Architectures &amp; Multimodal Intelligence (3w) · M11 — Fine-Tuning, LLMOps &amp; Security (5w)<br><br>
+      <strong>Electives (4):</strong><br>
+      M12 — Advanced Machine Learning &amp; Deep Learning 1 (4w) · M13 — Advanced Machine Learning &amp; Deep Learning 2 (4w) · M14 — Big Data Engineering (4w, Recorded) · M15 — Reinforcement Learning (4w, Recorded)<br><br>
+      <strong>Optional (1):</strong> M16 — DSA for Professionals (~6 months)<br>
+      <strong>Capstone (1):</strong> M17 — Advanced AI Engineering · CEC, IIT Roorkee Campus Immersion
+    </div>
+  </details>
   <div class="upgrade-grid" id="upgrade-grid"></div>
 </div>
 
 <!-- ══ SECTION 2 ══ -->
 <div class="section" id="section-tracker">
-  <div class="section-title">What do I have after each module?</div>
-  <p class="section-sub">Drag the slider to any checkpoint and see the skills you've built up and job roles you can now crack. <strong>Tap any skill pill to get a plain-English explanation</strong> — perfect for walking a customer through what it means.</p>
-  <div class="tracker-wrap">
-    <div class="slider-row">
-      <label>Completed up to</label>
-      <input type="range" id="mod-slider" min="1" max="14" value="1" oninput="updateTracker(this.value)">
-      <span class="mod-counter" id="mod-label">Module 1 of 14</span>
-    </div>
-    <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:7%"></div></div>
-    <div class="tracker-cards">
-      <div class="tc">
-        <div class="tc-title" id="tc-name">Data foundations and supervised learning</div>
-        <div class="label" style="margin-bottom:8px">Skills you now have <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px;color:#aaa">— tap any to explain it</span></div>
-        <ul class="skill-list" id="skill-list"></ul>
-        <div class="skill-explain" id="skill-explain">
-          <div class="explain-name" id="explain-name"></div>
-          <div class="explain-text" id="explain-text"></div>
-          <span class="explain-close" onclick="closeExplain()">close ✕</span>
-        </div>
-      </div>
-      <div class="tc">
-        <div class="tc-title">Job roles you can now crack</div>
-        <div class="label" style="margin-bottom:8px">Based on all modules completed so far</div>
-        <ul class="job-list" id="job-list"></ul>
-      </div>
-    </div>
-    <div class="milestone">
-      <div class="label" style="margin-bottom:7px">What a hiring manager says about you at this point</div>
-      <div class="milestone-text" id="milestone-text"></div>
-      <div class="milestone-note" id="milestone-note"></div>
-    </div>
+  <div class="section-title">The 6 career milestones — where AI/ML roles actually unlock</div>
+  <p class="section-sub">Most modules build skills; only a few actually complete a hireable 2026 AI/ML profile. These are the six moments when a real AI/ML role opens up. <strong>Tap any skill pill to get a plain-English explanation.</strong></p>
+  <div class="track-ribbon">
+    <span class="track-pill">AI Engineering Track</span>
+    <span>Roles grounded in <strong>2026 AI/ML JDs</strong> across the full market — ML Engineer, Data Scientist, AI/ML Engineer, MLOps Engineer, AI Platform Engineer, AI Platform Architect, LLM Engineer, Generative AI (GenAI) Engineer, Prompt Engineer, NLP Engineer, Computer Vision Engineer, AI Data Engineer.</span>
   </div>
+  <div id="milestone-cards"></div>
 </div>
 
 <!-- ══ SECTION 3 ══ -->
 <div class="section" id="section-modules">
-  <div class="section-title">All 14 module cards</div>
-  <p class="section-sub">What each module teaches and what a learner builds at a Netflix-scale company on day one.</p>
+  <div class="section-title">All 17 AI Engineering modules</div>
+  <p class="section-sub">What each module teaches, the tools used, and what a learner ships at a Netflix-scale company on day one.</p>
+  <div class="track-ribbon">
+    <span class="track-pill">AI Engineering Track</span>
+    <span><strong>11 Core</strong> · <strong>4 Electives</strong> · <strong>1 Optional</strong> (DSA) · <strong>1 Capstone</strong> (IIT Roorkee Campus Immersion)</span>
+  </div>
   <div class="filters">
-    <button class="fb active" onclick="filterMods('all',this)">All modules</button>
-    <button class="fb" onclick="filterMods('teal',this)">Supervised &amp; unsupervised</button>
-    <button class="fb" onclick="filterMods('purple',this)">Deep learning &amp; NLP</button>
-    <button class="fb" onclick="filterMods('amber',this)">Ops, scale &amp; RL</button>
-    <button class="fb" onclick="filterMods('coral',this)">GenAI era</button>
-    <button class="fb" onclick="filterMods('gray',this)">Engineering craft</button>
+    <button class="fb active" onclick="filterMods('all',this)">All 17 modules</button>
+    <button class="fb" onclick="filterMods('teal',this)">Foundations &amp; Classical ML</button>
+    <button class="fb" onclick="filterMods('purple',this)">Deep Learning</button>
+    <button class="fb" onclick="filterMods('amber',this)">Production &amp; Systems</button>
+    <button class="fb" onclick="filterMods('coral',this)">AI Engineering (GenAI)</button>
+    <button class="fb" onclick="filterMods('gray',this)">Advanced &amp; Electives</button>
   </div>
   <div class="mod-grid" id="mod-grid"></div>
+</div>
+
+<!-- ══ SECTION 4 ══ -->
+<div class="section" id="section-noncoder">
+  <div class="section-title">AI for Non-Coders — the second track</div>
+  <p class="section-sub">A separate 8-month programme for product managers, consultants, operators, designers, and senior leaders who need to build, ship, and govern AI — without writing production code.</p>
+
+  <div class="nc-overview">
+    <h3>Who this track is designed for</h3>
+    <p>Professionals whose job is to make AI work inside their organisation — identifying opportunities, designing products, running transformation, and making high-quality decisions with AI in the loop. This track does not teach model training — it teaches leverage.</p>
+    <div class="nc-stats">
+      <div class="nc-stat"><strong>32 modules</strong></div>
+      <div class="nc-stat"><strong>8 months</strong> · 32 weeks</div>
+      <div class="nc-stat"><strong>No coding</strong> prerequisite</div>
+      <div class="nc-stat">200+ tools covered</div>
+    </div>
+    <div class="label" style="margin-top:8px">Roles this track maps to</div>
+    <div class="nc-roles">
+      <span class="nc-role-pill">AI Product Manager</span>
+      <span class="nc-role-pill">AI Product Lead</span>
+      <span class="nc-role-pill">AI Transformation Lead</span>
+      <span class="nc-role-pill">AI Program Manager</span>
+      <span class="nc-role-pill">AI Operations Lead</span>
+      <span class="nc-role-pill">Head of AI Adoption</span>
+      <span class="nc-role-pill">AI Strategy Lead</span>
+      <span class="nc-role-pill">AI Product Designer</span>
+      <span class="nc-role-pill">AI Consultant</span>
+      <span class="nc-role-pill">AI Enablement Manager</span>
+    </div>
+  </div>
+
+  <div id="nc-phases"></div>
 </div>
 
 <script>
@@ -266,89 +338,155 @@ function show(id,btn){
    SKILL DESCRIPTIONS
 ══════════════════════════ */
 const SD={
-  'Feature engineering':'Taking raw data and turning it into something an AI can actually learn from. For Netflix, this means converting things like "user watched 70% of a film at 11pm on a Friday" into a number the model can use. The better the features, the smarter the model.',
-  'Regression (Linear, Ridge, Lasso)':'Predicting a number — like how many minutes a user will watch, or what price a house will sell for. It\'s the simplest and oldest form of machine learning, and it\'s still used every day inside billion-dollar products.',
-  'Classification (XGBoost, LightGBM)':'Teaching a model to put things into categories — like "will this user cancel their subscription: yes or no?" XGBoost and LightGBM are the tools of choice for this and they win more AI competitions than almost anything else.',
-  'Model evaluation (ROC-AUC, F1, RMSE)':'The scorecards that tell you whether your model is actually any good. Like a report card — except instead of grades, you get numbers showing how often the model is right and how badly it fails when it\'s wrong.',
-  'sklearn pipelines':'A way of chaining together all the steps of building a model — data cleaning, feature creation, training — into one automated workflow. Think of it as an assembly line for AI, so nothing gets missed and everything is repeatable.',
-  'Hyperparameter tuning (Optuna)':'Fine-tuning the internal settings of an AI model to squeeze the best performance out of it. Like adjusting the settings on a camera until the photo comes out perfect — except Optuna does it automatically by running hundreds of experiments.',
-  'Clustering (KMeans, DBSCAN, GMM)':'Grouping similar things together without being told in advance what the groups are. Netflix uses this to discover viewer tribes — not by asking users to fill in surveys, but by watching what they actually do and finding the natural patterns.',
-  'Anomaly and fraud detection (Isolation Forest)':'Teaching a model to spot the things that don\'t fit the normal pattern. In banking, this flags suspicious transactions. At Netflix, it detects account sharing or bot behaviour — automatically, at scale, without anyone manually checking each case.',
-  'Time series forecasting (ARIMA, SARIMA)':'Predicting what will happen next based on what happened before. Netflix uses this to forecast how many servers they\'ll need on a Friday night — weeks ahead of time — so they can prepare without over-spending on infrastructure.',
-  'Dimensionality reduction (PCA, t-SNE)':'Simplifying data that has hundreds of messy variables into something clean and manageable — without losing the important information. Like condensing a 200-page report into a one-page brief that still captures everything that matters.',
-  'Collaborative filtering':'The engine behind "people like you also enjoyed...". It finds users with similar taste patterns and assumes they\'ll enjoy the same things. No need to understand why the pattern exists — just that it consistently holds.',
-  'Neural network architecture (MLP, backpropagation)':'The building blocks of modern AI. Layers of simple maths stacked together can learn almost anything when trained on enough data. Backpropagation is how the network learns from its mistakes — adjusting itself slightly after every wrong answer.',
-  'Deep learning (TensorFlow, PyTorch)':'The industrial-grade tools for building and training neural networks. TensorFlow is Google\'s framework; PyTorch is Meta\'s. Most serious AI teams use one or both — they\'re the hammers and drills of the AI world.',
-  'Regularisation (Dropout, BatchNorm)':'Techniques that stop an AI from memorising the training data instead of genuinely learning. Like making a student explain their thinking out loud rather than just regurgitating answers — it forces real understanding rather than pattern copying.',
-  'Autoencoders':'A neural network that learns to compress information and then reconstruct it. Netflix uses these to create compact summaries of user behaviour that can be efficiently compared and matched across 238 million people.',
-  'Embedding layers':'A way of turning words, users, or items into lists of numbers that capture meaning and relationships. "King" and "queen" end up close together in number-space. This is how AI understands that two things are related without being told explicitly.',
-  'CNN architecture and filters':'The type of neural network designed to understand images. It scans pictures in small overlapping patches — like reading a map with a magnifying glass — and gradually learns to recognise edges, shapes, faces, and eventually complex objects.',
-  'Object detection (YOLO, Faster R-CNN)':'AI that doesn\'t just classify what\'s in an image but finds exactly where each thing is, drawing a precise box around it. YOLO is fast enough to do this in real-time video — used in everything from security cameras to autonomous vehicles.',
-  'Transfer learning (ResNet, InceptionV3)':'Taking an AI already trained on millions of images and repurposing it for a new task. Instead of teaching it from scratch — which takes weeks and huge computing power — you build on what it already knows. Dramatically faster and cheaper.',
-  'Image segmentation (U-Net, Mask R-CNN)':'Going beyond detecting objects to knowing exactly which pixels belong to each one. A self-driving car doesn\'t just need to know "there\'s a pedestrian" — it needs to know precisely where their outline is to navigate around them safely.',
-  'GAN-based image generation':'Two neural networks in competition — one creates fake images, the other tries to detect them. The more they compete, the better both get. The result is AI that can generate photorealistic images, faces, or scenes from scratch.',
-  'BERT and transformer fine-tuning':'Taking a language model already trained on the entire internet and teaching it your specific domain or use case. Like hiring someone who already speaks the language fluently, and then teaching them your company\'s specialist jargon — much faster than starting from zero.',
-  'Named entity recognition (NER)':'Teaching AI to spot and label specific types of things in text — names, places, dates, product codes, medical terms. Scan a legal contract and automatically extract every company name, deadline, and dollar figure mentioned.',
-  'Semantic search and embeddings':'Search that understands meaning rather than matching exact words. Type "feel-good film for a Sunday morning" and the system finds cosy comedies — not films that literally contain those words in their description.',
-  'Text classification and sentiment analysis':'Teaching AI to categorise text or understand its emotional tone. Is this customer review positive or negative? Is this support ticket urgent or routine? Is this news article about finance or politics? Done at scale, instantly.',
-  'Seq2Seq summarisation and translation':'AI that reads a long piece of text and produces a shorter or different version. Feed in a 10-page legal document and get a 3-paragraph plain-English summary. Feed in French and get English. The input and output are both sequences of words.',
-  'Docker and Kubernetes':'Docker packages your AI model and all its software into a portable container — like a shipping box that works identically on any computer anywhere. Kubernetes manages thousands of these containers simultaneously, scaling up or down automatically based on demand.',
-  'CI/CD for ML (GitHub Actions)':'Automated pipelines that test, validate, and redeploy your ML model every time someone makes a change — just as a factory production line runs continuously rather than needing someone to manually push a button for each unit.',
-  'Experiment tracking (MLflow)':'A logbook for AI experiments. Every time a data scientist tries a new model or setting, MLflow records exactly what they did and what results they got — so they can compare approaches, reproduce successful experiments, and never lose a breakthrough.',
-  'Model registry and versioning':'A version-controlled library for trained models — like Git for code, but for AI. If a new model underperforms in production, you can instantly roll back to the previous version. Absolutely essential when AI is powering a live product.',
-  'AWS SageMaker deployment':'Amazon\'s managed platform for taking a trained AI model and putting it into production. It handles the servers, scaling, and monitoring automatically — so engineers can focus on improving the model rather than managing infrastructure.',
+  /* M1 — Data Foundations */
+  'Python for data (NumPy, Pandas)':'The foundational tools that every data and ML job runs on. NumPy handles mathematical arrays at speed; Pandas lets you slice, filter, and reshape tables of data with a handful of lines. You cannot have an ML conversation without this.',
+  'DataFrames & data wrangling':'Cleaning, reshaping, joining, and transforming messy real-world data into something a model can actually learn from. In any real ML job, this is 60–70% of the actual work — before a single model is trained.',
+  'Exploratory data analysis (EDA)':'The disciplined first look at a dataset — spotting distributions, outliers, missing values, and the relationships between variables. Skipping EDA is the single most common reason models fail in production.',
+  'Data visualisation (Matplotlib, Seaborn, Plotly)':'Turning numbers into charts that actually communicate. In a business setting, the insight only exists if the stakeholder believes it — and they believe charts more than tables every single time.',
+  'Probability foundations':'The mathematical language of uncertainty — distributions, conditional probability, Bayes\' theorem. Every ML model is, at some level, a probability calculation. Understanding this is what separates a user from a practitioner.',
+
+  /* M2 — Supervised Learning */
+  'Linear regression & sklearn pipelines':'The oldest and most widely used ML algorithm in the world — used every day in pricing, risk, forecasting. Combined with sklearn pipelines, you can build an end-to-end repeatable workflow from raw data to prediction in one script.',
+  'Logistic regression':'The workhorse of classification — used for everything from spam filters to credit approval to churn prediction. It\'s simple, fast, and interpretable, and it is often the baseline that more complex models need to beat.',
+  'Classification metrics (ROC-AUC, F1, precision/recall)':'The scorecards that tell you whether your classifier is actually any good. Accuracy alone is misleading — ROC-AUC, F1, precision, and recall together tell you where the model is strong and where it is dangerously blind.',
+  'KNN (K-Nearest Neighbours)':'A brilliantly simple algorithm — to classify something new, find the K things most similar to it and take a vote. Used in recommendation, anomaly detection, and as a baseline that surprisingly often wins.',
+  'Decision trees':'Models that ask a sequence of yes/no questions — "is the user over 30? has the user watched sci-fi recently?" — and arrive at a prediction. Humans can actually read them, which is why regulators love them.',
+  'Bagging & Boosting (Random Forest, XGBoost, LightGBM)':'The techniques that dominate real-world tabular ML — combining hundreds of decision trees into a single ensemble that consistently outperforms everything else. XGBoost and LightGBM win more Kaggle competitions than almost anything else combined.',
+  'Naive Bayes':'A probabilistic classifier that is remarkably effective on text — still the baseline for spam detection, sentiment analysis, and document classification. Elegant, fast, and occasionally embarrassing to neural networks.',
+
+  /* M3 — Unsupervised, Time Series, Recommenders */
+  'Clustering (KMeans, DBSCAN)':'Grouping similar things together without being told in advance what the groups are. Netflix uses this to discover viewer tribes — not by asking users to fill in surveys, but by watching what they actually do and finding the natural patterns.',
+  'Anomaly detection & GMM':'Teaching a model to spot the things that don\'t fit the normal pattern. In banking, this flags suspicious transactions. At Netflix, it detects account sharing or bot behaviour — automatically, at scale, without anyone manually checking each case.',
+  'Dimensionality reduction (PCA, t-SNE)':'Simplifying data that has hundreds of messy variables into something clean and visualisable — without losing the important information. Like condensing a 200-page report into a one-page brief that still captures everything that matters.',
+  'Time series preprocessing & decomposition':'Breaking a time series into its trend, seasonality, and noise components — the first step before any forecasting or anomaly work. Without this, models latch onto the wrong signal and fall apart when the seasonality shifts.',
+  'Time series forecasting (ARIMA, SARIMA, Prophet)':'Predicting what will happen next based on what happened before. Netflix uses this to forecast how many servers they\'ll need on a Friday night — weeks ahead of time — so they can prepare without over-spending on infrastructure.',
+  'Collaborative filtering & ARM':'The engine behind "people like you also enjoyed..." and "frequently bought together". Collaborative filtering powers Netflix and Spotify recommendations; association rule mining powers Amazon\'s basket analysis.',
+  'Content-based filtering':'Recommending items based on what they are, not based on who else liked them. Essential for cold-start problems — when a new movie has no ratings, content-based filtering can still recommend it to the right user on day one.',
+
+  /* M4 — Neural Networks */
+  'Neural network fundamentals & backpropagation':'The building blocks of modern AI. Layers of simple maths stacked together can learn almost anything when trained on enough data. Backpropagation is how the network learns from its mistakes — adjusting itself slightly after every wrong answer.',
+  'Activation functions & weight initialisation':'The small technical choices that decide whether a neural network actually trains or gets stuck from epoch one. Understanding ReLU, softmax, and proper initialisation is what separates engineers who can debug a failing model from those who just retry with different seeds.',
+  'Loss functions':'The mathematical target a neural network is trying to minimise. Choosing the right loss function — cross-entropy for classification, MSE for regression, triplet loss for embeddings — is half the battle of getting a deep learning system to work at all.',
+  'Optimisers (SGD, Adam, RMSprop)':'The algorithms that actually update the weights of a neural network during training. Adam is the default for most deep learning; knowing when to pick SGD with momentum or a custom learning rate schedule is where real performance gains hide.',
+  'Regularisation (Dropout, BatchNorm)':'Techniques that stop a neural network from memorising the training data instead of genuinely learning. Like forcing a student to explain their thinking out loud rather than regurgitate answers — it forces real understanding rather than pattern copying.',
+
+  /* M5 — CV + NLP */
+  'OpenCV & image preprocessing':'The toolkit for handling images in code — resizing, augmenting, cleaning, and feeding them to neural networks. Every computer vision system in the world has a thin layer of OpenCV somewhere in the pipeline.',
+  'CNN architectures (ResNet, InceptionV3)':'The type of neural network designed to understand images. ResNet and InceptionV3 are the battle-tested architectures that still run in production at Google, Meta, and most major AI teams — either directly or as a pretrained backbone.',
+  'Transfer learning':'Taking an AI already trained on millions of images and repurposing it for a new task. Instead of teaching it from scratch — which takes weeks and huge computing power — you build on what it already knows. Dramatically faster and cheaper.',
+  'Advanced CV (object detection, segmentation, image generation)':'Going beyond classifying an image to detecting every object in it (YOLO, Faster R-CNN), segmenting it pixel by pixel (U-Net, Mask R-CNN), and generating new images from scratch (GANs, diffusion). This is what self-driving cars, medical imaging, and generative art all run on.',
+  'Autoencoders, LSTM, GRU':'Specialised neural networks — autoencoders for compressing and reconstructing data, LSTMs and GRUs for sequential data like text and time series. The ancestors of modern transformers — still used in production where transformers are overkill.',
+  'Text preprocessing (NLTK, spaCy) & topic modelling':'Cleaning, tokenising, and understanding the structure of raw text. Topic modelling (LDA) discovers themes inside thousands of documents automatically — turning a pile of customer feedback into an organised set of issues.',
+  'Sentiment analysis':'Teaching AI to read text and understand its emotional tone. Is this customer review positive or negative? Is this support ticket urgent or routine? Is this news article about finance or politics? Done at scale, instantly.',
+  'Attention mechanisms, RNN/LSTM':'The architecture breakthrough that made modern NLP possible. Attention lets a model focus on the most relevant parts of an input — the core mechanism that led to Transformers, BERT, and every modern LLM.',
+  'Transformers & GPT foundations':'The architecture that powers ChatGPT, Claude, Gemini, and essentially every modern AI system. Understanding how transformers work — attention, embeddings, positional encoding — is now a baseline requirement for any serious AI role.',
+
+  /* M6 — MLOps */
+  'ML lifecycle management':'The end-to-end view of an ML system — from raw data ingestion to training, validation, deployment, monitoring, and retraining. Understanding the full lifecycle is what separates a Jupyter-notebook hobbyist from a production ML engineer.',
+  'CI/CD pipelines for ML (GitHub Actions)':'Automated pipelines that test, validate, and redeploy your ML model every time someone makes a change — just as a factory production line runs continuously rather than needing someone to manually push a button for each unit.',
+  'Feature stores':'A centralised, versioned library of features that multiple ML models can share. Without a feature store, every team reinvents the same features and models drift out of sync — the silent killer of enterprise ML.',
+  'Model serving':'Turning a trained model into a live service that takes in a request and returns a prediction in milliseconds. Includes batch serving, real-time serving, and edge deployment — each with different tradeoffs in latency, cost, and scale.',
+  'ML monitoring & experiment tracking (MLflow, Optuna)':'MLflow logs every experiment — what you tried, what worked, what didn\'t — so a team never loses a breakthrough. Optuna automates hyperparameter tuning at scale. Together they are the logbook and lab assistant of modern ML.',
+  'Docker & containerisation':'Docker packages your AI model and all its software into a portable container — like a shipping box that works identically on any computer anywhere. Without Docker, your model\'s "it works on my machine" story becomes an outage.',
+  'AWS SageMaker':'Amazon\'s managed platform for taking a trained AI model and putting it into production at enterprise scale. Handles training, serving, monitoring, and feature stores — a one-stop shop that most mid-sized companies now standardise on.',
+
+  /* M7 — ML System Design */
+  'ML system design fundamentals':'The discipline of designing ML products as systems — not just models. Thinking about data flow, failure modes, monitoring, retraining triggers, and cost envelope is what gets you promoted from "engineer" to "architect".',
+  'Microservices for ML':'Breaking an ML system into small, independent services that each do one thing well — feature computation, model inference, post-processing, logging. This is how Netflix, Uber, and every modern AI-first company actually operates.',
+  'Design patterns (batch, streaming, real-time)':'The three fundamental modes of ML in production. Batch for nightly reports. Streaming (Kafka, Flink) for fraud detection within seconds. Real-time for personalisation within milliseconds. Picking the right one defines the shape of the entire system.',
+  'Scalability & cost optimisation':'Making ML cheaper and faster at scale — spot instances, quantisation, pruning, model distillation, smart caching. This is the skill that turns a promising pilot into a profitable product.',
   'Real-time inference architecture':'The system design that allows an AI to make predictions in milliseconds at massive scale. When you open Netflix and your personalised homepage loads in under a second — that\'s real-time inference working invisibly in the background.',
-  'Kafka streaming pipelines':'A system for moving enormous volumes of data between applications in real time. Think of it as a motorway for data — high speed, high volume, no traffic jams even when millions of events happen every second across the globe.',
-  'Redis caching strategies':'Storing frequently requested AI results in ultra-fast memory so they don\'t have to be recalculated every time. If millions of users open Netflix at 9pm, their recommendations are pre-computed and cached — not freshly generated for each person from scratch.',
-  'Distributed model serving (TF Serving)':'Running an AI model across many servers simultaneously so millions of people can get predictions at the exact same time without any single server being overwhelmed. The difference between a model that works in a demo and one that works in the real world.',
-  'Latency and throughput optimisation':'Making AI faster and capable of handling more simultaneous requests. Latency is how long one prediction takes; throughput is how many you can serve per second. Both matter enormously — a slow AI product is an abandoned AI product.',
-  'LLM orchestration (LangChain, LangGraph)':'Tools for connecting a large language model to other systems — databases, APIs, web search, internal tools — so the AI can perform complex multi-step tasks rather than just answering a single question from its training knowledge alone.',
-  'Vector databases (ChromaDB, Pinecone)':'A special type of database designed to store and search AI-generated number representations of content. Instead of searching for exact keyword matches, you search for meaning — "find me things most similar to this concept or document."',
-  'ReAct and Plan-and-Solve agents':'AI that doesn\'t just answer questions but thinks through a plan and takes actions — searching the web, running code, querying databases — to arrive at an answer step by step. It reasons before it responds, rather than just pattern-matching.',
-  'Multi-agent systems (CrewAI)':'Multiple AI agents working as a team, each with a specific role — one researches, one writes, one fact-checks. They collaborate and hand off work to each other to complete complex tasks that would overwhelm or confuse a single model acting alone.',
-  'RAG pipeline design':'Retrieval-Augmented Generation — giving an AI access to your company\'s actual documents and data before it answers. The difference between a generic chatbot that makes things up and an expert assistant that quotes from your real knowledge base.',
-  'LoRA and QLoRA fine-tuning':'Efficient techniques for customising a large AI model on your own data without retraining the whole thing from scratch — which would cost millions. Like giving an already-brilliant expert a focused two-week training course rather than re-educating them from childhood.',
-  'Model distillation':'Taking a large, expensive AI model and teaching a smaller, cheaper one to behave like it. The small model runs on much less hardware at a fraction of the cost, while retaining most of the capability. Essential for making AI economically viable at scale.',
-  'LLMOps (LangSmith, LangFuse)':'The operational layer for running AI in production — monitoring outputs for quality, tracking costs, catching hallucinations, logging every conversation. So when the AI says something wrong, you know exactly where it went wrong and why.',
-  'Production LLM serving (vLLM)':'Specialist software for serving large language models efficiently at scale. vLLM can handle far more simultaneous users from the same hardware compared to naive approaches — critical when inference costs add up to thousands of dollars per day.',
-  'Evaluation pipelines (Ragas)':'Automated systems that test whether your AI is actually giving good, accurate, well-grounded answers. Ragas scores the AI on multiple dimensions — accuracy, relevance, faithfulness to sources — so problems are caught before users encounter them.',
-  'Vision-language models (GPT-4V, LLaVA)':'AI that can look at an image and understand it in the context of a conversation. Show it a graph and ask what it means. Show it a product photo and ask what\'s wrong. Show it a screenshot and ask it to explain what the user is doing.',
-  'Speech-to-text (Whisper)':'AI that converts spoken audio into accurate written text — reliably, across accents, languages, and noisy environments. OpenAI\'s Whisper is the industry standard, used to transcribe meetings, customer calls, and video content at scale.',
-  'Voice AI (VAPI, WebRTC)':'The technology stack that makes AI voice assistants feel natural — capturing audio, understanding it, generating a spoken response, and delivering it with minimal delay. The engineering that turns a chatbot into something you actually want to talk to.',
-  'Document and PDF parsing':'Teaching AI to read complex documents — PDFs, scanned invoices, forms, tables — and extract structured information automatically. What used to take a human analyst an hour to process can be done in seconds, across thousands of documents simultaneously.',
-  'Multimodal RAG pipelines':'Knowledge retrieval systems that work across text, images, charts, and scanned documents simultaneously. Ask a question and the AI searches not just written paragraphs but also diagrams, tables, and images to find the most relevant answer.',
-  'SHAP and LIME interpretability':'Tools that explain why an AI made a specific decision, in plain language. Instead of a black-box yes/no, you get: "The model flagged this because the debt-to-income ratio was high and the address changed twice in 6 months." Crucial for regulated industries.',
-  'Graph neural networks (GNNs)':'AI designed for data that exists as a network of connections — social graphs, supply chains, fraud rings, molecular structures. Where traditional AI sees rows in a spreadsheet, a GNN sees the relationships between things, which is often where the real signal lives.',
-  'Vision Transformers (ViT)':'Applying the same transformer architecture that powers ChatGPT to understanding images. Instead of reading words, it reads patches of pixels. It\'s now the state of the art for image classification at most major AI research labs.',
+
+  /* M8 — Foundations of AI Engineering & RAG */
+  'Prompt engineering, jailbreaks & guardrails':'The discipline of making LLMs behave predictably — including knowing how they can be tricked so you can defend against it. Good prompt engineering is the difference between a chatbot that demos well and one that survives real users.',
+  'Asynchronous Python & data validation':'The engineering foundations of production AI apps — async/await for handling thousands of LLM calls concurrently, and Pydantic for validating every input and output. Skipping this is how AI prototypes crash the moment real traffic arrives.',
+  'Vector databases & embeddings':'A special type of database designed to store and search AI-generated number representations of content. Instead of searching for exact keyword matches, you search for meaning — "find me things most similar to this concept or document."',
+  'RAG pipeline design':'Retrieval-Augmented Generation — giving an LLM access to your company\'s actual documents and data before it answers. The difference between a generic chatbot that makes things up and an expert assistant that quotes from your real knowledge base.',
+  'Hallucination mitigation strategies':'The set of techniques — retrieval grounding, citation enforcement, output verification, confidence calibration — that stop LLMs from inventing plausible-sounding but wrong answers. Critical for any AI going into finance, legal, medical, or enterprise contexts.',
+
+  /* M9 — Agentic */
+  'LangChain & LangGraph':'The industry-standard frameworks for connecting LLMs to other systems — databases, APIs, web search, internal tools. LangGraph in particular lets you build stateful, branching workflows that reliably drive complex multi-step agent behaviour.',
+  'Memory systems (short-term, long-term, episodic)':'The architecture that lets an AI agent remember past conversations, user preferences, and important facts across sessions. Without memory, every conversation starts from zero. With memory, the agent genuinely learns your organisation over time.',
+  'Multi-agent frameworks (CrewAI, AutoGen)':'Multiple specialised AI agents working as a team — one researches, one writes, one fact-checks. They collaborate and hand off work to each other to complete complex tasks that would overwhelm or confuse a single model acting alone.',
+  'Tool use & function calling':'Teaching an LLM to use tools — run code, query databases, call APIs, search the web. This is what transforms a chatbot into an actual agent that can do things rather than just talk about them.',
+  'Planning, reasoning & ReAct patterns':'AI that doesn\'t just answer questions but thinks through a plan and takes actions — searching the web, running code, querying databases — to arrive at an answer step by step. It reasons before it responds, rather than just pattern-matching.',
+
+  /* M10 — Advanced Cognitive & Multimodal */
+  'Agentic RAG & GraphRAG':'The next generation of retrieval — instead of a flat document search, the AI navigates a knowledge graph of relationships (GraphRAG) and uses agents to iteratively refine its search (Agentic RAG). Delivers dramatically better answers on complex enterprise data.',
+  'Multimodal AI (GPT-4V, LLaVA for vision)':'AI that can look at an image and understand it in the context of a conversation. Show it a graph and ask what it means. Show it a product photo and ask what\'s wrong. Show it a screenshot and ask it to explain what the user is doing.',
+  'Whisper for audio & speech':'OpenAI\'s industry-standard model for converting spoken audio into accurate written text — reliably, across accents, languages, and noisy environments. The backbone of meeting AI, voice agents, and call-centre automation today.',
+  'DSPy & algorithmic prompt optimisation':'A framework that treats prompts as programs — automatically optimising them against a dataset rather than requiring humans to hand-tune. The serious engineering approach to prompting, used at Anthropic, Databricks, and top AI labs.',
+  'Complex document processing':'Teaching AI to read complex documents — PDFs, scanned invoices, forms, tables — and extract structured information automatically. What used to take a human analyst an hour can be done in seconds across thousands of documents.',
+
+  /* M11 — Fine-tuning, LLMOps & Security */
+  'Parameter-Efficient Fine-Tuning (PEFT, LoRA, QLoRA)':'Efficient techniques for customising a large AI model on your own data without retraining the whole thing from scratch — which would cost millions. Like giving an already-brilliant expert a focused two-week training course rather than re-educating them from childhood.',
+  'Serving LLMs at scale (vLLM, TGI, quantization)':'Specialist software for serving large language models efficiently at scale. vLLM and TGI can handle far more simultaneous users from the same hardware compared to naive approaches — critical when inference costs add up to thousands of dollars per day.',
+  'Token economics & cost optimisation':'The pricing model of modern AI — understanding tokens, context windows, prompt caching, and batch APIs. The difference between a startup spending $12k/month on AI and the same workload costing $3k is almost entirely this skill.',
+  'LLMOps (LangSmith, LangFuse, W&B)':'The operational layer for running AI in production — monitoring outputs for quality, tracking costs, catching hallucinations, logging every conversation. So when the AI says something wrong, you know exactly where it went wrong and why.',
+  'Enterprise AI security & guardrails':'The defensive layer — prompt injection protection, PII redaction, output filtering, rate limiting, authentication. Skipping these is how enterprises make the front page of the news.',
+  'Kubernetes deployment for LLMs':'The infrastructure layer that actually runs LLMs in production at enterprise scale — auto-scaling GPU pods, zero-downtime deployments, multi-tenant serving. This is what differentiates a weekend demo from an enterprise product.',
+
+  /* M12 — Advanced ML/DL 1 */
+  'Advanced probability & statistics':'The mathematical foundation that unlocks senior ML work — hypothesis testing, Bayesian inference, maximum likelihood. Without this, you can follow recipes; with this, you can invent new ones.',
+  'Optimisation theory & loss functions':'The mathematics of how models actually learn — gradient descent, convexity, regularisation at first-principles. This is what you debate in a principal-engineer interview, not what you read off a cheat sheet.',
   'Statistical learning theory (VC dimension, PAC)':'The mathematical framework that explains why machine learning actually works — and predicts when it will fail. Understanding this separates engineers who can diagnose a failing model from those who just blindly add more data and retrain.',
-  'Advanced SVM and kernel methods':'A class of algorithms that find clever mathematical boundaries between categories in complex data. The kernel trick lets them handle non-linear patterns without deep learning — still widely used in production at companies where interpretability matters.',
-  'Apache Spark and PySpark':'The industry standard for processing data that is too large for a single machine. Instead of one powerful computer, Spark splits the work across hundreds or thousands — making it practical to process petabytes of data in reasonable time.',
-  'Distributed ETL pipelines':'Automated pipelines that Extract data from multiple sources, Transform it into a clean consistent format, and Load it into a database — all running across many machines simultaneously so they can handle massive data volumes without grinding to a halt.',
-  'Databricks and Delta Lake':'A cloud platform built on Spark that makes large-scale data engineering feel manageable. Delta Lake adds reliability on top — ensuring that even if a pipeline crashes halfway through, your data stays consistent and nothing gets corrupted or lost.',
-  'Workflow orchestration (Airflow, dbt)':'Tools that schedule and manage complex data pipelines — making sure every task runs in the right order, at the right time, and retries automatically if something fails. Think of it as the air traffic control system for a company\'s entire data operation.',
-  'Kafka at petabyte scale':'Running Kafka — the high-speed data motorway — at a scale where billions of events flow through it every single day. This is the infrastructure that companies like Netflix, Uber, and LinkedIn run to power every real-time feature in their products.',
-  'Policy gradient methods (PPO, REINFORCE)':'Algorithms that teach AI to make decisions by trying things, seeing what happens, and learning to do more of what worked. PPO is the exact algorithm used to train ChatGPT\'s conversational style through human feedback — one of the most important techniques in modern AI.',
-  'Deep Q-Networks (DQN)':'A neural network that learns to make decisions by predicting the future value of each possible action it could take. It was famously used to teach AI to play Atari games at superhuman level — learning purely from pixels and a score, with no human guidance.',
-  'Reward modelling for RLHF':'Training an AI to understand what humans consider a good response — by learning from human feedback rather than fixed rules. This is exactly how ChatGPT and Claude are shaped to be helpful, honest, and safe rather than just statistically likely.',
-  'Multi-agent environments':'Simulated worlds where multiple AI agents interact — competing, cooperating, or simply coexisting and reacting to each other. Complex social behaviours only emerge when agents must deal with each other, making this essential for real-world AI systems.',
-  'Imitation learning (GAIL)':'Teaching AI to behave like a human expert by watching examples of what the expert does — rather than programming every rule explicitly. Like teaching someone to cook by having them observe a chef, rather than handing them a 200-page recipe manual.',
-  'Algorithmic problem solving':'The ability to break down a complex technical problem into clear, efficient steps and implement them in code. This is the core skill tested in every technical interview at Google, Amazon, Meta, Netflix, and any serious technology company.',
-  'Graph traversal (BFS, DFS, Dijkstra)':'Algorithms for navigating networks — finding the shortest path between two points, discovering all connected components, or mapping relationships. Google Maps uses Dijkstra. LinkedIn uses BFS to show "2nd degree connections". Fundamental to how software works.',
-  'Dynamic programming':'A technique for solving complex problems by breaking them into smaller sub-problems and storing the answers so you never solve the same thing twice. It\'s behind everything from DNA sequencing to autocorrect to route planning — quietly powering the modern world.',
-  'Big-O complexity analysis':'The language engineers use to describe how fast or slow an algorithm is as the amount of data grows. Knowing that your code runs in O(n²) vs O(n log n) is the difference between a system that scales gracefully and one that falls over when traffic spikes.',
+  'SVM & kernel methods':'A class of algorithms that find clever mathematical boundaries between categories in complex data. The kernel trick lets them handle non-linear patterns without deep learning — still widely used in production at companies where interpretability matters.',
+  'Advanced clustering & dimensionality reduction':'The research-grade versions — spectral clustering, UMAP, HDBSCAN, manifold learning. The techniques that let you work with truly high-dimensional, messy real-world data without losing structure.',
+
+  /* M13 — Advanced ML/DL 2 */
+  'Advanced neural network theory':'Deep understanding of how neural networks actually learn — backpropagation from scratch, vanishing/exploding gradients, batch norm internals. Required for research roles and for anyone interviewing at frontier AI labs.',
+  'Model interpretability (SHAP, LIME)':'Tools that explain why an AI made a specific decision, in plain language. Instead of a black-box yes/no, you get: "The model flagged this because the debt-to-income ratio was high and the address changed twice in 6 months." Crucial for regulated industries.',
+  'Backpropagation from first principles':'Deriving and implementing backpropagation from scratch — not just calling .backward() in PyTorch. This is the interview question that separates those who use ML from those who understand it.',
+  'Advanced transformers & attention mechanisms':'The research-depth view of how transformers actually work — multi-head attention, positional encoding variants, sparse attention, flash attention. What you need when debugging or extending a frontier model.',
+  'Research-grade deep learning':'The ability to read a new arXiv paper, reproduce its results, and decide whether it belongs in your production stack. This is what frontier AI labs actually hire for — not framework familiarity.',
+
+  /* M14 — Big Data */
+  'Hadoop & HDFS':'The original distributed storage and compute system that made modern big data possible. Still the foundation of many enterprise data lakes, especially in banking, telecom, and government.',
+  'Apache Spark (RDDs, DataFrames, Spark SQL)':'The industry standard for processing data that is too large for a single machine. Instead of one powerful computer, Spark splits the work across hundreds or thousands — making it practical to process petabytes of data in reasonable time.',
+  'Spark Streaming & MLlib':'Spark\'s real-time streaming engine and built-in ML library. Lets you process live data flows and train distributed models on them — the combination that powers real-time personalisation at Uber, LinkedIn, and Netflix.',
+  'Hive & Kafka integration':'Hive gives you SQL over massive datasets stored in Hadoop. Kafka is the high-speed data motorway for events. Together they form the backbone of the classic big data architecture still running at thousands of enterprises.',
+  'Data visualisation (Tableau, AWS QuickSight)':'The enterprise-grade dashboarding tools that present ML outputs to business users. The difference between an ML system that gets adopted and one that sits unused is often just whether the dashboard was good enough.',
+
+  /* M15 — RL */
+  'Markov Decision Processes (MDPs)':'The mathematical framework underneath every reinforcement learning algorithm — states, actions, rewards, transitions. Understanding MDPs is the vocabulary you need to even have a serious RL conversation.',
+  'Dynamic programming (value & policy iteration)':'The classical algorithms for solving MDPs when you know the environment fully. The intellectual ancestors of modern deep RL, still used where the problem can be modelled exactly.',
+  'Q-Learning & DQN':'A neural network that learns to make decisions by predicting the future value of each possible action it could take. It was famously used to teach AI to play Atari games at superhuman level — learning purely from pixels and a score, with no human guidance.',
+  'Policy gradients & actor-critic':'The family of algorithms behind ChatGPT\'s training. Actor-critic methods let agents learn policies directly from experience — the technical foundation of RLHF and modern reasoning models.',
+  'PPO, SAC, TD3':'The state-of-the-art modern RL algorithms. PPO is what OpenAI used to train ChatGPT\'s conversational style. SAC and TD3 dominate continuous control in robotics. Understanding these is the price of admission to any serious RL role.',
+  'Imitation learning & multi-agent RL':'Imitation learning teaches AI to behave like a human expert by watching examples. Multi-agent RL handles scenarios where multiple AIs interact — autonomous driving, market simulation, game AI. The frontiers of the field.',
+
+  /* M16 — DSA */
+  'Time & space complexity analysis':'The language engineers use to describe how fast or slow an algorithm is as the amount of data grows. Knowing that your code runs in O(n²) vs O(n log n) is the difference between a system that scales gracefully and one that falls over when traffic spikes.',
+  'Array & string patterns':'The half-dozen patterns — sliding window, two pointers, prefix sums, pattern matching — that solve 60% of all coding interview problems. Mastering them is how candidates go from "struggling in interviews" to "passing them confidently".',
+  'Recursion, backtracking, DP':'The problem-solving techniques that separate great engineers from good ones. Dynamic programming in particular is behind everything from DNA sequencing to autocorrect to route planning — quietly powering the modern world.',
+  'Trees, tries, heaps':'The non-linear data structures that power real software. Tries run autocomplete. Heaps run priority queues and event systems. Binary search trees run indexing. Every system you interact with uses several of them invisibly.',
+  'Graph algorithms (BFS, DFS, Dijkstra)':'Algorithms for navigating networks — finding the shortest path between two points, discovering connected components, or mapping relationships. Google Maps uses Dijkstra. LinkedIn uses BFS to show "2nd degree connections". Fundamental to how software works.',
   'Interview-grade coding fluency':'The ability to write clean, correct, and efficient code under time pressure — the standard required to pass technical interviews at top-tier technology companies. It\'s not just about knowing the answer but communicating your thinking clearly while you work.',
-  'All M1 skills':'This represents everything learned up to this module — a growing foundation of skills that each new module builds on. Every subsequent capability runs on what came before it.',
-  'All M1–M2 skills':'Everything from modules 1 and 2 combined — supervised ML plus unsupervised learning. A solid mid-level ML profile already begins to take shape here.',
-  'All M1–M3 skills':'Modules 1 through 3 together: classical ML, unsupervised learning, and deep learning. A full traditional ML engineering profile.',
-  'All M1–M4 skills':'Modules 1–4: classical ML, unsupervised, deep learning, plus computer vision. One of the most hireable profiles in applied AI.',
-  'All M1–M5 skills':'Modules 1–5: the full traditional ML and NLP stack. Strong enough for most ML engineering roles at established tech companies.',
-  'All M1–M6 skills':'Modules 1–6 including MLOps. The difference between someone who builds models and someone who can actually run them in production.',
-  'All M1–M7 skills':'Modules 1–7: full-stack ML from data to deployed, scalable systems. A Senior ML Engineer profile at most companies.',
-  'All M1–M8 skills':'Modules 1–8: everything through RAG and agentic AI. The most in-demand AI engineering profile of 2024–2025.',
-  'All M1–M9 skills':'Modules 1–9: adds LLM fine-tuning and LLMOps. Can now build, adapt, and operate custom AI models end to end.',
-  'All M1–M10 skills':'Modules 1–10: full multimodal capability. Can build AI systems that see, hear, read, and reason across data types simultaneously.',
-  'All M1–M11 skills':'Modules 1–11: adds research-grade ML depth. Interpretability, GNNs, and statistical theory — a Principal-level engineering profile.',
-  'All M1–M12 skills':'Modules 1–12: now includes large-scale data infrastructure. A complete data-to-model-to-production stack with nothing missing.'
+
+  /* M17 — Campus Immersion */
+  'IIT Roorkee Campus Immersion':'A week at CEC, IIT Roorkee — the Centre for Continuing Education — working with faculty on industry problems. The prestige signal on the CV plus the hands-on project work that converts learning into proof of capability.',
+  'AI in healthcare case studies':'Real industry case studies of AI deployment in healthcare — from diagnostic imaging to clinical decision support. A sector where AI decisions carry real consequences, which makes it the best possible training ground for responsible AI engineering.',
+  'LLMs for workplace productivity':'The practical, executive-level view of deploying LLMs for productivity across an organisation. What works, what hits adoption walls, and the governance questions every senior technical leader must be able to answer.',
+  'Industry capstone project':'An end-to-end AI project that ships to real stakeholders — built under IIT Roorkee faculty mentorship. The portfolio piece that converts the course into a credible story for senior-level hiring conversations.',
+  'Executive-track AI thinking':'The final upgrade — thinking about AI not just as an engineer but as an architect of organisational impact. How to scope, defend, and lead AI initiatives at scale.',
+
+  /* Rollup skills */
+  'All M1 skills':'Everything learned in Module 1 — the analyst-level data foundation. Every subsequent module assumes this.',
+  'All M1–M2 skills':'Modules 1 and 2 together — data foundations plus classical supervised ML. A Junior Data Scientist profile.',
+  'All M1–M3 skills':'Modules 1–3 — full classical ML including unsupervised, time series, and recommenders. A solid Data Scientist profile.',
+  'All M1–M4 skills':'Modules 1–4 — full classical ML plus deep learning foundations. A Junior ML Engineer profile begins here.',
+  'All M1–M5 skills':'Modules 1–5 — classical ML plus applied deep learning for vision and language. A full Applied ML Engineer profile.',
+  'All M1–M6 skills':'Modules 1–6 — the full applied ML stack plus MLOps. Now hireable as an ML Engineer who can ship to production.',
+  'All M1–M7 skills':'Modules 1–7 — adds production-scale system design. A Senior ML Engineer profile.',
+  'All M1–M8 skills':'Modules 1–8 — adds the AI Engineering foundation: prompt engineering, RAG, vector databases. The 2026 GenAI baseline.',
+  'All M1–M9 skills':'Modules 1–9 — adds agents and multi-agent orchestration. This is the AI Engineer profile companies are actively hiring for.',
+  'All M1–M10 skills':'Modules 1–10 — adds multimodal (vision, audio) and advanced cognitive architectures. A Senior AI Engineer profile.',
+  'All M1–M11 skills':'Modules 1–11 — adds fine-tuning, LLMOps, and enterprise security. A full LLM Engineer / Applied AI Scientist profile.',
+  'All M1–M12 skills':'Modules 1–12 — adds advanced mathematical ML foundations. Opens Principal and Research-track conversations.',
+  'All M1–M13 skills':'Modules 1–13 — adds research-grade deep learning theory. Ready for frontier-lab and research-engineer interviews.',
+  'All M1–M14 skills':'Modules 1–14 — adds distributed big data engineering. Now full-stack from raw petabytes to production inference.',
+  'All M1–M15 skills':'Modules 1–15 — adds reinforcement learning including RLHF. The training technique behind ChatGPT and Claude.',
+  'All M1–M16 skills':'Modules 1–16 — adds interview-grade DSA. Now FAANG-ready across every technical dimension.'
 };
 
 function getDesc(skill){
@@ -358,173 +496,335 @@ function getDesc(skill){
 }
 
 /* ══════════════════════════
-   SKILL EXPLAIN LOGIC
+   MILESTONE DATA — 6 career milestones where AI/ML roles actually unlock.
+   Grounded strictly in the 9 canonical 2026 AI/ML JDs:
+   ML Engineer · Data Scientist · AI/ML Engineer · MLOps Engineer · Prompt Engineer
+   Generative AI Engineer · NLP Engineer · Computer Vision Engineer · AI Data Engineer
+   
+   Modules M1-M5, M8-M10, M12-M13, M15 build skills but do NOT individually unlock
+   a complete AI/ML role per 2026 JDs — so they don't appear as separate milestones.
+   They are rolled up into the next milestone card that DOES complete a role.
 ══════════════════════════ */
-let activePill=null;
-function handlePillClick(pill,skill,isNew){
-  if(activePill===pill){closeExplain();return;}
-  if(activePill) activePill.classList.remove('active-pill','not-new');
-  activePill=pill;
+const milestones=[
+
+{id:'ms1', step:'Milestone 1', 
+ badge:'Classical ML + Production', badgeClass:'ms-badge-ml',
+ title:'Data Scientist, CV Engineer & NLP Engineer unlock',
+ modsBuilt:'M1 (Data Foundations) · M2 (Supervised Learning) · M3 (Unsupervised/TS/Recommenders) · M4 (Neural Networks) · M5 (CV & NLP) · <strong>M6 (MLOps)</strong>',
+ modsNote:'First career unlock. 6 modules combined — classical ML + deep learning + production deployment.',
+ skills:['Python, NumPy, Pandas','EDA & data visualisation','Probability & statistics foundations','Linear & logistic regression','Classification metrics (ROC-AUC, F1)','Decision trees & ensembles (XGBoost, LightGBM)','Naive Bayes','Clustering (KMeans, DBSCAN)','Dimensionality reduction (PCA, t-SNE)','Time series forecasting (ARIMA, Prophet)','Recommender systems (collaborative & content-based)','Neural networks & backpropagation','Optimisers, loss functions, regularisation','CNNs (ResNet, InceptionV3) & OpenCV','Transfer learning','Advanced CV (detection, segmentation)','Text preprocessing (NLTK, spaCy)','Sentiment analysis & topic modelling','Attention, RNN, LSTM, Transformers','MLflow & experiment tracking','Docker & containerisation','CI/CD pipelines (GitHub Actions)','Model serving & feature stores','AWS SageMaker'],
+ newSkills:['MLflow & experiment tracking','Docker & containerisation','CI/CD pipelines (GitHub Actions)','Model serving & feature stores','AWS SageMaker'],
+ roles:[
+   {name:'Data Scientist',variant:'',c:'#0F6E56'},
+   {name:'Computer Vision Engineer',variant:'',c:'#0F6E56'},
+   {name:'NLP Engineer',variant:'',c:'#0F6E56'}
+ ],
+ quote:'"They can take a business problem, frame it correctly, build the right model — classical ML, deep learning, CV, or NLP — and actually get it into production. Not a notebook, a real system."',
+ note:'Why these three roles and not ML Engineer yet: 2026 ML Engineer JDs require system design depth (scalability, microservices, real-time inference) that lands in M7. Data Scientist, CV Engineer, and NLP Engineer JDs are fully satisfied at M6.'},
+
+{id:'ms2', step:'Milestone 2',
+ badge:'Production & Scale', badgeClass:'ms-badge-prod',
+ title:'ML Engineer & MLOps Engineer unlock',
+ modsBuilt:'Everything from Milestone 1 + <strong>M7 (ML System Design)</strong>',
+ modsNote:'Adds microservices, real-time inference, scalability, and cost optimisation on top of the MLOps foundation.',
+ skills:['All M1–M6 skills','ML system design fundamentals','Microservices for ML','Design patterns (batch, streaming, real-time)','Scalability & cost optimisation','Real-time inference architecture'],
+ newSkills:['ML system design fundamentals','Microservices for ML','Design patterns (batch, streaming, real-time)','Scalability & cost optimisation','Real-time inference architecture'],
+ roles:[
+   {name:'Machine Learning Engineer',variant:'',c:'#534AB7'},
+   {name:'MLOps Engineer',variant:'',c:'#534AB7'},
+   {name:'AI Platform Engineer',variant:'',c:'#534AB7'},
+   {name:'Data Scientist',variant:'(Senior)',c:'#0F6E56'},
+   {name:'Computer Vision Engineer',variant:'(Production/Senior)',c:'#0F6E56'},
+   {name:'NLP Engineer',variant:'(Production/Senior)',c:'#0F6E56'}
+ ],
+ quote:'"They think in systems, not just models. They can design how to serve predictions to a million users simultaneously without breaking the product or the budget."',
+ note:'Full 2026 ML Engineer JD covered: Python, ML frameworks, data pipelines, feature engineering, cloud (AWS SageMaker), MLOps, system design. MLOps Engineer JD fully covered: Python/Git, CI/CD, Docker, Kubernetes-ready patterns, cloud, monitoring, automation. AI Platform Engineer unlocks here too — the infra-layer role that combines system design + MLOps + cloud-scale deployment.'},
+
+{id:'ms3', step:'Milestone 3',
+ badge:'AI Engineering (GenAI)', badgeClass:'ms-badge-ai',
+ title:'AI/ML Engineer, Generative AI Engineer, LLM Engineer & Prompt Engineer unlock',
+ modsBuilt:'Everything from Milestone 2 + <strong>M8 (RAG) · M9 (Agents) · M10 (Multimodal) · M11 (Fine-Tuning, LLMOps & Security)</strong>',
+ modsNote:'The full AI Engineering stack. M8–M10 build the skills; M11 completes the profile with fine-tuning, LLMOps, and enterprise security.',
+ skills:['All M1–M7 skills','Prompt engineering, jailbreaks & guardrails','Asynchronous Python & data validation','Vector databases & embeddings','RAG pipeline design','Hallucination mitigation','LangChain & LangGraph','Multi-agent frameworks (CrewAI, AutoGen)','Memory systems','Tool use & function calling','ReAct planning patterns','Agentic RAG & GraphRAG','Multimodal AI (GPT-4V, LLaVA)','Whisper for audio','DSPy prompt optimisation','Complex document processing','PEFT, LoRA, QLoRA fine-tuning','Serving LLMs (vLLM, TGI, quantization)','Token economics','LLMOps (LangSmith, LangFuse)','Enterprise AI security & guardrails','Kubernetes for LLMs'],
+ newSkills:['Prompt engineering, jailbreaks & guardrails','Vector databases & embeddings','RAG pipeline design','LangChain & LangGraph','Multi-agent frameworks (CrewAI, AutoGen)','Agentic RAG & GraphRAG','Multimodal AI (GPT-4V, LLaVA)','PEFT, LoRA, QLoRA fine-tuning','Serving LLMs (vLLM, TGI, quantization)','LLMOps (LangSmith, LangFuse)','Kubernetes for LLMs'],
+ roles:[
+   {name:'AI/ML Engineer',variant:'',c:'#993C1D'},
+   {name:'Generative AI Engineer',variant:'(GenAI Engineer)',c:'#993C1D'},
+   {name:'LLM Engineer',variant:'',c:'#993C1D'},
+   {name:'Prompt Engineer',variant:'',c:'#993C1D'},
+   {name:'Multimodal AI Engineer',variant:'',c:'#993C1D'},
+   {name:'RAG / LLM Applications Engineer',variant:'',c:'#993C1D'}
+ ],
+ quote:'"This is the person who can take a general-purpose LLM and make it yours — grounded in your data via RAG, orchestrated as agents, fine-tuned with LoRA, served at scale, and secured for enterprise. The highest-paying AI profile in the 2026 market."',
+ note:'Why the full GenAI stack lands together at M11: M8 alone gives RAG/prompt foundations, M9 adds agents, M10 adds multimodal — but per 2026 JDs, LLM Engineer and Generative AI Engineer both require fine-tuning (LoRA/PEFT) + vector DBs + Docker/K8s + ethical AI — all of which only complete at M11. Partial profiles at M8/M9/M10 are not yet hireable as the full AI/ML Engineer, LLM Engineer, or GenAI Engineer. M11 is where the full stack lands.'},
+
+{id:'ms4', step:'Milestone 4',
+ badge:'Data Infrastructure', badgeClass:'ms-badge-data',
+ title:'AI Data Engineer unlocks',
+ modsBuilt:'Everything from Milestone 3 + <strong>M14 (Big Data Engineering · Elective)</strong>',
+ modsNote:'The distributed data layer that every AI system at scale depends on.',
+ skills:['All M1–M11 skills','Hadoop & HDFS','Apache Spark (RDDs, DataFrames, Spark SQL)','Spark Streaming & MLlib','Hive & Kafka integration','Data visualisation (Tableau, AWS QuickSight)'],
+ newSkills:['Hadoop & HDFS','Apache Spark (RDDs, DataFrames, Spark SQL)','Spark Streaming & MLlib','Hive & Kafka integration','Data visualisation (Tableau, AWS QuickSight)'],
+ roles:[
+   {name:'AI Data Engineer',variant:'',c:'#854F0B'}
+ ],
+ quote:'"They can build the distributed pipelines that every AI system depends on. Without this skill, your data sits in silos and your models never see the full picture."',
+ note:'Full 2026 AI Data Engineer JD covered: ETL/pipelines (Airflow/Kafka/Spark), SQL/NoSQL, Python/Scala, ML frameworks, big data/cloud (Hadoop/AWS S3), feature engineering. Elective — highest value for enterprise AI platform roles.'},
+
+{id:'ms5', step:'Milestone 5',
+ badge:'FAANG-Ready', badgeClass:'ms-badge-elite',
+ title:'All 9 AI/ML roles at FAANG / tier-1 level',
+ modsBuilt:'Everything from Milestone 4 + <strong>M12–M13 (Advanced ML/DL · Electives) · M15 (Reinforcement Learning · Elective) · M16 (DSA · Optional)</strong>',
+ modsNote:'The theory, research depth, and interview fluency that convert a strong profile into a FAANG-level offer.',
+ skills:['All M1–M11, M14 skills','Advanced probability & statistics','Optimisation theory','Statistical learning theory','SVM & kernel methods','Advanced neural network theory','Model interpretability (SHAP, LIME)','Backpropagation from first principles','Advanced transformers & attention','Research-grade deep learning','Markov Decision Processes','Q-Learning & DQN','Policy gradients & actor-critic','PPO, SAC, TD3 (RLHF foundations)','Multi-agent RL','Time & space complexity','Array & string patterns','Recursion, backtracking, DP','Trees, tries, heaps','Graph algorithms (BFS, DFS, Dijkstra)','Interview-grade coding fluency'],
+ newSkills:['Advanced probability & statistics','Statistical learning theory','Backpropagation from first principles','Advanced transformers & attention','PPO, SAC, TD3 (RLHF foundations)','Graph algorithms (BFS, DFS, Dijkstra)','Interview-grade coding fluency'],
+ roles:[
+   {name:'Machine Learning Engineer',variant:'(Senior/Staff · FAANG)',c:'#1a1a18'},
+   {name:'Data Scientist',variant:'(Senior/Staff · FAANG)',c:'#1a1a18'},
+   {name:'AI/ML Engineer',variant:'(Senior/Staff · FAANG)',c:'#1a1a18'},
+   {name:'MLOps Engineer',variant:'(Senior · FAANG)',c:'#1a1a18'},
+   {name:'Generative AI Engineer',variant:'(Senior · RLHF/Alignment)',c:'#1a1a18'},
+   {name:'LLM Engineer',variant:'(Senior · RLHF specialisation)',c:'#1a1a18'},
+   {name:'AI Platform Architect',variant:'(full-stack senior)',c:'#1a1a18'},
+   {name:'AI Platform Engineer',variant:'(Senior)',c:'#1a1a18'},
+   {name:'Prompt Engineer',variant:'(Senior)',c:'#1a1a18'},
+   {name:'NLP Engineer',variant:'(Senior)',c:'#1a1a18'},
+   {name:'Computer Vision Engineer',variant:'(Senior)',c:'#1a1a18'},
+   {name:'AI Data Engineer',variant:'(Senior)',c:'#1a1a18'}
+ ],
+ quote:'"They can walk into a technical interview at Google, Netflix, or any AI-first company and hold their own on every dimension — classical ML, deep learning, GenAI, system design, AND DSA. They can also architect the platform the AI runs on."',
+ note:'Optional + Electives that convert a strong profile into FAANG-level offer-ready across every major 2026 AI/ML role — including the senior architect track (AI Platform Architect) which requires the full theory + system design + LLM + MLOps stack. Research-track roles (OpenAI, Anthropic, DeepMind) also open here — particularly RLHF specialisation via M15.'},
+
+{id:'ms6', step:'Milestone 6',
+ badge:'Capstone', badgeClass:'ms-badge-elite',
+ title:'Full-stack AI/ML Engineer with IIT Roorkee capstone',
+ modsBuilt:'Everything from Milestone 5 + <strong>M17 (CEC, IIT Roorkee Campus Immersion)</strong>',
+ modsNote:'The prestige signal + the portfolio project that converts the full skillset into proof of capability.',
+ skills:['All M1–M16 skills','IIT Roorkee Campus Immersion','AI in healthcare case studies','LLMs for workplace productivity','Industry capstone project','Executive-track AI thinking'],
+ newSkills:['IIT Roorkee Campus Immersion','AI in healthcare case studies','LLMs for workplace productivity','Industry capstone project','Executive-track AI thinking'],
+ roles:[
+   {name:'Full-stack AI/ML Engineer',variant:'(All roles · IIT Roorkee capstone)',c:'#1a1a18'}
+ ],
+ quote:'"Programme complete with a prestige signal. This learner carries a full-stack AI engineering profile — foundations, applied ML, production systems, the GenAI stack, interview readiness, and an IIT Roorkee capstone."',
+ note:'Capstone with the Centre for Continuing Education, IIT Roorkee. The final signal — a CV marker, a portfolio project, and a peer network.'}
+];
+
+function renderMilestones(){
+  const root=document.getElementById('milestone-cards');
+  milestones.forEach(m=>{
+    const card=document.createElement('div');
+    card.className='ms-card';
+    let html='<div class="ms-head">'+
+      '<div class="ms-head-left">'+
+        '<div class="ms-step">'+m.step+'</div>'+
+        '<div class="ms-title">'+m.title+'</div>'+
+        '<div class="ms-mods">'+m.modsBuilt+'<br><span style="color:#9b9b96;font-size:11px">'+m.modsNote+'</span></div>'+
+      '</div>'+
+      '<span class="ms-badge '+m.badgeClass+'">'+m.badge+'</span>'+
+    '</div>';
+    html+='<div class="ms-body">';
+    
+    // LEFT: skills
+    html+='<div>'+
+      '<div class="ms-col-title">Skills unlocked<span class="ms-col-sub">— tap any pill to explain</span></div>'+
+      '<ul class="skill-list" id="sl-'+m.id+'"></ul>'+
+      '<div class="skill-explain" id="se-'+m.id+'">'+
+        '<div class="explain-name" id="en-'+m.id+'"></div>'+
+        '<div class="explain-text" id="et-'+m.id+'"></div>'+
+        '<span class="explain-close" onclick="closeExplain()">close ✕</span>'+
+      '</div>'+
+    '</div>';
+    
+    // RIGHT: roles
+    html+='<div>'+
+      '<div class="ms-col-title">AI/ML roles you can now target</div>'+
+      '<ul class="role-list">';
+    m.roles.forEach(r=>{
+      const variant=r.variant?'<span class="role-variant">'+r.variant+'</span>':'';
+      html+='<li class="role-item"><span class="role-dot" style="background:'+r.c+'"></span><span><span class="role-canonical">'+r.name+'</span>'+variant+'</span></li>';
+    });
+    html+='</ul></div>';
+    html+='</div>';
+    
+    // QUOTE
+    html+='<div class="ms-quote">'+
+      '<div class="ms-quote-label">What a hiring manager says</div>'+
+      '<div class="ms-quote-text">'+m.quote+'</div>'+
+      '<div class="ms-quote-note">'+m.note+'</div>'+
+    '</div>';
+    
+    card.innerHTML=html;
+    root.appendChild(card);
+    
+    // Populate skill pills
+    const sl=card.querySelector('#sl-'+m.id);
+    m.skills.forEach(s=>{
+      const isNew=m.newSkills.includes(s);
+      const li=document.createElement('li');
+      li.className='skill-pill'+(isNew?' new':'');
+      li.textContent=s;
+      li.title='Click to explain this skill';
+      li.onclick=function(){handleMsPillClick(li,s,isNew,m.id);};
+      sl.appendChild(li);
+    });
+  });
+}
+
+let activeMsPill=null;
+let activeMsId=null;
+function handleMsPillClick(pill,skill,isNew,msId){
+  // close previous
+  if(activeMsPill===pill){closeMsExplain();return;}
+  if(activeMsPill){
+    activeMsPill.classList.remove('active-pill','not-new');
+    if(activeMsId){
+      const prevBox=document.getElementById('se-'+activeMsId);
+      if(prevBox)prevBox.classList.remove('visible','not-new-explain');
+    }
+  }
+  activeMsPill=pill;
+  activeMsId=msId;
   pill.classList.add('active-pill');
   if(!isNew) pill.classList.add('not-new');
-  const box=document.getElementById('skill-explain');
-  const desc=getDesc(skill);
-  document.getElementById('explain-name').textContent=skill;
-  document.getElementById('explain-text').textContent=desc;
+  const box=document.getElementById('se-'+msId);
+  document.getElementById('en-'+msId).textContent=skill;
+  document.getElementById('et-'+msId).textContent=getDesc(skill);
   box.className='skill-explain visible'+(isNew?'':' not-new-explain');
 }
-function closeExplain(){
-  if(activePill){activePill.classList.remove('active-pill','not-new');activePill=null;}
-  const box=document.getElementById('skill-explain');
-  box.classList.remove('visible');
+function closeMsExplain(){
+  if(activeMsPill){activeMsPill.classList.remove('active-pill','not-new');activeMsPill=null;}
+  if(activeMsId){
+    const box=document.getElementById('se-'+activeMsId);
+    if(box)box.classList.remove('visible','not-new-explain');
+    activeMsId=null;
+  }
 }
+function closeExplain(){closeMsExplain();}
+renderMilestones();
+
 
 /* ══════════════════════════
-   CHECKPOINT DATA
-══════════════════════════ */
-const cp=[
-{name:'Data foundations and supervised learning',
- skills:['Feature engineering','Regression (Linear, Ridge, Lasso)','Classification (XGBoost, LightGBM)','Model evaluation (ROC-AUC, F1, RMSE)','sklearn pipelines','Hyperparameter tuning (Optuna)'],
- newSkills:['Feature engineering','Regression (Linear, Ridge, Lasso)','Classification (XGBoost, LightGBM)','Model evaluation (ROC-AUC, F1, RMSE)','sklearn pipelines','Hyperparameter tuning (Optuna)'],
- jobs:[{t:'Junior Data Scientist',c:'#0F6E56'},{t:'ML Analyst',c:'#0F6E56'},{t:'Analytics Engineer (ML track)',c:'#888'}],
- milestone:'"This person can take a raw dataset, build a working prediction model, and tell us whether it\'s actually any good. That is genuinely useful from week one."',
- note:'Roles open: entry-level data science and ML analyst positions at product companies and startups.'},
-{name:'Unsupervised learning',
- skills:['All M1 skills','Clustering (KMeans, DBSCAN, GMM)','Anomaly and fraud detection (Isolation Forest)','Time series forecasting (ARIMA, SARIMA)','Dimensionality reduction (PCA, t-SNE)','Collaborative filtering'],
- newSkills:['Clustering (KMeans, DBSCAN, GMM)','Anomaly and fraud detection (Isolation Forest)','Time series forecasting (ARIMA, SARIMA)','Dimensionality reduction (PCA, t-SNE)','Collaborative filtering'],
- jobs:[{t:'Data Scientist',c:'#0F6E56'},{t:'ML Engineer',c:'#0F6E56'},{t:'Fraud / Anomaly Detection Engineer',c:'#0F6E56'},{t:'Demand Forecasting Analyst',c:'#888'}],
- milestone:'"They can find structure in data we didn\'t know was there. Customer segmentation, fraud signals, forecasting — this person is already dangerous with a dataset."',
- note:'The combination of M1 and M2 is what most mid-level Data Scientist job descriptions actually require.'},
-{name:'Neural networks and deep learning',
- skills:['All M1–M2 skills','Neural network architecture (MLP, backpropagation)','Deep learning (TensorFlow, PyTorch)','Regularisation (Dropout, BatchNorm)','Autoencoders','Embedding layers'],
- newSkills:['Neural network architecture (MLP, backpropagation)','Deep learning (TensorFlow, PyTorch)','Regularisation (Dropout, BatchNorm)','Autoencoders','Embedding layers'],
- jobs:[{t:'Deep Learning Engineer',c:'#534AB7'},{t:'ML Engineer',c:'#0F6E56'},{t:'AI Research Associate',c:'#534AB7'},{t:'Junior AI Scientist',c:'#888'}],
- milestone:'"This candidate actually understands deep learning — not just how to call a library. They can debug a training run, explain why it is failing, and fix it."',
- note:'M3 is the gateway module. Most senior ML roles now assume deep learning fluency as a baseline requirement.'},
-{name:'Computer vision',
- skills:['All M1–M3 skills','CNN architecture and filters','Object detection (YOLO, Faster R-CNN)','Transfer learning (ResNet, InceptionV3)','Image segmentation (U-Net, Mask R-CNN)','GAN-based image generation'],
- newSkills:['CNN architecture and filters','Object detection (YOLO, Faster R-CNN)','Transfer learning (ResNet, InceptionV3)','Image segmentation (U-Net, Mask R-CNN)','GAN-based image generation'],
- jobs:[{t:'Computer Vision Engineer',c:'#534AB7'},{t:'Perception Engineer',c:'#534AB7'},{t:'ML Engineer (CV track)',c:'#534AB7'},{t:'Vision AI Developer',c:'#888'}],
- milestone:'"They can build systems that look at images and make intelligent decisions. Retail, manufacturing, media, autonomous vehicles — the applications are enormous."',
- note:'CV is one of the highest-paying ML specialisations. M4 opens a dedicated and well-compensated hiring market.'},
-{name:'Natural language processing',
- skills:['All M1–M4 skills','BERT and transformer fine-tuning','Named entity recognition (NER)','Semantic search and embeddings','Text classification and sentiment analysis','Seq2Seq summarisation and translation'],
- newSkills:['BERT and transformer fine-tuning','Named entity recognition (NER)','Semantic search and embeddings','Text classification and sentiment analysis','Seq2Seq summarisation and translation'],
- jobs:[{t:'NLP Engineer',c:'#534AB7'},{t:'Search Engineer',c:'#534AB7'},{t:'Conversational AI Developer',c:'#534AB7'},{t:'Language AI Specialist',c:'#888'}],
- milestone:'"They can make machines understand language — not just match keywords. That is the difference between a search bar and an intelligent assistant."',
- note:'M1–M5 together form a complete traditional ML and NLP stack — strong for most ML engineering roles at scale-ups.'},
-{name:'MLOps',
- skills:['All M1–M5 skills','Docker and Kubernetes','CI/CD for ML (GitHub Actions)','Experiment tracking (MLflow)','Model registry and versioning','AWS SageMaker deployment'],
- newSkills:['Docker and Kubernetes','CI/CD for ML (GitHub Actions)','Experiment tracking (MLflow)','Model registry and versioning','AWS SageMaker deployment'],
- jobs:[{t:'MLOps Engineer',c:'#854F0B'},{t:'ML Platform Engineer',c:'#854F0B'},{t:'AI Infrastructure Engineer',c:'#854F0B'},{t:'Applied ML Engineer',c:'#888'}],
- milestone:'"Finally, someone who can get a model into production — not just a Jupyter notebook, but a real versioned, monitored, auto-retraining pipeline."',
- note:'MLOps engineers are among the most in-demand AI hires. Many companies have models but nobody who can operate them.'},
-{name:'ML system design',
- skills:['All M1–M6 skills','Real-time inference architecture','Kafka streaming pipelines','Redis caching strategies','Distributed model serving (TF Serving)','Latency and throughput optimisation'],
- newSkills:['Real-time inference architecture','Kafka streaming pipelines','Redis caching strategies','Distributed model serving (TF Serving)','Latency and throughput optimisation'],
- jobs:[{t:'Senior ML Engineer',c:'#854F0B'},{t:'ML Architect',c:'#854F0B'},{t:'Staff AI Engineer',c:'#854F0B'},{t:'ML Infrastructure Lead',c:'#888'}],
- milestone:'"They think in systems, not just models. They can design how to serve predictions to a million users simultaneously without breaking the product or the budget."',
- note:'M7 is the inflection point from engineer to architect. It unlocks Staff and Principal-level career conversations.'},
-{name:'RAG systems and agentic AI',
- skills:['All M1–M7 skills','LLM orchestration (LangChain, LangGraph)','Vector databases (ChromaDB, Pinecone)','ReAct and Plan-and-Solve agents','Multi-agent systems (CrewAI)','RAG pipeline design'],
- newSkills:['LLM orchestration (LangChain, LangGraph)','Vector databases (ChromaDB, Pinecone)','ReAct and Plan-and-Solve agents','Multi-agent systems (CrewAI)','RAG pipeline design'],
- jobs:[{t:'AI Engineer',c:'#993C1D'},{t:'GenAI Engineer',c:'#993C1D'},{t:'LLM Application Developer',c:'#993C1D'},{t:'Conversational AI Lead',c:'#888'}],
- milestone:'"They can build agents that actually do things — search internal knowledge, call APIs, chain decisions together. This is the most-hired AI profile right now."',
- note:'The AI Engineer title emerged in 2023 and is now one of the fastest-growing job categories globally. M8 is where you enter that market.'},
-{name:'LLM fine-tuning and LLMOps',
- skills:['All M1–M8 skills','LoRA and QLoRA fine-tuning','Model distillation','LLMOps (LangSmith, LangFuse)','Production LLM serving (vLLM)','Evaluation pipelines (Ragas)'],
- newSkills:['LoRA and QLoRA fine-tuning','Model distillation','LLMOps (LangSmith, LangFuse)','Production LLM serving (vLLM)','Evaluation pipelines (Ragas)'],
- jobs:[{t:'LLM Engineer',c:'#993C1D'},{t:'Applied AI Scientist',c:'#993C1D'},{t:'Foundation Model Engineer',c:'#993C1D'},{t:'AI Product Engineer',c:'#888'}],
- milestone:'"This is the person who can take a general-purpose model and make it yours — fine-tuned, evaluated properly, and served at scale without burning the GPU budget."',
- note:'Fine-tuning is the skill that separates companies using AI from companies that own AI. M9 is where that conversation begins.'},
-{name:'Multimodal AI',
- skills:['All M1–M9 skills','Vision-language models (GPT-4V, LLaVA)','Speech-to-text (Whisper)','Voice AI (VAPI, WebRTC)','Document and PDF parsing','Multimodal RAG pipelines'],
- newSkills:['Vision-language models (GPT-4V, LLaVA)','Speech-to-text (Whisper)','Voice AI (VAPI, WebRTC)','Document and PDF parsing','Multimodal RAG pipelines'],
- jobs:[{t:'Multimodal AI Engineer',c:'#993C1D'},{t:'Senior AI Engineer',c:'#993C1D'},{t:'Voice AI Engineer',c:'#993C1D'},{t:'Document AI Specialist',c:'#888'}],
- milestone:'"They can build AI that sees, hears, and reads simultaneously. Products that used to need three different specialists — this person builds it alone."',
- note:'Multimodal is the frontier of the consumer AI market. M10 puts learners at the cutting edge of what companies are hiring for now.'},
-{name:'Advanced machine learning',
- skills:['All M1–M10 skills','SHAP and LIME interpretability','Graph neural networks (GNNs)','Vision Transformers (ViT)','Statistical learning theory (VC dimension, PAC)','Advanced SVM and kernel methods'],
- newSkills:['SHAP and LIME interpretability','Graph neural networks (GNNs)','Vision Transformers (ViT)','Statistical learning theory (VC dimension, PAC)','Advanced SVM and kernel methods'],
- jobs:[{t:'Senior ML Scientist',c:'#534AB7'},{t:'Research Engineer',c:'#534AB7'},{t:'Principal ML Engineer',c:'#534AB7'},{t:'AI Ethics / Fairness Lead',c:'#888'}],
- milestone:'"They can tell you not just what the model predicts but why — and whether it is being fair. That is what enterprise procurement committees ask for now."',
- note:'M11 opens research-track and principal-level roles. It also differentiates learners in senior interviews where theory is examined.'},
-{name:'Big data engineering',
- skills:['All M1–M11 skills','Apache Spark and PySpark','Distributed ETL pipelines','Databricks and Delta Lake','Workflow orchestration (Airflow, dbt)','Kafka at petabyte scale'],
- newSkills:['Apache Spark and PySpark','Distributed ETL pipelines','Databricks and Delta Lake','Workflow orchestration (Airflow, dbt)','Kafka at petabyte scale'],
- jobs:[{t:'ML Platform Lead',c:'#0F6E56'},{t:'Data Engineering Lead',c:'#0F6E56'},{t:'ML Infrastructure Architect',c:'#0F6E56'},{t:'Senior Data Engineer',c:'#888'}],
- milestone:'"They can build the pipelines that every AI system depends on. Without this skill, your data sits in silos and your models never see the full picture."',
- note:'Big data engineering is essential for ML at scale. M12 makes learners complete across the full data-to-model-to-production stack.'},
-{name:'Reinforcement learning',
- skills:['All M1–M12 skills','Policy gradient methods (PPO, REINFORCE)','Deep Q-Networks (DQN)','Reward modelling for RLHF','Multi-agent environments','Imitation learning (GAIL)'],
- newSkills:['Policy gradient methods (PPO, REINFORCE)','Deep Q-Networks (DQN)','Reward modelling for RLHF','Multi-agent environments','Imitation learning (GAIL)'],
- jobs:[{t:'RL Engineer',c:'#854F0B'},{t:'Research Scientist (AI)',c:'#854F0B'},{t:'RLHF / Alignment Engineer',c:'#854F0B'},{t:'AI Research Engineer',c:'#888'}],
- milestone:'"They can build AI that learns from experience — not just from historical data. Every user interaction becomes a training signal. That is a fundamentally different class of system."',
- note:'RLHF is at the core of how frontier LLMs like GPT and Claude are trained. M13 puts learners in that conversation.'},
-{name:'DSA and problem solving',
- skills:['All M1–M12 skills','Algorithmic problem solving','Graph traversal (BFS, DFS, Dijkstra)','Dynamic programming','Big-O complexity analysis','Interview-grade coding fluency'],
- newSkills:['Algorithmic problem solving','Graph traversal (BFS, DFS, Dijkstra)','Dynamic programming','Big-O complexity analysis','Interview-grade coding fluency'],
- jobs:[{t:'FAANG-ready across all AI/ML roles',c:'#1a1a18'},{t:'Tech Lead — AI / ML',c:'#1a1a18'},{t:'Principal Engineer',c:'#1a1a18'},{t:'Senior ML Engineer at any tier',c:'#888'}],
- milestone:'"Full programme complete. This person can walk into a technical interview at Google, Netflix, or any serious AI-first company and hold their own on every dimension."',
- note:'Programme complete. The learner now carries a full-stack AI engineering profile: foundations, intelligence, scale, GenAI, and interview readiness.'}
-];
-
-function updateTracker(v){
-  closeExplain();
-  const c=cp[v-1];
-  document.getElementById('mod-label').textContent='Module '+v+' of 14';
-  document.getElementById('prog-fill').style.width=Math.round((v/14)*100)+'%';
-  document.getElementById('tc-name').textContent=c.name;
-  const sl=document.getElementById('skill-list');
-  sl.innerHTML='';
-  c.skills.forEach(s=>{
-    const isNew=c.newSkills.includes(s);
-    const li=document.createElement('li');
-    li.className='skill-pill'+(isNew?' new':'');
-    li.textContent=s;
-    li.title='Click to explain this skill';
-    li.onclick=function(){handlePillClick(li,s,isNew);};
-    sl.appendChild(li);
-  });
-  const jl=document.getElementById('job-list');
-  jl.innerHTML='';
-  c.jobs.forEach(j=>{
-    const li=document.createElement('li');
-    li.className='job-item';
-    li.innerHTML='<span class="job-dot" style="background:'+j.c+'"></span><span>'+j.t+'</span>';
-    jl.appendChild(li);
-  });
-  document.getElementById('milestone-text').textContent=c.milestone;
-  document.getElementById('milestone-note').textContent=c.note;
-}
-updateTracker(1);
-
-/* ══════════════════════════
-   MODULE CARDS
+   MODULE CARDS — 17 modules
 ══════════════════════════ */
 const modules=[
-{num:1,phase:'teal',name:'Data foundations and supervised learning',tools:'scikit-learn, XGBoost, LightGBM, Pandas, Optuna, Streamlit',level:'ML engineer (junior)',levelColor:'#0F6E56',task:'Build a churn prediction model using XGBoost that scores every Netflix subscriber daily — flagging who is likely to cancel so the retention team can act 30 days ahead.',hook:'This is the first model that earns money. Churn prediction is the entry point for almost every AI conversation with a new customer.'},
-{num:2,phase:'teal',name:'Unsupervised learning',tools:'KMeans, DBSCAN, PCA, ARIMA, Isolation Forest, mlxtend',level:'ML engineer',levelColor:'#0F6E56',task:'Cluster 238M users into taste profiles with no labels — surfacing hidden tribes like "binge-thriller weekenders" that the marketing team never knew existed.',hook:'Customers always ask what they don\'t know about their users. This module answers that question with code, not surveys.'},
-{num:3,phase:'purple',name:'Neural networks and deep learning',tools:'TensorFlow, Keras, PyTorch, TensorBoard',level:'ML engineer',levelColor:'#534AB7',task:'Build the two-tower deep learning model that creates a mathematical fingerprint for every user and every title — the engine behind 80% of everything watched on Netflix.',hook:'When a customer asks how a recommendation engine actually works, this is the module you point to.'},
-{num:4,phase:'purple',name:'Computer vision',tools:'CNNs, ResNet, YOLO, OpenCV, Albumentations, torchvision',level:'ML engineer (CV)',levelColor:'#534AB7',task:'Build the thumbnail personalisation system that evaluates millions of images per title and serves the frame most likely to make each specific user click play.',hook:'This one gets gasps in demos. Every image ever seen on Netflix was chosen by a system exactly like this.'},
-{num:5,phase:'purple',name:'Natural language processing',tools:'BERT, Hugging Face Transformers, spaCy, NLTK, Gensim',level:'NLP engineer',levelColor:'#534AB7',task:'Fine-tune BERT so Netflix search understands "feel-good film for a rainy evening" — moving beyond keyword matching to genuine user intent.',hook:'Search is the most visible AI a customer interacts with every day. This learner makes it actually intelligent.'},
-{num:6,phase:'amber',name:'MLOps',tools:'MLflow, Docker, Kubernetes, AWS SageMaker, GitHub Actions',level:'MLOps engineer',levelColor:'#854F0B',task:'Build CI/CD pipelines that automatically retrain, test, and redeploy Netflix\'s recommendation models — so the engine never serves stale predictions.',hook:'The question "what happens after the model is built?" is the one most prospects haven\'t thought about yet. This is the answer.'},
-{num:7,phase:'amber',name:'ML system design',tools:'Kafka, Redis, TF Serving, FastAPI, gRPC, Kubernetes',level:'Staff ML engineer',levelColor:'#854F0B',task:'Design the real-time inference system that serves a personalised homepage to 238M users within 250ms — globally, at every timezone, without a single timeout.',hook:'Speed is the silent killer of AI products. This learner designs for latency and scale from day one.'},
-{num:8,phase:'coral',name:'RAG systems and agentic AI',tools:'LangGraph, CrewAI, ChromaDB, Pinecone, LangChain, MCP',level:'AI engineer',levelColor:'#993C1D',task:'Build an internal agent where a Netflix producer types "find all courtroom dramas set before 1980" and gets sourced, accurate results from the entire content library in seconds.',hook:'This is the module that makes every internal knowledge base conversation real. Enterprise clients lean in hard here.'},
-{num:9,phase:'coral',name:'LLM fine-tuning and LLMOps',tools:'LoRA, QLoRA, vLLM, LangSmith, Ragas, AWS Bedrock',level:'LLM engineer',levelColor:'#993C1D',task:'Fine-tune Llama-3 on Netflix\'s internal content taxonomy so it understands genres, tone codes, and production language — a model that speaks Netflix, not just English.',hook:'Off-the-shelf LLMs don\'t know your customer\'s business. Fine-tuning is how you make AI genuinely theirs.'},
-{num:10,phase:'coral',name:'Multimodal AI',tools:'GPT-4V, Whisper, VAPI, WebRTC, LLaVA, PyMuPDF',level:'AI engineer (multimodal)',levelColor:'#993C1D',task:'Build a system that watches a clip, transcribes the dialogue, reads the subtitles, and auto-tags every scene — content metadata at machine speed, zero human review.',hook:'When AI can see, hear, and read simultaneously, the volume of work it replaces becomes staggering. This is the demo that closes deals.'},
-{num:11,phase:'purple',name:'Advanced machine learning',tools:'SHAP, LIME, GNNs, ViT, PyTorch Geometric, SciPy',level:'Senior / research ML engineer',levelColor:'#534AB7',task:'Use SHAP to audit why Netflix\'s recommendation model surfaces different content to different demographic groups — making AI decisions transparent and defensible.',hook:'Enterprise buyers ask about AI fairness and explainability in every serious procurement. This is the technical answer, not a policy document.'},
-{num:12,phase:'teal',name:'Big data engineering',tools:'Apache Spark, PySpark, Kafka, Databricks, Airflow, dbt',level:'Data / ML infrastructure engineer',levelColor:'#0F6E56',task:'Build distributed PySpark pipelines that process petabytes of Netflix viewing history — turning raw event logs into the clean, partitioned datasets every downstream model depends on.',hook:'A company\'s AI is only as good as its data infrastructure. This learner builds the foundation that makes everything else possible at scale.'},
-{num:13,phase:'amber',name:'Reinforcement learning',tools:'PPO, DQN, Stable-Baselines3, RLlib, OpenAI Gym',level:'Research / RL engineer',levelColor:'#854F0B',task:'Train an RL agent that experiments with Netflix homepage row order in real time — learning which layout drives the most engagement per unique user session.',hook:'This is AI that never stops improving. Every user interaction becomes training data for the next decision.'},
-{num:14,phase:'gray',name:'DSA and problem solving',tools:'Algorithms, graphs, dynamic programming, Big-O analysis',level:'Software engineer (all roles)',levelColor:'#5F5E5A',task:'Write the efficient graph traversal that powers Netflix\'s content similarity network — the unseen backbone of every "more like this" row on the homepage.',hook:'Every module in this programme runs on code that has to be fast. DSA is what separates engineers who ship from those who struggle.'}
+{num:1,phase:'teal',kind:'Core',weeks:'4 weeks',name:'Data Foundations',
+ tools:'NumPy, Pandas, Matplotlib, Seaborn, Plotly, SciPy',
+ level:'Data analyst (junior)',levelColor:'#0F6E56',
+ task:'Take a raw 12-month Netflix viewership log and produce a clean, honest EDA report — distributions, outliers, correlations, missing-data story — that the content team can actually make decisions from.',
+ hook:'Every AI conversation starts with "how is your data?". This module is the honest, rigorous answer every hiring manager checks for first.'},
+
+{num:2,phase:'teal',kind:'Core',weeks:'6 weeks',name:'ML Coding: Supervised Learning',
+ tools:'scikit-learn, XGBoost, LightGBM, Pandas, Optuna',
+ level:'Junior data scientist',levelColor:'#0F6E56',
+ task:'Build a churn prediction model using XGBoost that scores every Netflix subscriber daily — flagging who is likely to cancel so the retention team can act 30 days ahead.',
+ hook:'This is the first model that earns money. Churn prediction is the entry point for almost every AI conversation with a new customer.'},
+
+{num:3,phase:'teal',kind:'Core',weeks:'4 weeks',name:'ML Coding: Unsupervised Learning, Time Series & Recommender Systems',
+ tools:'KMeans, DBSCAN, PCA, Isolation Forest, ARIMA, Prophet, mlxtend',
+ level:'Data scientist',levelColor:'#0F6E56',
+ task:'Cluster 238M users into taste profiles with no labels, forecast Friday-night traffic weeks ahead, AND build a content-based recommender — three production-grade ML pipelines in one module.',
+ hook:'This module alone answers three of the most common customer questions: "what patterns am I missing?", "what will happen next?", and "what should we recommend?"'},
+
+{num:4,phase:'purple',kind:'Core',weeks:'3 weeks',name:'ML Coding: Neural Networks',
+ tools:'TensorFlow, Keras, PyTorch, TensorBoard',
+ level:'Junior ML engineer',levelColor:'#534AB7',
+ task:'Build the deep learning embedding model that creates a mathematical fingerprint for every user and every title — the engine behind a significant share of what Netflix recommends.',
+ hook:'When a customer asks how modern recommendation engines actually work, this is the module you point to.'},
+
+{num:5,phase:'purple',kind:'Core',weeks:'7 weeks',name:'ML Coding: Computer Vision & NLP',
+ tools:'OpenCV, CNNs, ResNet, YOLO, BERT, Hugging Face Transformers, spaCy, NLTK, Gensim',
+ level:'ML engineer (applied DL)',levelColor:'#534AB7',
+ task:'Ship two systems in one module: a thumbnail personalisation engine (CV) that picks the frame most likely to get each user to click play, AND a BERT-powered semantic search that understands "feel-good film for a rainy evening".',
+ hook:'CV and NLP together — the two modalities every applied ML team ships with. This is the module that covers the bulk of real-world deep learning work.'},
+
+{num:6,phase:'amber',kind:'Core',weeks:'8 weeks',name:'MLOps',
+ tools:'MLflow, Docker, Optuna, Streamlit, GitHub Actions, AWS SageMaker, Feature Store',
+ level:'MLOps engineer',levelColor:'#854F0B',
+ task:'Build CI/CD pipelines that automatically retrain, test, and redeploy Netflix\'s recommendation models — with experiment tracking, a feature store, and model registry — so the engine never serves stale predictions.',
+ hook:'The question "what happens after the model is built?" is the one most prospects have not thought about. This is the answer — and where the highest-paid ML roles sit.'},
+
+{num:7,phase:'amber',kind:'Core',weeks:'4 weeks',name:'ML System Design',
+ tools:'Microservices, Kafka, Flink, TF Serving, gRPC, Kubernetes, spot instances, quantisation',
+ level:'Senior ML engineer / architect',levelColor:'#854F0B',
+ task:'Design the real-time inference system that serves a personalised homepage to 238M users within 250ms — globally, in every timezone — and a streaming fraud detection system using Kafka + Flink.',
+ hook:'Speed and scale are the silent killers of AI products. This learner designs for latency, throughput, and cost from day one.'},
+
+{num:8,phase:'coral',kind:'Core',weeks:'4 weeks',name:'Foundations of AI Engineering & RAG Systems',
+ tools:'LangChain, Pydantic, ChromaDB, Pinecone, OpenAI, Anthropic, async Python',
+ level:'AI engineer (junior-mid)',levelColor:'#993C1D',
+ task:'Build a hallucination-free RAG system over Netflix\'s entire internal content catalogue — where a producer types "find all courtroom dramas set before 1980" and gets sourced, accurate results with citations.',
+ hook:'RAG is the single most requested AI skill of 2025–2026. Every enterprise client has this project on their roadmap right now.'},
+
+{num:9,phase:'coral',kind:'Core',weeks:'4 weeks',name:'Agentic Design Patterns & Multi-Agent Orchestration',
+ tools:'LangGraph, CrewAI, AutoGen, MCP, memory systems, function calling',
+ level:'AI engineer',levelColor:'#993C1D',
+ task:'Build a multi-agent content pipeline — one agent researches trending topics, one drafts episode synopses, one fact-checks, one formats for the CMS. Static chatbots replaced by an autonomous team.',
+ hook:'Static chatbots are obsolete. Multi-agent AI is the 2026 industry standard — and this module is where learners enter that market.'},
+
+{num:10,phase:'coral',kind:'Core',weeks:'3 weeks',name:'Advanced Cognitive Architectures & Multimodal Intelligence',
+ tools:'GraphRAG, Neo4j, GPT-4V, LLaVA, Whisper, DSPy, PyMuPDF',
+ level:'Senior AI engineer / multimodal',levelColor:'#993C1D',
+ task:'Build a system that ingests financial PDFs, watches a clip, transcribes the dialogue, reads the subtitles, extracts entities into a knowledge graph, and answers complex queries across all three modalities.',
+ hook:'Real business data is messy and multimodal. This module is the demo that closes enterprise deals — AI that sees, hears, reads, and reasons simultaneously.'},
+
+{num:11,phase:'coral',kind:'Core',weeks:'5 weeks',name:'Fine-Tuning, LLMOps & Security',
+ tools:'LoRA, QLoRA, PEFT, vLLM, TGI, quantization, LangSmith, LangFuse, Kubernetes',
+ level:'LLM engineer / senior AI engineer',levelColor:'#993C1D',
+ task:'Fine-tune Llama-3 on Netflix\'s internal content taxonomy with LoRA, serve it at scale on vLLM + Kubernetes, monitor it with LangSmith, cost-optimise with prompt caching, and lock it down with enterprise guardrails.',
+ hook:'Off-the-shelf LLMs do not know your customer\'s business. Fine-tuning + LLMOps is how you make AI genuinely theirs — at a cost they can actually afford.'},
+
+{num:12,phase:'gray',kind:'Elective',weeks:'4 weeks',name:'Advanced Machine Learning & Deep Learning 1',
+ tools:'Probability, statistics, optimisation, SVM, kernel methods, statistical learning theory',
+ level:'Senior applied scientist',levelColor:'#5F5E5A',
+ task:'Derive gradient descent, statistical learning theory, and SVM kernels from first principles — then apply them to debug and improve a deep learning model that was silently underperforming in production.',
+ hook:'The theory layer that differentiates candidates in Principal-level interviews. Separates engineers who apply models from those who invent them.'},
+
+{num:13,phase:'gray',kind:'Elective',weeks:'4 weeks',name:'Advanced Machine Learning & Deep Learning 2',
+ tools:'Backpropagation from scratch, SHAP, LIME, advanced transformers, attention internals',
+ level:'Research ML engineer',levelColor:'#5F5E5A',
+ task:'Implement backpropagation from scratch in pure NumPy, audit a production model with SHAP for fairness, and extend a transformer architecture with a custom attention mechanism.',
+ hook:'Research-grade depth. The module that unlocks frontier AI lab interviews and principal-track career paths.'},
+
+{num:14,phase:'gray',kind:'Elective',weeks:'4 weeks',name:'Big Data Engineering (Recorded)',
+ tools:'Hadoop, Apache Spark, PySpark, Kafka, Hive, Tableau, AWS QuickSight',
+ level:'ML platform / data engineer',levelColor:'#5F5E5A',
+ task:'Build distributed PySpark pipelines that process petabytes of Netflix viewing history — turning raw event logs into the clean, partitioned datasets every downstream model depends on.',
+ hook:'A company\'s AI is only as good as its data infrastructure. This learner builds the foundation that makes everything else possible at scale.'},
+
+{num:15,phase:'gray',kind:'Elective',weeks:'4 weeks',name:'Reinforcement Learning (Recorded)',
+ tools:'MDPs, Q-Learning, DQN, PPO, SAC, TD3, Stable-Baselines3, OpenAI Gym, imitation learning',
+ level:'RL / research engineer',levelColor:'#5F5E5A',
+ task:'Train an RL agent using PPO to optimise Netflix homepage row ordering in real time — and understand how the same algorithm family trains ChatGPT via RLHF.',
+ hook:'RLHF is how every frontier LLM is trained. This module puts learners inside the conversation happening at OpenAI, Anthropic, and DeepMind.'},
+
+{num:16,phase:'gray',kind:'Optional',weeks:'~6 months',name:'DSA for Professionals',
+ tools:'Algorithms, data structures, graphs, dynamic programming, Big-O analysis',
+ level:'Software engineer (all roles)',levelColor:'#5F5E5A',
+ task:'Write the efficient graph traversal that powers Netflix\'s content similarity network, plus master DP and backtracking under interview time pressure — the unseen backbone of every "more like this" row.',
+ hook:'Every module in this programme runs on code that has to be fast. DSA is what separates engineers who ship from those who struggle — and what unlocks FAANG-level offers.'},
+
+{num:17,phase:'gray',kind:'Capstone',weeks:'Campus Immersion',name:'Advanced AI Engineering — IIT Roorkee Campus Immersion',
+ tools:'CEC, IIT Roorkee · Industry case studies · AI in healthcare · LLMs for productivity · Capstone project',
+ level:'Full-stack AI engineer / architect',levelColor:'#1a1a18',
+ task:'Ship an end-to-end AI project under IIT Roorkee faculty mentorship — from problem framing to production deployment — tackling a real healthcare or enterprise productivity challenge.',
+ hook:'The prestige signal on the CV plus the capstone that converts a full-stack skillset into proof of capability. The closing signal on the entire programme.'}
 ];
 
-function phaseLabel(p){return{teal:'Supervised / data',purple:'Deep learning',amber:'Ops & scale',coral:'GenAI',gray:'Craft'}[p]}
+function phaseLabel(p){return{teal:'Foundations / Classical ML',purple:'Deep Learning',amber:'Production & Scale',coral:'AI Engineering (GenAI)',gray:'Advanced & Electives'}[p]}
 function renderMods(phase){
   const g=document.getElementById('mod-grid');g.innerHTML='';
   (phase==='all'?modules:modules.filter(m=>m.phase===phase)).forEach(m=>{
     const d=document.createElement('div');d.className='mod-card';
-    d.innerHTML='<div class="mod-num">Module '+m.num+' of 14</div><div class="card-top"><div class="mod-name">'+m.name+'</div><span class="badge badge-'+m.phase+'">'+phaseLabel(m.phase)+'</span></div><div class="tools">'+m.tools+'</div><div class="level-row"><div class="level-dot" style="background:'+m.levelColor+'"></div><div class="level-text">Unlocks: '+m.level+'</div></div><hr class="divider"><div class="label">On day one, this learner will...</div><div class="task">'+m.task+'</div><div class="hook-box"><div class="label" style="margin-bottom:3px">Sales hook</div><div class="hook">'+m.hook+'</div></div>';
+    const kindClass=m.kind==='Core'?'kind-core':(m.kind==='Elective'?'kind-elective':'kind-optional');
+    d.innerHTML='<div class="mod-num">Module '+m.num+' of 17</div>'+
+      '<div class="card-top"><div class="mod-name">'+m.name+'</div><span class="badge badge-'+m.phase+'">'+phaseLabel(m.phase)+'</span></div>'+
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px"><span class="kind-chip '+kindClass+'">'+m.kind+'</span><span class="weeks-chip">'+m.weeks+'</span></div>'+
+      '<div class="tools">'+m.tools+'</div>'+
+      '<div class="level-row"><div class="level-dot" style="background:'+m.levelColor+'"></div><div class="level-text">Unlocks: '+m.level+'</div></div>'+
+      '<hr class="divider">'+
+      '<div class="label">On day one, this learner will...</div>'+
+      '<div class="task">'+m.task+'</div>'+
+      '<div class="hook-box"><div class="label" style="margin-bottom:3px">Sales hook</div><div class="hook">'+m.hook+'</div></div>';
     g.appendChild(d);
   });
 }
@@ -532,14 +832,43 @@ renderMods('all');
 function filterMods(phase,btn){document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderMods(phase);}
 
 /* ══════════════════════════
-   UPGRADE ROLES
+   UPGRADE ROLES — updated module references
 ══════════════════════════ */
 const roles=[
-{icon:'⚙',bg:'#EEEDFE',title:'ML Engineer',years:'2–5 years experience',gap:'You know sklearn and basic deep learning but you have likely never fine-tuned an LLM, built a real agent, or designed a system that serves predictions at real-time scale. The GenAI wave has moved faster than most ML engineering roles.',gain:'Modules 8–10 give you the complete GenAI and agent stack. Modules 6–7 formalise your MLOps and system design thinking. Module 9 gives you fine-tuning depth that most self-described ML engineers simply do not have.',from:'ML Engineer',to:'Senior AI Engineer / GenAI Lead',mods:['M7 — System design','M8 — RAG & agents','M9 — LLM fine-tuning','M10 — Multimodal']},
-{icon:'📊',bg:'#FAEEDA',title:'Data Scientist',years:'2–6 years experience',gap:'You are strong at analysis, statistics, and data storytelling. But you have probably never deployed a model, fine-tuned a transformer, or built anything that runs in production without a data engineer handling the hard parts.',gain:'Modules 3, 6, and 7 close the deployment gap entirely. Modules 8–9 give you the GenAI skills that data science job descriptions now assume. You move from insight-generator to product-builder.',from:'Data Scientist',to:'Applied AI Engineer / ML Engineer',mods:['M3 — Neural networks','M6 — MLOps','M7 — System design','M8 — RAG & agents']},
-{icon:'🤖',bg:'#FAECE7',title:'AI Engineer',years:'1–3 years experience',gap:'You build things with OpenAI APIs, LangChain, and prompt engineering. But when a system breaks in production, you are exposed. You may not know how to fine-tune, evaluate rigorously, or design the infrastructure underneath your stack.',gain:'Module 9 gives you fine-tuning depth. Module 7 gives you system design rigour to architect at scale. Modules 1–2 give you classical ML foundations that make you credible in any technical conversation.',from:'AI Engineer',to:'Senior AI Engineer / ML Platform Lead',mods:['M1 — ML foundations','M7 — System design','M9 — LLM fine-tuning','M11 — Advanced ML']},
-{icon:'💻',bg:'#E1F5EE',title:'Software / Backend Engineer',years:'Wants to move into AI',gap:'You are a strong engineer who can ship software, design APIs, and think in systems. But you have no formal ML training and every AI job description reads like a foreign language. The gap feels too large to bridge.',gain:'This programme is built for exactly this situation. Your engineering instincts are a superpower — you just need the ML layer. By module 6 you are already more deployable than most data scientists. By module 10 you are a full-stack AI engineer.',from:'Software Engineer',to:'ML Engineer → AI Engineer in 12–18 months',mods:['M1 — Start here','M3 — Deep learning','M6 — MLOps','M8 — GenAI stack']},
-{icon:'🔤',bg:'#EEEDFE',title:'NLP or CV Specialist',years:'Deep in one modality',gap:'You are highly skilled in one area — language or vision. But the industry is moving to multimodal systems, agentic pipelines, and cross-modal reasoning. A single-modality specialist is increasingly a single point of failure on any team.',gain:'Module 10 makes you multimodal. Module 8 connects your domain expertise to agent orchestration so you can build systems that reason across text, images, and audio. You move from specialist to full-stack AI engineer.',from:'NLP / CV Specialist',to:'Multimodal AI Engineer / Full-Stack AI Lead',mods:['M8 — RAG & agents','M9 — Fine-tuning','M10 — Multimodal','M7 — System design']}
+{icon:'',bg:'#EEEDFE',title:'ML Engineer',years:'2–5 years experience',
+ gap:'You know scikit-learn, XGBoost, deep learning basics, and how to ship a model to production with Docker + CI/CD. What you have likely never done: build a production RAG system, orchestrate a multi-agent pipeline, fine-tune an LLM with LoRA, or serve a 70B model at scale on Kubernetes. The 2023–2026 GenAI wave has completely redefined what "ML Engineer" means.',
+ gain:'Modules 8–11 give you the complete modern AI Engineering stack that every 2026 AI/ML JD now assumes — RAG, agents, multimodal, fine-tuning, LLMOps, enterprise security. Add M12–M13 for the theory depth that wins Principal-level interviews. You move from classical ML practitioner to full-stack LLM Engineer / GenAI Engineer / AI Platform Architect — the market\'s highest-paying profiles.',
+ from:'ML Engineer',to:'LLM Engineer / GenAI Engineer / AI Platform Architect',
+ mods:['M8 — Foundations of AI Engineering & RAG Systems','M9 — Agentic Design Patterns & Multi-Agent Orchestration','M10 — Advanced Cognitive Architectures & Multimodal Intelligence','M11 — Fine-Tuning, LLMOps & Security','M12 — Advanced ML & DL 1 (Elective)','M13 — Advanced ML & DL 2 (Elective)']},
+
+{icon:'',bg:'#FAEEDA',title:'Data Scientist',years:'2–6 years experience',
+ gap:'You are strong at statistics, data analysis, classical ML, and likely have solid deep learning / CV / NLP exposure from your modelling work. What you probably have not done: shipped a model to production yourself (MLOps), built a RAG system, or orchestrated an agent. Every 2026 "Data Scientist" JD now assumes production + GenAI foundations.',
+ gain:'Module 6 gives you the production deployment layer you do not currently own (Docker, MLflow, CI/CD, SageMaker). Modules 8–11 add the GenAI + agent + fine-tuning stack. You move from insight-generator to AI/ML Engineer / GenAI Engineer — the roles the market is actually paying a 40–60% premium for.',
+ from:'Data Scientist',to:'AI/ML Engineer / GenAI Engineer',
+ mods:['M6 — MLOps','M8 — Foundations of AI Engineering & RAG Systems','M9 — Agentic Design Patterns & Multi-Agent Orchestration','M10 — Advanced Cognitive Architectures & Multimodal Intelligence','M11 — Fine-Tuning, LLMOps & Security']},
+
+{icon:'',bg:'#FAECE7',title:'AI Engineer (GenAI-only)',years:'1–3 years experience',
+ gap:'You build things with OpenAI APIs, LangChain, prompt engineering, and RAG — and you likely have working knowledge of neural networks and basic deployment. What you have almost certainly skipped: the deeper theory under transformers, proper fine-tuning (LoRA/PEFT) on your own data, LLMOps at production scale, and the frontier techniques (RLHF, distributed training) that differentiate senior LLM roles. In senior interviews this shows up the moment the conversation moves past the API layer.',
+ gain:'Module 11 gives you genuine fine-tuning, LLMOps, token economics, and enterprise security — the LLM Engineer depth you are missing. M12–M13 bring the mathematical and transformer theory that wins Principal-level interviews. M14 (Big Data) adds the distributed data layer for enterprise-scale AI; M15 (RL) adds RLHF — the algorithm behind ChatGPT/Claude training and a rare, well-paid specialisation. You become a credible Senior LLM Engineer / GenAI Engineer / AI Platform Architect rather than an API wrapper.',
+ from:'AI Engineer (GenAI-only)',to:'Senior LLM Engineer / GenAI Engineer / AI Platform Architect',
+ mods:['M11 — Fine-Tuning, LLMOps & Security','M12 — Advanced ML & DL 1 (Elective)','M13 — Advanced ML & DL 2 (Elective)','M14 — Big Data Engineering (Elective)','M15 — Reinforcement Learning (Elective · RLHF)']},
+{icon:'',bg:'#E1F5EE',title:'Software / Backend Engineer',years:'Wants to move into AI',
+ gap:'You are a strong engineer who can ship software, design APIs, and think in systems. But you have no formal ML training, and every AI JD reads like a foreign language. You need the full stack — classical ML, deep learning, production, GenAI — not a partial course.',
+ gain:'This programme is built for exactly this transition. Your engineering instincts are a superpower — you just need the full ML layer on top. Work through every Core module (M1–M11) in sequence; your existing system design skills make M6–M7 trivial for you. Add M14 (Big Data) for the AI Data Engineer path. By completion you hold a full-stack AI/ML Engineer profile with every 2026 title on the table.',
+ from:'Software Engineer',to:'ML Engineer → AI/ML Engineer → LLM Engineer in 12–18 months',
+ mods:['M1 — Data Foundations','M2 — ML Coding: Supervised Learning','M3 — ML Coding: Unsupervised Learning, Time Series & Recommenders','M4 — ML Coding: Neural Networks','M5 — ML Coding: Computer Vision & NLP','M6 — MLOps','M7 — ML System Design','M8 — Foundations of AI Engineering & RAG Systems','M9 — Agentic Design Patterns & Multi-Agent Orchestration','M10 — Advanced Cognitive Architectures & Multimodal Intelligence','M11 — Fine-Tuning, LLMOps & Security','M14 — Big Data Engineering (Elective)']},
+
+{icon:'',bg:'#EEEDFE',title:'NLP or CV Specialist',years:'Deep in one modality',
+ gap:'You are highly skilled in one area — language OR vision. But the industry has moved to multimodal systems, agentic pipelines, and cross-modal reasoning. A single-modality specialist is increasingly a single point of failure on any modern AI team.',
+ gain:'Module 8 gives you production RAG on your existing model depth. Module 9 connects your domain expertise to agent orchestration. Module 10 makes you multimodal (GPT-4V, LLaVA, Whisper, GraphRAG). Module 11 adds fine-tuning and LLMOps. You move from specialist to full-stack Senior AI Engineer / Multimodal AI Engineer.',
+ from:'NLP / CV Specialist',to:'Multimodal AI Engineer / Senior GenAI Engineer / LLM Engineer',
+ mods:['M8 — Foundations of AI Engineering & RAG Systems','M9 — Agentic Design Patterns & Multi-Agent Orchestration','M10 — Advanced Cognitive Architectures & Multimodal Intelligence','M11 — Fine-Tuning, LLMOps & Security']},
+
+{icon:'',bg:'#FAEEDA',title:'MLOps / Data Engineer',years:'2–5 years experience',
+ gap:'You can run CI/CD, Docker, Kubernetes, and data pipelines — strong infrastructure foundation. What you are missing is the modern LLM-specific layer (vLLM, LangSmith, token economics, LoRA serving) that has little overlap with traditional MLOps, plus the frontier AI techniques (RLHF, distributed RL training) that are becoming core to LLM alignment work.',
+ gain:'Module 11 adds the LLMOps layer specifically — vLLM, quantization, LangSmith, Kubernetes for LLMs, enterprise security. Module 14 formalises your big-data skills into the full AI Data Engineer profile. Module 15 (RL) is the differentiator — RLHF is now core to how frontier LLMs are trained, and almost no MLOps engineer has it. You become an AI Platform Engineer / LLMOps Lead with a rare RLHF specialisation.',
+ from:'MLOps / Data Engineer',to:'AI Platform Engineer / LLMOps Lead / RLHF Infrastructure Engineer',
+ mods:['M11 — Fine-Tuning, LLMOps & Security','M14 — Big Data Engineering (Elective)','M15 — Reinforcement Learning (Elective · RLHF)']}
 ];
 function renderUpgrade(){
   const g=document.getElementById('upgrade-grid');
@@ -550,6 +879,84 @@ function renderUpgrade(){
   });
 }
 renderUpgrade();
+
+/* ══════════════════════════
+   AI FOR NON-CODERS — 32 modules in 8 phases
+══════════════════════════ */
+const ncPhases=[
+ {num:'Phase 1',title:'AI Productivity Foundations',sub:'Modules 1–4 · Daily workflow and mental models',
+  mods:[
+   {n:1,t:'AI Productivity Basics',d:'Personal assistants, daily work tools, and smart research workflows that reclaim your time for judgment-level work.',o:'Set up Claude Projects / Custom GPTs as a personal assistant that knows your role, priorities, and tone.'},
+   {n:2,t:'Documents & Knowledge',d:'Instant document creation, company Q&A bots, and the modern AI research stack (Elicit, Consensus, NotebookLM, Perplexity Spaces).',o:'Build a NotebookLM- or Claude Projects-powered Q&A bot your team can use for institutional knowledge.'},
+   {n:3,t:'How AI Works',d:'Accurate mental models — tokens, context, hallucinations, capability vs. marketing — that keep you from approving bad AI projects.',o:'Develop a hype-filter framework and a 5-question evaluation method for any new AI tool.'},
+   {n:4,t:'Context Engineering',d:'The shift from ad-hoc prompting to structured context engineering. Prompt anatomy, explore vs. build modes, a personal prompt library.',o:'Build a reusable prompt library using the 4-part Context/Instruction/Format/Constraints structure.'}
+  ]},
+ {num:'Phase 2',title:'Workflow Integration',sub:'Modules 5–8 · Voice, connected workspace, data, and quality',
+  mods:[
+   {n:5,t:'Voice & Speed',d:'Voice-first workflows with Wispr Flow, outbound voice agents (Vapi, Retell), and a full meeting intelligence stack (Granola, Otter, Fireflies).',o:'Replace 90 minutes of daily typing with 20 minutes of voice input, plus an end-to-end meeting workflow.'},
+   {n:6,t:'Connected Workspace',d:'The MCP stack, connecting AI to Drive / Gmail / Calendar / Slack / Notion / GitHub, and workflow automation with Zapier, Make, n8n.',o:'Build a personal MCP stack and at least one automation that runs while you sleep.'},
+   {n:7,t:'Data & Systems',d:'Talk-to-data (ChatGPT ADA, Claude analysis, Julius), task decomposition, and a full delegation map across your role.',o:'Map your entire job into Delegate / Augment / Keep Human and identify AI-executable steps for a complex project.'},
+   {n:8,t:'Quality & Judgment',d:'A structured eval scorecard (Accuracy, Completeness, Tone, Actionability, Risk), failure detection, and an AI-native inbox and calendar stack.',o:'Build a 5-dimension quality scorecard and run it against real AI outputs from your work.'}
+  ]},
+ {num:'Phase 3',title:'Writing, Analysis & Decisions',sub:'Modules 9–12 · The professional output layer',
+  mods:[
+   {n:9,t:'AI Writing & Storytelling',d:'Long-form writing workflows, data storytelling (the "so what?" framework), and AI copywriting at scale — with your voice firmly in control.',o:'Develop a draft-to-polish workflow that produces executive-grade memos 3–5x faster without losing your voice.'},
+   {n:10,t:'AI for Strategic Analysis',d:'Competitive intelligence systems, TAM/SAM/SOM with AI Deep Research, and AI-powered due diligence.',o:'Produce an investor-grade market analysis in a single session using Claude + Deep Research.'},
+   {n:11,t:'Advanced Data & Dashboards',d:'Power BI Copilot, Tableau AI, Hex, text-to-SQL, and self-generating automated reports.',o:'Build and distribute a real-time dashboard using Power BI Copilot or Hex — without a data team.'},
+   {n:12,t:'AI for Decision Making',d:'AI as a structured thinking partner — pre-mortems, assumption testing, red-team analysis, scenario modelling, and board-ready memos.',o:'Run a pre-mortem and red-team on a real live decision and produce a 1-page board memo with uncertainty ranges.'}
+  ]},
+ {num:'Phase 4',title:'Building & Prototyping',sub:'Modules 13–16 · Ship real tools without engineering',
+  mods:[
+   {n:13,t:'Building Real Tools',d:'Visual builders (Lovable, Bolt, v0), the AI PRD format, and a live 2-hour build session.',o:'Take an idea from concept to a clickable prototype a real user can test in a single session.'},
+   {n:14,t:'Coding Agents',d:'Cursor agent mode, Claude Code, design & branding basics, and engineer handoff packages.',o:'Brief a coding agent in plain English, direct the build, and produce a professional-looking prototype ready for engineering handoff.'},
+   {n:15,t:'AI Product Design',d:'The 3P framework (Prioritisation, Placement, Prominence), designing for uncertainty, and the 4D method for identifying AI opportunities.',o:'Run the 4D method on your organisation and surface the three highest-leverage AI opportunities.'},
+   {n:16,t:'Multimodal AI',d:'The full capability map — image (Midjourney, Flux), video (Sora, Veo, Runway), avatars (HeyGen), and AI presentations (Gamma, Tome).',o:'Produce a complete campaign asset using image, video, and voice AI in a single workflow.'}
+  ]},
+ {num:'Phase 5',title:'Leading AI Systems & Teams',sub:'Modules 17–20 · The organisational layer',
+  mods:[
+   {n:17,t:'AI Product Lifecycle',d:'End-to-end AI product journey, the 5-question feasibility checklist, and a disciplined build-vs-buy framework.',o:'Evaluate a real AI project with the feasibility checklist and deliver a defensible build-vs-buy recommendation.'},
+   {n:18,t:'Leading Teams',d:'The new operating model (engineers as reviewers, PMs as builders, leaders as directors), AI sprints, and stakeholder communication.',o:'Redesign a team sprint cadence around AI-first execution and present it to real stakeholders.'},
+   {n:19,t:'Quality & Risk',d:'Eval systems, adversarial red-teaming, AI risk frameworks (bias, privacy, security), and EU AI Act / India DPDP overviews.',o:'Red-team a peer\'s AI prototype and produce a deployment-risk checklist for your organisation.'},
+   {n:20,t:'Agents In Practice',d:'Computer Use, OpenAI Operator, Lindy, Gumloop, Relay.app, and the economics of running agents at scale.',o:'Deploy a goal-based agent for a recurring task and build an AI budget that proves ROI.'}
+  ]},
+ {num:'Phase 6',title:'Strategy & Transformation',sub:'Modules 21–24 · Organisational AI leadership',
+  mods:[
+   {n:21,t:'Strategy Frameworks',d:'The GUCCI framework, effort-vs-impact matrices, AI roadmaps, and investor-grade AI business cases.',o:'Build a phased AI roadmap with a 1-page strategy document and a quantified business case.'},
+   {n:22,t:'Org Transformation',d:'Why rollouts fail, engineering AI-first culture, champion networks, and team redesign in the agent era.',o:'Design a 30-day culture activation plan and a team-redesign proposal for an AI-first operating model.'},
+   {n:23,t:'Hard Leadership',d:'Role-played hard conversations (skeptical boards, hype-dismissing team members), change sequencing, and honest AI measurement.',o:'Run a live role-played board-level AI strategy pitch and build a leading/lagging measurement dashboard.'},
+   {n:24,t:'Future-Proofing',d:'Designing products for AI agents as users, leading engineering teams building agents, and reasoning models (o3, Claude extended thinking).',o:'Produce an 18-month AI-native product roadmap that accounts for reasoning models and agent-user patterns.'}
+  ]},
+ {num:'Phase 7',title:'Career & Function-Specific',sub:'Modules 25–28 · Positioning and applied domains',
+  mods:[
+   {n:25,t:'Career Positioning',d:'Insider AI vocabulary, personal brand building on LinkedIn, and infrastructure literacy for leaders.',o:'Rewrite your LinkedIn and positioning as an "AI-fluent" leader and build a 90-day authority plan.'},
+   {n:26,t:'AI for Go-To-Market',d:'AI sales stack (Clay, Apollo, Salesforce Agentforce), AI support (Decagon, Sierra, Intercom Fin), and AI marketing (Jasper, Writer, Mutiny, Surfer).',o:'Design an AI-powered GTM workflow for sales, support, OR marketing for your organisation.'},
+   {n:27,t:'AI for Operations',d:'AI legal (Harvey, Spellbook, Ironclad), AI finance (Ramp, Pilot, Mosaic), and AI HR (Gem, hireEZ, Paradox).',o:'Automate a high-volume legal, finance, OR HR workflow and measure the quality and time savings.'},
+   {n:28,t:'Frontier Topics',d:'Enterprise AI search (Glean, Hebbia, Perplexity Enterprise), long-context workflows, and privacy-preserving local AI (Ollama, LM Studio).',o:'Evaluate the relevance of enterprise search, long context, or local AI for your org — with a concrete recommendation.'}
+  ]},
+ {num:'Phase 8',title:'Executive & Governance',sub:'Modules 29–32 · The senior-leader track',
+  mods:[
+   {n:29,t:'Advanced Agents',d:'Multi-agent workflows, agent monitoring and traces, custom GPTs and distributable Claude Projects.',o:'Design and monitor a 3-agent content, operations, or research pipeline — with cost, failure, and handoff monitoring.'},
+   {n:30,t:'AI Governance & Policy',d:'AI usage policies, vendor governance (SLAs, DPAs, red flags), and audit/compliance readiness (SOC2, ISO 27001, GDPR).',o:'Draft an AI usage policy for your organisation and a 10-question vendor evaluation framework.'},
+   {n:31,t:'AI for People & Performance',d:'AI-assisted feedback and reviews, hiring decisions, and meeting mastery — supporting (not replacing) human judgment.',o:'Build a weekly 1:1 prep template and a structured, bias-aware interview scorecard you can actually use next week.'},
+   {n:32,t:'AI for Executive Operations',d:'AI chief-of-staff systems, AI-assisted negotiation prep, and crisis response playbooks.',o:'Build a Monday-planning AI workflow and a negotiation prep simulation for a real upcoming conversation.'}
+  ]}
+];
+
+function renderNcPhases(){
+  const root=document.getElementById('nc-phases');
+  ncPhases.forEach(p=>{
+    const section=document.createElement('div');
+    section.className='nc-phase';
+    let html='<div class="nc-phase-head"><span class="nc-phase-num">'+p.num+'</span><span class="nc-phase-title">'+p.title+'</span><span class="nc-phase-sub">'+p.sub+'</span></div><div class="nc-mod-grid">';
+    p.mods.forEach(m=>{
+      html+='<div class="nc-mod"><div class="nc-mod-top"><span class="nc-mod-num">Module '+m.n+'</span></div><div class="nc-mod-name">'+m.t+'</div><div class="nc-mod-desc">'+m.d+'</div><div class="nc-mod-outcome"><strong>Outcome:</strong> '+m.o+'</div></div>';
+    });
+    html+='</div>';
+    section.innerHTML=html;
+    root.appendChild(section);
+  });
+}
+renderNcPhases();
 </script>
 </body>
 </html>
