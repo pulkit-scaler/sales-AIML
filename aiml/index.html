@@ -308,11 +308,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <span class="nc-role-pill">AI Transformation Lead</span>
       <span class="nc-role-pill">AI Program Manager</span>
       <span class="nc-role-pill">AI Operations Lead</span>
-      <span class="nc-role-pill">Head of AI Adoption</span>
       <span class="nc-role-pill">AI Strategy Lead</span>
-      <span class="nc-role-pill">Chief of Staff (AI-augmented)</span>
-      <span class="nc-role-pill">Chief AI Officer</span>
-      <span class="nc-role-pill">AI Product Designer</span>
       <span class="nc-role-pill">AI Consultant</span>
       <span class="nc-role-pill">AI Enablement Manager</span>
     </div>
@@ -482,7 +478,77 @@ const SD={
   'All M1–M13 skills':'Modules 1–13 — adds research-grade deep learning theory. Ready for frontier-lab and research-engineer interviews.',
   'All M1–M14 skills':'Modules 1–14 — adds distributed big data engineering. Now full-stack from raw petabytes to production inference.',
   'All M1–M15 skills':'Modules 1–15 — adds reinforcement learning including RLHF. The training technique behind ChatGPT and Claude.',
-  'All M1–M16 skills':'Modules 1–16 — adds interview-grade DSA. Now FAANG-ready across every technical dimension.'
+  'All M1–M16 skills':'Modules 1–16 — adds interview-grade DSA. Now FAANG-ready across every technical dimension.',
+  'All M1–M11, M14 skills':'Modules 1–11 plus Module 14 — the full AI Engineering stack (LLMs, agents, fine-tuning) combined with distributed big data engineering. A full-stack profile from raw petabytes to production inference.',
+
+  /* ══ MILESTONE PILL ALIASES ══
+     The milestone cards use shorter composite pill labels than the SD keys above.
+     Each alias below is an exact match for a pill label so getDesc returns a
+     tailored description instead of falling back to the generic message. ══ */
+
+  /* M1 aliases */
+  'Python, NumPy, Pandas':'The foundational tools every data and ML job runs on. NumPy handles mathematical arrays at speed; Pandas lets you slice, filter, and reshape tables of data in a handful of lines. You cannot have an ML conversation without this stack.',
+  'EDA & data visualisation':'The disciplined first look at a dataset, paired with the charts that make it legible — distributions, outliers, missing values, correlations, turned into visuals stakeholders can actually read. Skipping EDA is the single most common reason models fail in production; skipping visualisation is why insights never get adopted.',
+  'Probability & statistics foundations':'The mathematical language of uncertainty — distributions, conditional probability, Bayes\' theorem, hypothesis testing. Every ML model is, at some level, a probability calculation. This is what separates a framework user from a practitioner.',
+
+  /* M2 aliases */
+  'Linear & logistic regression':'The two oldest and most widely used ML algorithms in the world. Linear regression drives pricing, risk, and forecasting models everywhere. Logistic regression is the workhorse of classification — spam filters, credit approvals, churn prediction. Together they are the baselines every more complex model must beat.',
+  'Classification metrics (ROC-AUC, F1)':'The scorecards that tell you whether your classifier is actually any good. Accuracy alone is misleading — ROC-AUC, F1, precision, and recall together tell you where the model is strong and where it is dangerously blind.',
+  'Decision trees & ensembles (XGBoost, LightGBM)':'Decision trees ask a sequence of yes/no questions to arrive at a prediction — the type humans can actually read, which is why regulators love them. Ensembles combine hundreds of them into XGBoost and LightGBM, which dominate real-world tabular ML and win more Kaggle competitions than almost anything else combined.',
+
+  /* M3 aliases */
+  'Time series forecasting (ARIMA, Prophet)':'Predicting what will happen next based on what happened before. Netflix uses this to forecast how many servers they\'ll need on a Friday night — weeks ahead of time — so they can prepare without over-spending on infrastructure.',
+  'Recommender systems (collaborative & content-based)':'The engines behind "people like you also enjoyed..." and "because you watched X". Collaborative filtering powers Netflix and Spotify recommendations; content-based filtering solves the cold-start problem so new movies still reach the right users on day one.',
+
+  /* M4 aliases */
+  'Neural networks & backpropagation':'The building blocks of modern AI. Layers of simple maths stacked together can learn almost anything when trained on enough data. Backpropagation is how the network learns from its mistakes — adjusting itself slightly after every wrong answer.',
+  'Optimisers, loss functions, regularisation':'The three training-time choices that decide whether a neural network actually learns or gets stuck from epoch one. Adam vs SGD, cross-entropy vs MSE, dropout and batch norm — getting these right is where real performance gains hide, and what separates engineers who debug models from those who just retry with different seeds.',
+
+  /* M5 aliases */
+  'CNNs (ResNet, InceptionV3) & OpenCV':'The neural network architectures designed for images — ResNet and InceptionV3 still run in production at Google, Meta, and most major AI teams — paired with OpenCV, the toolkit that handles image preprocessing, resizing, and augmentation. Every computer vision system in the world has a thin layer of OpenCV somewhere.',
+  'Advanced CV (detection, segmentation)':'Going beyond classifying an image to detecting every object in it (YOLO, Faster R-CNN) and segmenting it pixel by pixel (U-Net, Mask R-CNN). This is what self-driving cars, medical imaging, and industrial quality control all run on.',
+  'Text preprocessing (NLTK, spaCy)':'Cleaning, tokenising, and understanding the structure of raw text — the ground-level work every NLP system depends on. NLTK and spaCy are the industry-standard toolkits that turn messy raw text into something a model can actually learn from.',
+  'Sentiment analysis & topic modelling':'Sentiment analysis teaches AI to read text and understand its emotional tone — is this review positive, is this ticket urgent. Topic modelling (LDA) discovers themes inside thousands of documents automatically — turning a pile of customer feedback into an organised set of issues.',
+  'Attention, RNN, LSTM, Transformers':'The evolution of sequence modelling — from RNNs and LSTMs that process one token at a time, to attention mechanisms that let models focus on the most relevant parts of an input, to Transformers, the architecture behind ChatGPT, Claude, and Gemini. Understanding this progression is now a baseline requirement for any serious AI role.',
+
+  /* M6 aliases */
+  'MLflow & experiment tracking':'MLflow logs every experiment — what you tried, what worked, what didn\'t — so a team never loses a breakthrough. The logbook of modern ML, and the single biggest productivity unlock once teams grow past two people.',
+  'CI/CD pipelines (GitHub Actions)':'Automated pipelines that test, validate, and redeploy your ML model every time someone makes a change — just as a factory production line runs continuously rather than needing someone to manually push a button for each unit.',
+  'Model serving & feature stores':'The production layer of ML. Model serving turns a trained model into a live service that returns predictions in milliseconds. Feature stores give multiple models a centralised, versioned library of features to share. Without both, ML systems drift out of sync and decay silently — the most common failure mode of enterprise ML.',
+
+  /* M8 aliases */
+  'Hallucination mitigation':'The set of techniques — retrieval grounding, citation enforcement, output verification, confidence calibration — that stop LLMs from inventing plausible-sounding but wrong answers. Critical for any AI going into finance, legal, medical, or enterprise contexts.',
+
+  /* M9 aliases */
+  'Memory systems':'The architecture that lets an AI agent remember past conversations, user preferences, and important facts across sessions. Without memory, every conversation starts from zero. With memory, the agent genuinely learns your organisation over time.',
+  'ReAct planning patterns':'AI that doesn\'t just answer questions but thinks through a plan and takes actions — searching the web, running code, querying databases — to arrive at an answer step by step. It reasons before it responds, rather than just pattern-matching.',
+
+  /* M10 aliases */
+  'Multimodal AI (GPT-4V, LLaVA)':'AI that can look at an image and understand it in the context of a conversation. Show it a graph and ask what it means. Show it a product photo and ask what\'s wrong. Show it a screenshot and ask it to explain what the user is doing.',
+  'Whisper for audio':'OpenAI\'s industry-standard model for converting spoken audio into accurate written text — reliably, across accents, languages, and noisy environments. The backbone of meeting AI, voice agents, and call-centre automation today.',
+  'DSPy prompt optimisation':'A framework that treats prompts as programs — automatically optimising them against a dataset rather than requiring humans to hand-tune. The serious engineering approach to prompting, used at Anthropic, Databricks, and top AI labs.',
+
+  /* M11 aliases */
+  'PEFT, LoRA, QLoRA fine-tuning':'Efficient techniques for customising a large AI model on your own data without retraining the whole thing from scratch — which would cost millions. Like giving an already-brilliant expert a focused two-week training course rather than re-educating them from childhood.',
+  'Serving LLMs (vLLM, TGI, quantization)':'Specialist software for serving large language models efficiently at scale. vLLM and TGI can handle far more simultaneous users from the same hardware compared to naive approaches — critical when inference costs add up to thousands of dollars per day.',
+  'Token economics':'The pricing model of modern AI — understanding tokens, context windows, prompt caching, and batch APIs. The difference between a startup spending $12k/month on AI and the same workload costing $3k is almost entirely this skill.',
+  'LLMOps (LangSmith, LangFuse)':'The operational layer for running AI in production — monitoring outputs for quality, tracking costs, catching hallucinations, logging every conversation. So when the AI says something wrong, you know exactly where it went wrong and why.',
+  'Kubernetes for LLMs':'The infrastructure layer that actually runs LLMs in production at enterprise scale — auto-scaling GPU pods, zero-downtime deployments, multi-tenant serving. This is what differentiates a weekend demo from an enterprise product.',
+
+  /* M12 aliases */
+  'Optimisation theory':'The mathematics of how models actually learn — gradient descent, convexity, regularisation at first-principles. This is what you debate in a principal-engineer interview, not what you read off a cheat sheet.',
+  'Statistical learning theory':'The mathematical framework that explains why machine learning actually works — and predicts when it will fail. Understanding VC dimension and PAC learning separates engineers who can diagnose a failing model from those who just blindly add more data and retrain.',
+
+  /* M13 aliases */
+  'Advanced transformers & attention':'The research-depth view of how transformers actually work — multi-head attention, positional encoding variants, sparse attention, flash attention. What you need when debugging or extending a frontier model.',
+
+  /* M15 aliases */
+  'Markov Decision Processes':'The mathematical framework underneath every reinforcement learning algorithm — states, actions, rewards, transitions. The vocabulary you need to even have a serious RL conversation.',
+  'PPO, SAC, TD3 (RLHF foundations)':'The state-of-the-art modern RL algorithms. PPO is what OpenAI used to train ChatGPT\'s conversational style — the direct foundation of RLHF. SAC and TD3 dominate continuous control in robotics. Understanding these is the price of admission to any serious RL role.',
+  'Multi-agent RL':'Reinforcement learning in scenarios where multiple AIs interact — autonomous driving, market simulation, game AI, negotiation bots. The frontier of the field, where most current research is happening.',
+
+  /* M16 aliases */
+  'Time & space complexity':'The language engineers use to describe how fast or slow an algorithm is as the amount of data grows. Knowing that your code runs in O(n²) vs O(n log n) is the difference between a system that scales gracefully and one that falls over when traffic spikes.'
 };
 
 function getDesc(skill){
