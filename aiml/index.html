@@ -203,25 +203,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.6rem;grid-column:1/-1">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px">📖 What Has Actually Changed</div>
       <div style="font-size:13px;line-height:1.85;color:#2a2420">
-        Scaler 3.0 is not a pivot away from the core curriculum. The foundations — data, supervised learning, unsupervised learning, neural networks, NLP, computer vision — are all still here, and we haven't softened any of it.<br><br>
-        What has changed is <strong>how</strong> learners move through it. We've integrated AI-powered tools, workflows, and methodologies throughout the programme, along with rigorous agentic and multimodal AI curriculum, that not just teaches calling APIs, but build real world AI applications that can be deployed to real time applications — so that the same rigorous content can be absorbed faster, applied more confidently, and retained more deeply than before.<br><br>
-        Think of it as upgrading the engine, not changing the destination.
+        The true evolution of Scaler 3.0 lies in the learning experience. We’ve seamlessly integrated AI-driven workflows across the entire program, accelerating how quickly learners absorb and retain complex concepts. But we didn’t stop at methodology. We’ve introduced a rigorous new curriculum centered on Agentic and Multimodal AI. We go far beyond teaching basic API calls—we train our students to architect, build, and deploy production-grade, real-time AI applications. The result? Our graduates master the same demanding core foundations faster, while acquiring the exact, deployable AI engineering skills that today’s market desperately needs.<br><br>
+        Imagine a carpenter learning to make furniture. The foundation—knowing which wood to use, understanding measurements, and structural balance—is exactly the same. We haven’t changed that. But instead of making you cut everything with a hand saw, we’ve handed you modern power tools. You learn the craft faster, and instead of just building a wobbly practice stool, you’re building polished, showroom-ready furniture from day one.
       </div>
     </div>
 
-    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.6rem;max-width:560px">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px">🗺️ The Full Learning Arc</div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.6rem;grid-column:1/-1">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:16px">🗺️ The Full Learning Arc</div>
 
-      <div style="font-size:13px;line-height:1.8;color:#2a2420;margin-bottom:14px">
-        Take Razorpay. Before their fraud model can flag a bad transaction, someone had to clean the data, label it, and build the model — <strong>data and supervised learning</strong>. Then segment merchants, predict churn, find patterns nobody defined upfront — <strong>unsupervised learning</strong>. Then read contracts and process invoice images — <strong>NLP and computer vision</strong>.
-      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;line-height:1.8;color:#2a2420">
+          <p>It starts with a mess. Razorpay processes millions of payments every day. Behind the scenes, that's raw log files with missing fields, duplicate entries, and inconsistent formats. Before any machine can learn from this, someone has to make sense of it. That's <strong>Data Foundations</strong> — the unglamorous but essential first act.</p>
+          <p>Then comes the first "aha" moment. Once the data is clean and labelled, you can teach a model: here are 10,000 transactions we know were fraud, and 10,000 we know were safe — now figure out the pattern. That's <strong>Supervised Learning</strong>, and it's what powers Razorpay's fraud detection engine.</p>
+          <p>But some questions don't have labels. Nobody sat down and pre-defined Razorpay's merchant segments — the model has to discover them on its own. Which merchants are at risk of leaving? Which ones are seasonal? <strong>Unsupervised Learning</strong> finds these hidden patterns, and time series models help predict what comes next.</p>
+          <p>Then the patterns get more complex. A card used in three cities in ten minutes. A suspicious purchase at 3am from a new device. Rules can't catch these — you need <strong>Neural Networks</strong>, which learn non-obvious combinations that a human would never think to code manually.</p>
+          <p>Then the data stops being just numbers. Merchants upload invoice photos. They sign PDF contracts. Razorpay needs to read them. <strong>Computer Vision and NLP</strong> are how machines understand images and language — turning unstructured documents into structured decisions.</p>
+          <p style="font-weight:700;color:var(--text)">The models are built. Now what?</p>
+          <p>A model in a notebook helps nobody. Getting it to serve real decisions — in under 50 milliseconds, at scale, and staying accurate as fraud patterns shift — is a completely different problem. That's <strong>MLOps</strong>: deployment pipelines, monitoring dashboards, automatic retraining when the world changes.</p>
+          <p>And when 10,000 payments hit per second? That's <strong>System Design</strong> — the load balancers, caches, and queues that make sure the fraud check finishes before the user even sees a loading spinner.</p>
+          <p style="font-weight:700;color:var(--text)">Now comes the generative AI layer.</p>
+          <p>The compliance officer has a question. "Is this merchant allowed to sell dietary supplements?" Instead of manually searching through 200 pages of policy documents, a <strong>RAG system</strong> lets an AI look up the right documents and answer instantly — grounded in the actual source, not hallucination.</p>
+          <p>Then the AI stops waiting to be asked. When a merchant gets flagged, an <strong>AI agent</strong> picks up the case: reads the fraud alert, pulls the merchant's transaction history, checks it against policy, and files the compliance report — end to end, no analyst required. That's <strong>Agentic AI</strong>.</p>
+          <p>The final two modules are where it all sharpens: fine-tuning models on Razorpay's own data to make them more precise, understanding how to run and secure AI systems in production, and building agents that can reason across images, documents, and data simultaneously.</p>
+        </div>
 
-      <div style="font-size:13px;line-height:1.8;color:#2a2420;margin-bottom:14px">
-        Most programmes stop there. This one doesn't. <strong>MLOps and system design</strong> make that fraud model serve decisions in 50ms and retrain itself when patterns shift. <strong>RAG and agentic AI</strong> automate the compliance workflows that used to take a full analyst team.
-      </div>
-
-      <div style="font-size:13px;line-height:1.8;color:#2a2420;">
-        By the end, they're ready for the roles Razorpay, PhonePe, and every serious fintech is hiring for right now.
+        <div style="border:2px dashed var(--border);border-radius:var(--radius);background:#fafaf8;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;padding:2rem;text-align:center;gap:10px">
+          <!-- <div style="font-size:28px">🖼️</div> -->
+          <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/192/285/original/razorpay_curriculum_compact.svg?1776952056" alt="Image Placeholder" style="border-radius:8px;object-fit:cover">
+          <!-- <div style="font-size:12px;font-weight:600;color:var(--muted)">Image placeholder</div> -->
+          <!-- <div style="font-size:11px;color:#b0a99f">Replace with your image</div> -->
+        </div>
       </div>
     </div>
 
@@ -238,7 +249,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
         <div style="width:28px;height:28px;border-radius:8px;background:var(--orange-light);color:var(--orange);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">1</div>
         <div>
           <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Open with what hasn't changed</div>
-          <div style="font-size:13px;line-height:1.75;color:#2a2420;font-style:italic">"The first thing I want to be clear about — we haven't moved away from fundamentals at all. Data, machine learning, neural networks, NLP, computer vision — all of it is still here, and none of it has been watered down. That foundation is non-negotiable for us."</div>
+          <div style="font-size:13px;line-height:1.75;color:#2a2420;font-style:italic">"Let me start by setting the record straight—we haven’t touched the foundational rigor of the program. You are still going to dive deep into machine learning, neural networks, NLP, and computer vision. We haven’t diluted a single concept. That core technical depth is entirely non-negotiable for us."</div>
         </div>
       </div>
 
@@ -246,7 +257,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
         <div style="width:28px;height:28px;border-radius:8px;background:var(--orange-light);color:var(--orange);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">2</div>
         <div>
           <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Then explain what has changed — and why it matters</div>
-          <div style="font-size:13px;line-height:1.75;color:#2a2420;font-style:italic">"What's new is how we move through it. We've built AI-powered tools and integrated assisted methodologies, along with rigorous agentic and multimodal AI curriculum integration into the learning experience itself — so learners cover the same current world requirements ground but get there faster, with more confidence, and with better retention. The learning is smarter. The content is the advanced and up to date."</div>
+          <div style="font-size:13px;line-height:1.75;color:#2a2420;font-style:italic">"What has evolved is the learning experience itself. We’ve woven AI-powered workflows, Agentic AI, and Multimodal AI directly into the curriculum. Because you are using AI to learn AI, you absorb the same intense material much faster and retain it far better. You aren’t just keeping up with industry standards; you’re mastering the most advanced, up-to-date tech landscape with total confidence."</div>
         </div>
       </div>
 
@@ -254,7 +265,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
         <div style="width:28px;height:28px;border-radius:8px;background:var(--orange-light);color:var(--orange);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">3</div>
         <div>
           <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Paint the full arc</div>
-          <div style="font-size:13px;line-height:1.75;color:#2a2420;font-style:italic">"From day one with data and supervised learning, all the way through to AI agents — the programme is one continuous arc. Someone with a year or two of coding experience walks in. Someone who can design and deploy real AI systems walks out. The roles that arc leads to are the ones companies are hiring urgently for right now."</div>
+          <div style="font-size:13px;line-height:1.75;color:#2a2420;font-style:italic">"Think of the program as one seamless, transformative journey. We take you from the absolute basics of data all the way to building autonomous AI agents. If you come in with a year or two of coding experience, you are going to walk out as an engineer who can actually architect and deploy real-world AI systems. That specific transformation is exactly what top companies are scrambling to hire for right now."</div>
         </div>
       </div>
 
@@ -262,7 +273,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
         <div style="width:28px;height:28px;border-radius:8px;background:var(--orange-light);color:var(--orange);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">4</div>
         <div>
           <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Close with the growth loop</div>
-          <div style="font-size:13px;line-height:1.75;color:#2a2420;font-style:italic">"And the growth never stops at Part 1. After the foundations, learners move into MLOps, system design, and then the frontier AI modules — so there's always a clear next level. By the end, they don't just know the theory. They have the real-world skills that are actually in demand."</div>
+          <div style="font-size:13px;line-height:1.75;color:#2a2420;font-style:italic">"And your growth doesn’t flatline after the basics. We actively push you into the next level—MLOps, system design, and frontier AI modules. You are always leveling up. By the time you finish, you aren’t just walking away with theoretical knowledge; you are armed with the exact, hands-on skills the market desperately needs today."</div>
         </div>
       </div>
 
@@ -278,12 +289,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <div style="background:var(--green-bg);border:1px solid #a7f3d0;border-radius:var(--radius);padding:1.1rem 1.3rem">
       <div style="font-size:22px;margin-bottom:8px">⚡</div>
       <div style="font-size:12px;font-weight:700;color:#14532d;margin-bottom:5px">AI-Accelerated Learning</div>
-      <div style="font-size:12px;line-height:1.65;color:#1a3a28">Improved tools and AI tools and methodologies integrated throughout — so learners go deeper in less time, with better retention and real-world application.</div>
+      <div style="font-size:12px;line-height:1.65;color:#1a3a28">Learn advanced AI by using it. Integrated tools accelerate your mastery of complex concepts, empowering you to build the real-time, real-world AI solutions that top companies are actively hiring for.</div>
     </div>
     <div style="background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:var(--radius);padding:1.1rem 1.3rem">
       <div style="font-size:22px;margin-bottom:8px">🎯</div>
       <div style="font-size:12px;font-weight:700;color:#1e3a8a;margin-bottom:5px">Market-Ready Skills</div>
-      <div style="font-size:12px;line-height:1.65;color:#1e3069">From MLOps to AI Agents — the growth modules that turn you into an industry ready individual that are actively being hired right now.</div>
+      <div style="font-size:12px;line-height:1.65;color:#1e3069">Master the exact tech stack the industry demands. From advanced MLOps to building autonomous AI Agents, gain the hands-on engineering skills required to transition directly into high-growth AI roles.</div>
     </div>
   </div>
 
@@ -299,16 +310,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   <div class="sec-hd">The Programme Journey</div>
   <p class="sec-sub">Follow one company — Netflix — through every module. Each stage solves a real problem Netflix actually faces, showing exactly what skill gets built and why it matters. Click any module to expand the context and your sales script.</p>
   <div id="journey-content"></div>
-  <div class="roles-timeline">
-    <div class="rt-hd">Roles unlocked — by career paths</div>
-    <p class="rt-sub">How each track builds toward a different career destination, module by module.</p>
-    <div class="rt-track-sel">
-      <button class="rtb on" onclick="showTrack('ml',this)">ML Engineering career path</button>
-      <button class="rtb" onclick="showTrack('ai',this)">AI Engineering career path</button>
-    </div>
-    <div class="rt-flow on" id="rt-ml"></div>
-    <div class="rt-flow" id="rt-ai"></div>
-  </div>
+
 </div>
 
 <div class="sec" id="sec-modules">
@@ -340,7 +342,7 @@ function showTab(id,btn){
 /* ══ PROFILES ══ */
 const profiles=[
   {icon:'🚀',bg:'#fce7f3',name:'The Career Switcher',role:'Coding experience of 2 years · Any language, any tech stack, but motivated to move into AI',
-   gap:'Strong domain knowledge in finance, marketing, operations, or healthcare — but no technical credentials. Gets screened out automatically. Without a portfolio, there\'s no way to demonstrate capability to a hiring manager who has 500 applications.',
+   gap:'Strong domain knowledge in finance, operations, research — with around 2 years of experience of any coding languages. Gets screened out automatically. Without a portfolio, there\'s no way to demonstrate capability to a hiring manager who has 500 applications.',
    gain:'Portfolio-first approach. Every module builds something real. By the end: working projects that any interviewer from any industry immediately understands. Domain knowledge + technical skills = a candidate who is genuinely rare.',
    from:'Professional in any domain',to:'Data Scientist / ML Engineer / AI Engineer',
    mods:['Full Programme','M1 — Data Foundations','M8 — RAG Systems','M9 — Agentic AI']},
@@ -426,7 +428,7 @@ const modules=[
    jobs:['MLOps Engineer','ML Engineer','AI Platform Engineer','Data Scientist'],
    script:'"MLOps is what separates a notebook model from a product. Any engineer can train a model. Very few can keep one running reliably in production — updating itself, monitoring itself, failing gracefully. Every ML Engineer JD lists Docker, CI/CD, and SageMaker. This module covers all three, end to end, with real deployments. The learner finishes with a live model API that updates automatically. That is what every hiring manager in the market wants to see."'},
 
-  {id:'m07',num:'07',phase:'Part 2',phTag:'tag-p2',isElective:false,isNew:false,dur:'4 weeks',
+  {id:'m07',num:'07',phase:'Part 2',phTag:'tag-p2',isElective:true,isNew:false,dur:'4 weeks',
    name:'ML System Design',
    tools:'Kafka, Apache Flink, Kubernetes, TF Serving, TensorRT, Redis, Nginx, gRPC, FastAPI',
    story:'Netflix serves a personalised homepage to 260 million users. Every user sees a different page. Every page must load in under 200 milliseconds. At Friday 9pm, hundreds of thousands of people hit play simultaneously. The system can\'t go down. It can\'t slow down. It needs fallbacks when a model is unavailable, cost guardrails so it doesn\'t run up a cloud bill overnight, and real-time updates as viewing trends shift by the hour. Designing that system — not just the model inside it, but everything around it — is ML System Design.',
@@ -481,7 +483,7 @@ const modules=[
    script:'"The ability to explain model decisions is now required in every regulated industry — and it separates senior engineers from junior ones everywhere. A learner who can open SHAP, generate a force plot, and clearly explain why the model made a specific prediction is differentiated in every Data Science interview. This elective covers the theory and the tools that most courses skip entirely."'},
 
   {id:'m13',num:'13',phase:'Part 3',phTag:'tag-p3',isElective:true,isNew:false,dur:'4 weeks',
-   name:'Big Data Engineering',
+   name:'Big Data Engineering (Recorded)',
    tools:'Apache Spark, PySpark, Hadoop, HDFS, Kafka, Databricks, dbt, Airflow, AWS QuickSight, Tableau',
    story:'Every time someone watches, pauses, rewinds, or abandons a Netflix show, that event is recorded. Across 260 million accounts, that\'s billions of data points every single day. No single computer can process that. Netflix runs its data across clusters of machines — aggregating viewing trends overnight, feeding real-time signals into its recommendation models, and maintaining years of history for content strategy decisions. This elective teaches the distributed data infrastructure that makes all of that possible — the highway every AI system at scale travels on.',
    analogy:'Big data engineering is building the highway that AI systems travel on. Without it, your data sits in silos — inconsistent, slow to access, and impossible to join at scale. With it, terabytes flow from source to model to dashboard automatically, in minutes. The ML team never waits on the data team. The pipeline runs itself.',
@@ -490,7 +492,7 @@ const modules=[
    script:'"Every enterprise AI system depends on a data pipeline feeding it. Engineers who can build that pipeline — Spark, Kafka, Airflow, dbt — are the foundation of every AI team at scale. This elective closes the gap between having a great ML model and having a system that keeps it fed with clean, current data at the volumes real businesses operate at."'},
 
   {id:'m14',num:'14',phase:'Part 3',phTag:'tag-p3',isElective:true,isNew:false,dur:'4 weeks',
-   name:'Reinforcement Learning',
+   name:'Reinforcement Learning (Recorded)',
    tools:'OpenAI Gym, Stable-Baselines3, PyTorch, RLlib, PettingZoo, MuJoCo',
    story:'Netflix doesn\'t just want an AI that predicts what you\'ll watch — it wants one that learns to keep you engaged over time. That\'s a different kind of problem. It\'s not a single prediction; it\'s a sequence of decisions where each one affects the next. Show you this title now, or save it for when you\'re more likely to commit? Autoplay the next episode, or let you choose? Reinforcement learning is how AI learns to make sequences of decisions — the same technique used to train the systems behind ChatGPT\'s behaviour and the models that optimise long-term outcomes across millions of users.',
    analogy:'Reinforcement Learning is how humans learn to play chess, drive a car, or negotiate a deal: try something, observe what happens, adjust. The AI equivalent is an agent in an environment, taking actions, collecting reward signals, and continuously refining its approach. Human feedback simply replaces the game score with "which response did a real person prefer?"',
@@ -678,10 +680,6 @@ function renderModules(){
       <div class="script-title">Say this when explaining the module to a lead</div>
       <div class="script-txt">${m.script}</div>
     </div>
-    <div style="margin-top:16px">
-      <div class="col-lbl">💼 Roles this module unlocks or strengthens</div>
-      <div class="job-chips">${m.jobs.map(j=>`<div class="job-chip">${j}</div>`).join('')}</div>
-    </div>
   </div>
 </div>
 <div class="mod-footer">
@@ -712,12 +710,17 @@ function renderProjects(){
 
 renderProfiles();
 renderJourney();
-renderTimeline(mlTrack,'rt-ml');
-renderTimeline(aiTrack,'rt-ai');
 renderModules();
 
 /* ══ FAQ DATA ══ */
 const faqs=[
+
+  /* ── CATEGORY: Programme Comparison ── */
+  {cat:'Programme Comparison',term:'DSML vs AIML',
+   q:'What is the difference between DSML and AIML — and why should I choose AIML?',
+   plain:'Both programmes are rigorous and career-focused, but they are built for different people with different goals.<br><br><strong>Who they are built for:</strong> DSML is open to complete non-tech beginners — no coding background needed. AIML requires at least 2 years of coding experience. If you are already a developer, backend engineer, or someone who codes professionally, AIML is built specifically for you. DSML would feel slow; AIML respects where you already are and takes you further.<br><br><strong>How they approach the fundamentals:</strong> DSML dives deep into the maths from day one — statistics, probability, linear algebra — because it is building that foundation from scratch. AIML is practical and hands-on from day one. You start building and applying things immediately. For learners who want to go deeper into the mathematical theory, there is a dedicated Advanced ML elective in AIML — so the depth is available if you want it, but it does not slow down the main journey for everyone else.<br><br><strong>Programme duration:</strong> AIML\'s core programme (Modules 1–3) runs approximately 13 months. DSML\'s intermediate track is longer — designed to move someone from zero coding experience to professional competence, which simply takes more time. If you already code, you do not need that time. AIML gets you to a higher destination, faster.<br><br><strong>Where they take you:</strong> DSML is focused on Data Scientist and Data Analyst outcomes — roles that work with data to generate insights and build models. AIML is heavily focused on ML Engineer and AI Engineer roles — engineers who build the actual AI systems, lead the technical architecture, and own the infrastructure that runs AI in production at companies like Razorpay, Swiggy, Meesho, and Flipkart. These are the roles leading teams and building the robust systems behind AI products.',
+   analogy:'Think of DSML as the medical school track — it starts from first principles, covers everything from anatomy to diagnosis, and is designed to bring someone to proficiency from zero. AIML is the specialist residency track — it assumes you already know how to operate, and it trains you to become the surgeon who leads the theatre. Same field, very different starting point, very different destination.',
+   script:'\"The simplest way to think about it: DSML is built for someone who is starting from scratch — no coding, no technical background, and they need the programme to build every layer from the ground up. AIML is built for someone who already codes and wants to become an AI engineer — someone who can build and run real AI systems, lead a technical team, and architect production infrastructure. The pace is different, the outcomes are different, and the career trajectories are different. If you have two years of coding experience, AIML gets you further, faster — and to roles that are frankly more senior.\"'},
 
   /* ── CATEGORY: Core ML Concepts ── */
   {cat:'Core ML Concepts',term:'Supervised Learning',
@@ -904,13 +907,6 @@ const faqs=[
    plain:'SHAP and LIME are model interpretability tools — they explain why a model made a specific prediction. For any single prediction, SHAP shows which features pushed the prediction in each direction and by how much. LIME creates a simpler local model that approximates the complex model\'s behaviour around a specific data point. Both are critical for regulated industries where AI decisions must be explainable — credit decisions, medical diagnoses, hiring.',
    analogy:'Most ML models are black boxes — they give an answer but don\'t explain their reasoning. SHAP and LIME are like asking the model "show your work." SHAP says: "Your loan was rejected because your credit utilisation contributed -35 points, your income contributed +20 points, and your existing EMIs contributed -28 points." Now the decision is explainable — and auditable.',
    script:'"As AI regulation increases — and it is increasing, everywhere — explainability goes from nice-to-have to legally required. A bank in India cannot reject a loan application on \'the model said so.\' SHAP and LIME are the standard tools for producing that explanation. Engineers who know them are the ones building AI that companies can actually deploy in regulated contexts."'},
-
-  /* ── CATEGORY: Programme Comparison ── */
-  {cat:'Programme Comparison',term:'DSML vs AIML',
-   q:'What is the difference between DSML and AIML — and why should I choose AIML?',
-   plain:'Both programmes are rigorous and career-focused, but they are built for different people with different goals.<br><br><strong>Who they are built for:</strong> DSML is open to complete non-tech beginners — no coding background needed. AIML requires at least 2 years of coding experience. If you are already a developer, backend engineer, or someone who codes professionally, AIML is built specifically for you. DSML would feel slow; AIML respects where you already are and takes you further.<br><br><strong>How they approach the fundamentals:</strong> DSML dives deep into the maths from day one — statistics, probability, linear algebra — because it is building that foundation from scratch. AIML is practical and hands-on from day one. You start building and applying things immediately. For learners who want to go deeper into the mathematical theory, there is a dedicated Advanced ML elective in AIML — so the depth is available if you want it, but it does not slow down the main journey for everyone else.<br><br><strong>Programme duration:</strong> AIML\'s core programme (Modules 1–3) runs approximately 13 months. DSML\'s intermediate track is longer — designed to move someone from zero coding experience to professional competence, which simply takes more time. If you already code, you do not need that time. AIML gets you to a higher destination, faster.<br><br><strong>Where they take you:</strong> DSML is focused on Data Scientist and Data Analyst outcomes — roles that work with data to generate insights and build models. AIML is heavily focused on ML Engineer and AI Engineer roles — engineers who build the actual AI systems, lead the technical architecture, and own the infrastructure that runs AI in production at companies like Razorpay, Swiggy, Meesho, and Flipkart. These are the roles leading teams and building the robust systems behind AI products.',
-   analogy:'Think of DSML as the medical school track — it starts from first principles, covers everything from anatomy to diagnosis, and is designed to bring someone to proficiency from zero. AIML is the specialist residency track — it assumes you already know how to operate, and it trains you to become the surgeon who leads the theatre. Same field, very different starting point, very different destination.',
-   script:'\"The simplest way to think about it: DSML is built for someone who is starting from scratch — no coding, no technical background, and they need the programme to build every layer from the ground up. AIML is built for someone who already codes and wants to become an AI engineer — someone who can build and run real AI systems, lead a technical team, and architect production infrastructure. The pace is different, the outcomes are different, and the career trajectories are different. If you have two years of coding experience, AIML gets you further, faster — and to roles that are frankly more senior.\"'},
 
   /* ── CATEGORY: Salary & Market ── */
   {cat:'Market & Career',term:'LLM Engineer Salary',
